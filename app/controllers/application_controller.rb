@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     def logged_in?
         !!current_user 
     end 
+
+    def require_logged_in 
+        redirect_to root_url if current_user.nil?
+    end 
  
 
 end

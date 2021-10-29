@@ -1,5 +1,7 @@
 class Api::UsersController < ApplicationController
     
+    before_action :require_logged_in, only: [:show]
+
     #retrieve a single user
     def show 
         @user = User.find(params[:id])
@@ -13,7 +15,7 @@ class Api::UsersController < ApplicationController
             login!(@user)
             render :show 
         else 
-            render json: @user.errors.full_messages 
+            render json: @user.errors.full_messages, status: 422 
     end 
 
     #require a user to enter following params
