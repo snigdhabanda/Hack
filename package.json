@@ -2,6 +2,10 @@
   "name": "Hack",
   "private": true,
   "dependencies": {
+    
+  },
+  "devDependencies": {
+    
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
@@ -24,9 +28,14 @@
     "lib": "lib",
     "test": "test"
   },
+  "engines": {
+    "node": "12.5.0",
+    "npm": "6.9.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --watch --mode=development"
+    "start": "webpack --watch --mode=development",
+    "postinstall": "webpack"
   },
   "repository": {
     "type": "git",

@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
         authorId: state.session.id,
         recipientId: undefined
     },
-    users: state.users
+    users: state.entities.users
 
 })
 

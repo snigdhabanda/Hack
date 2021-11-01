@@ -18,23 +18,24 @@ class MessageForm extends React.Component {
     handleInput(recipientName){
         return (e) => (
             // console.log(e.currentTarget.value)
-            this.update(recipientName, e)
-            // .then(this.searchUsers(e))
+            this.update(recipientName, e.currentTarget.value, this.searchUsers.bind(this, e.currentTarget.value))
         )
             
         
     }
 
-    update(field, event){
-        console.log(field, event)
-        this.setState({[field]: event.currentTarget.value})
+    update(field, value, search){
+        this.setState({[field]: value})
+        search()
     }
 
-    searchUsers(e){
+    searchUsers(value){
         const users = Object.values(this.props.users)
+        // console.log(users)
         users.map((user) => {
-            if (user.displayName === e.currentTarget.value){
+            if (user.displayName === value){
                 this.state.recipientId = user.id 
+                // console.log(this.state.recipientId)
             }
         })
     }
