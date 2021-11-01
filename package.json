@@ -11,6 +11,9 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.0",
     "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.0",
+    "snakeize": "^0.1.0",
     "webpack": "^5.61.0",
     "webpack-cli": "^4.9.1"
   },

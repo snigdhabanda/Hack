@@ -5,6 +5,8 @@ class SessionForm extends React.Component {
     constructor(props){
         super(props)
         this.state = this.props.user 
+
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleSubmit(e){
@@ -20,7 +22,7 @@ class SessionForm extends React.Component {
     }
 
     render() {
-        const signup; 
+        let signup; 
         if (this.props.formType === "Sign Up") signup = true; 
         else signup = false; 
 
@@ -34,15 +36,16 @@ class SessionForm extends React.Component {
     
                 <label>Password</label>
                     <input type="password" value={this.state.password} onChange={this.update('password')} />
-                
+
+                 
                 {signup ? 
                     <div>
                         <label>Name</label>
                         <input type="displayName" value={this.state.displayName} onChange={this.update('displayName')} />
                     </div>
-                : nil }
+                : "" }
                 
-                <button type="submit" onClick={this.handleSubmit('newUser')}>Continue</button>
+                <button type="submit" onClick={this.handleSubmit}>Continue</button>
                 {/* <button type="submit" onClick={this.handleSubmit('demo')}>Login As A Demo User</button> */}
 
                 {this.props.link}

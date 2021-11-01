@@ -1,4 +1,4 @@
-import { RECEIVE_USER } from "../../actions/session/session_actions";
+import { RECEIVE_USER, REMOVE_USER } from "../../actions/session/session_actions";
 
 const _nullUser = {id: null}
 const SessionReducer = (state=_nullUser, action) => {

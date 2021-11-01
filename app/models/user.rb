@@ -1,10 +1,26 @@
 class User < ApplicationRecord
     validates :email, :image_url, :display_name, :password_digest, :session_token, presence: true
     validates :email, :session_token, uniqueness: true 
-    validates :password, length: {minimum: 8, allow_nil: true}
+    validates :password, length: {minimum: 7, allow_nil: true}
 
     attr_reader :password 
     before_validation :ensure_session_token
+
+    has_many :authored_messages,
+    foreign_key: :author_id,
+    class_name: :Message
+
+    has_many :received_messages,
+    foreign_key: :recipient_id,
+    class_name: :Message
+
+    has_many :channels,
+    foreign_key: :channel_member_id,
+    class_name: :Channel
+
+    has_many :dms,
+    foreign_key: :dm_member_id,
+    class_name: :Dm
 
     
     #find a user in the database 

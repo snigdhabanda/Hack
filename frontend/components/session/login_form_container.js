@@ -1,18 +1,21 @@
-import {connect} from 'react'
+import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import SessionForm from './session_form'
+import React from 'react'
+import { loginUser } from '../../actions/session/session_actions'
 
-mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
     user: {
         email: "",
         password: ""
     },
     formType: "Login",
     formInstructions: "Sign into Hack",
-    link: <Link to="/starthere" />
+    link: <Link to="/starthere">Sign Up Instead</Link>
 })
 
-mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
     processForm: (user) => dispatch(loginUser(user))
 })
 
-export default connect(mapStateToProps)(mapDispatchToProps)(SessionForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SessionForm)

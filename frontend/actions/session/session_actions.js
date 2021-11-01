@@ -4,17 +4,17 @@ export const RECEIVE_USER = "RECEIVE_USER"
 export const REMOVE_USER = "REMOVE_USER"
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 
-const receiveUser = (user) => ({
+export const receiveUser = (user) => ({
     type: RECEIVE_USER,
     user
 })
 
-const removeUser = (user) => ({
+export const removeUser = (user) => ({
     type: REMOVE_USER,
     user
 })
 
-const receiveErrors = (errs) => ({
+export const receiveErrors = (errs) => ({
     type: RECEIVE_ERRORS,
     errs 
 })

@@ -1,10 +1,11 @@
 
+import snakeize from 'snakeize'
 
 export const loginUser = (user) => (
     $.ajax({
         method: "POST",
         url: `/api/session`,
-        data: {user}
+        data: snakeize({user})
     })
 )
 
@@ -12,7 +13,7 @@ export const signupUser = (user) => (
     $.ajax({
         method: "POST",
         url: "/api/users",
-        data: {user}
+        data: snakeize({user})
     })
 )
 

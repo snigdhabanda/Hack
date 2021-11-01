@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_160355) do
+ActiveRecord::Schema.define(version: 2021_11_01_064616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "topic"
+    t.string "description"
+    t.integer "creator_id", null: false
+    t.integer "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_channels_on_creator_id"
+    t.index ["member_id"], name: "index_channels_on_member_id"
+  end
+
+  create_table "dms", force: :cascade do |t|
+    t.integer "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body", null: false
+    t.integer "parent_message_id"
+    t.integer "author_id", null: false
+    t.integer "recipient_id", null: false
+    t.integer "channel_id"
+    t.integer "dm_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
