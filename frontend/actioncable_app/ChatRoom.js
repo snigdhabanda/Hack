@@ -8,15 +8,15 @@ class ChatRoom extends React.Component {
     this.state = { messages: [] };
     this.bottom = React.createRef();
     this.currentUser = this.props.currentUser
-    this.currentView = this.props.currentView
     this.channels = this.props.channels
+    this.channelQueue = []; 
   }
   
   componentDidMount() {
     console.log("cdm")
     App.cable.subscriptions.create(
       { channel: "ChatChannel",
-        id: this.currentView
+        id: this.props.currentView
     },
       {
         received: data => {
@@ -58,8 +58,7 @@ class ChatRoom extends React.Component {
   }
   
   render() {
-    // console.log(this.currentView)
-    // console.log(this.state.messages)
+    console.log(this.props.currentView)
     const messageList = this.state.messages.map((message, idx) => {
       console.log(message)
       return (
@@ -87,7 +86,7 @@ class ChatRoom extends React.Component {
           Leave
         </button>
         <div className="message-list">{messageList}</div>
-        <MessageForm currentUser={this.currentUser} channelId={this.currentView}/>
+        <MessageForm currentUser={this.currentUser} channelId={this.props.currentView}/>
       </div>
     );
   }
