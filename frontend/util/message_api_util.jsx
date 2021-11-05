@@ -11,7 +11,7 @@ export const fetchMessages = () => (
 export const updateMessage = (message) => (
     $.ajax({
         method: "PATCH",
-        url: `/api/message/${message.id}`,
+        url: `/api/messages/${message.id}`,
         data: snakeize({message})
         
     })

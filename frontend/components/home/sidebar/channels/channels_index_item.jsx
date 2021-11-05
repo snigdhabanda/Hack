@@ -3,23 +3,29 @@ import React from 'react'
 class ChannelsIndexItem extends React.Component {
     constructor(props){
         super(props)
-        this.handleClick = this.handleClick.bind(this)
+        this.changeChannel = this.changeChannel.bind(this)
+        
     }
-
-    handleClick(e){
-        e.preventDefault()
-        this.props.fetchMessages(this.props.channel.id)
-
+    
+    changeChannel(){
+        this.props.fetchChannel(this.props.channel.id)
+        
     }
 
     render(){
-        return (
-            <li>
-            <div onClick={this.handleClick}>{this.props.channel.name}</div>
-            </li>
+        console.log("indexitem")
+        const {channel} = this.props
+        return(
+            <div>
+                {channel ?  
+                    <li onClick={this.changeChannel}>{channel.name}</li> 
+                : ""
+                }
+            </div>
+
         )
     }
-   
+    
 }
 
 export default ChannelsIndexItem

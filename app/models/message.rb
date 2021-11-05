@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-    validates :body, :author_id, presence: true 
+    validates :body, presence: true 
     # validates :dm_id, presence: true, unless: :channel_id
     # validates :channel_id, presence: true, unless: :dm_id
 
@@ -7,9 +7,9 @@ class Message < ApplicationRecord
     foreign_key: :author_id,
     class_name: :User
     
-    belongs_to :recipient,
-    foreign_key: :recipient_id,
-    class_name: :User
+    # belongs_to :recipient,
+    # foreign_key: :recipient_id,
+    # class_name: :User
 
     # belongs_to :parent_message,
     # foreign_key: :parent_message_id,
@@ -26,6 +26,10 @@ class Message < ApplicationRecord
     # belongs_to :dm,
     # foreign_key: :dm_id,
     # class_name: :Dm
+
+    def self.get_by_channel(channelId)
+        Message.where('')
+    end 
 
     def self.filter_messages
         # author_id matches current_user id 

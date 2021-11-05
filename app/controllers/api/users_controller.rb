@@ -2,7 +2,12 @@ class Api::UsersController < ApplicationController
 
     # skip_before_action :verify_authenticity_token
     
-    before_action :require_logged_in, only: [:show]
+    before_action :require_logged_in, only: [:show, :index]
+
+    def index 
+        @users = User.all
+        render "api/users/index" 
+    end 
 
     #retrieve a single user
     def show 

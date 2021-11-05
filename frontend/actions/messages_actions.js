@@ -3,7 +3,7 @@ import * as MessageApiUtil from './../util/message_api_util'
 export const RECEIVE_MESSAGES = "RECEIVE_MESSAGES"
 export const UPDATE_MESSAGE = "UPDATE_MESSAGE"
 export const DELETE_MESSAGE = "DELETE_MESSAGE"
-export const NEW_MESSAGE = "NEW_MESSAGE"
+export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
 
 const receiveMessages = (messages) => ({
     type: RECEIVE_MESSAGES,
@@ -20,8 +20,8 @@ const removeMessage = (message) => ({
     message
 })
 
-const newMessage = (message) => ({
-    type: NEW_MESSAGE,
+const receiveMessage = (message) => ({
+    type: RECEIVE_MESSAGE,
     message
 })
 
@@ -35,9 +35,9 @@ export const updateMessage = (message) => dispatch => (
         (message) => dispatch(changeMessage(message)))
 )
 
-export const writeMessage = (message) => dispatch => (
+export const createMessage = (message) => dispatch => (
     MessageApiUtil.createMessage(message).then(
-        (message) => dispatch(newMessage(message)))
+        (message) => dispatch(receiveMessage(message)))
 )
 
 export const deleteMessage = (messageId) => dispatch => (

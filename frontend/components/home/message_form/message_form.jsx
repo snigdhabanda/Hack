@@ -1,5 +1,5 @@
 import React from 'react'
-
+import RenderMessages from '../messages/messages_index'
 
 class MessageForm extends React.Component {
     constructor(props){
@@ -10,32 +10,43 @@ class MessageForm extends React.Component {
         this.handleInput = this.handleInput.bind(this)
     }
 
+    // displayMessage(message){
+    //     return <RenderMessagesContainer message={message}  />
+    // }
+
     handleSubmit(e){
         e.preventDefault()
-        if (recipientId) this.props.submitMessage(this.state)
+        if (this.state.recipientId) this.props.submitMessage(this.state).then((message) => <RenderMessages message={message}  />)
     }
+
+    
 
     handleInput(recipientName){
         return (e) => (
-            // console.log(e.currentTarget.value)
-            this.update(recipientName, e.currentTarget.value, this.searchUsers.bind(this, e.currentTarget.value))
+            this.updateUser(recipientName, e.currentTarget.value, this.searchUsers.bind(this, e.currentTarget.value))
         )
             
         
     }
 
-    update(field, value, search){
+    updateUser(field, value, search){
         this.setState({[field]: value})
         search()
     }
 
+    updateBody(field){
+        return (e) => (
+            this.setState({[field]: e.currentTarget.value})
+        )
+        
+    }
+
     searchUsers(value){
         const users = Object.values(this.props.users)
-        // console.log(users)
         users.map((user) => {
             if (user.displayName === value){
                 this.state.recipientId = user.id 
-                // console.log(this.state.recipientId)
+                
             }
         })
     }
@@ -46,7 +57,7 @@ class MessageForm extends React.Component {
             <form >
                 <input type="text" onChange={this.handleInput('recipientName')} />
                 
-                {/* <textarea value={this.state.body} onChange={this.update('body')}></textarea> */}
+                <textarea value={this.state.body} onChange={this.updateBody('body')}></textarea>
                 
                 <button type="submit" onClick={this.handleSubmit}>Send</button>
                

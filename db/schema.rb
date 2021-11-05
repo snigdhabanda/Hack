@@ -10,21 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_064616) do
+ActiveRecord::Schema.define(version: 2021_11_04_232004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channel_members", force: :cascade do |t|
+    t.integer "channel_id", null: false
+    t.integer "member_id", null: false
+    t.boolean "creator", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id", "channel_id"], name: "index_channel_members_on_member_id_and_channel_id"
+  end
 
   create_table "channels", force: :cascade do |t|
     t.string "name", null: false
     t.string "topic"
     t.string "description"
-    t.integer "creator_id", null: false
-    t.integer "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_channels_on_creator_id"
-    t.index ["member_id"], name: "index_channels_on_member_id"
   end
 
   create_table "dms", force: :cascade do |t|
@@ -37,8 +42,8 @@ ActiveRecord::Schema.define(version: 2021_11_01_064616) do
     t.text "body", null: false
     t.integer "parent_message_id"
     t.integer "author_id", null: false
-    t.integer "recipient_id", null: false
-    t.integer "channel_id"
+    t.integer "recipient_id"
+    t.integer "channel_id", null: false
     t.integer "dm_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

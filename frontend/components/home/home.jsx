@@ -1,7 +1,6 @@
 import React from 'react'
-import MessageFormContainer from './message_form/message_form_container'
-// import {RenderMessagesContainer}
-// import {SidebarContainer}
+import ChannelsIndexContainer from './sidebar/channels/channels_index_container'
+import UsersIndexContainer from '.././home/sidebar/users/users_index_container'
 
 class Home extends React.Component{
    constructor(props){
@@ -12,7 +11,10 @@ class Home extends React.Component{
       return (
          <div> 
             <button onClick={() => this.props.logoutUser()}>Logout</button>
-             <MessageFormContainer />
+            <UsersIndexContainer /> 
+            <ChannelsIndexContainer />     
+            
+
             {/* // <RenderMessagesContainer /> 
             // <SidebarContainer />  */}
          </div>

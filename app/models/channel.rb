@@ -1,15 +1,16 @@
 class Channel < ApplicationRecord
-    validates :name, :creator_id, :member_id, presence: true 
+    validates :name, presence: true 
 
-    belongs_to :creator,
-    foreign_key: :creator_id,
-    class_name: :User
+    has_many :channel_members,
+    foreign_key: :channel_id,
+    class_name: :ChannelMember
 
-    belongs_to :member,
-    foreign_key: :channel_member_id,
-    class_name: :User
+    # has_many :messages,
+    # foreign_key: :channel_id,
+    # class_name: :Message,
+    # dependent: :destroy 
 
-    has_many :messages,
-    foreign_key: :channeL_id,
-    class_name: :Message 
+    def self.get_channels_by_user(current_user)
+        Channel.joins(:channel_members).where('channel_members.member_id = ?', current_user.id)
+    end 
 end

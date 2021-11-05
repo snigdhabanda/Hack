@@ -6,21 +6,21 @@ class User < ApplicationRecord
     attr_reader :password 
     before_validation :ensure_session_token
 
-    has_many :authored_messages,
-    foreign_key: :author_id,
-    class_name: :Message
+    # has_many :authored_messages,
+    # foreign_key: :author_id,
+    # class_name: :Message
 
-    has_many :received_messages,
-    foreign_key: :recipient_id,
-    class_name: :Message
+    # has_many :received_messages,
+    # foreign_key: :recipient_id,
+    # class_name: :Message
 
     has_many :channels,
-    foreign_key: :channel_member_id,
-    class_name: :Channel
+    foreign_key: :member_id,
+    class_name: :ChannelMember
 
-    has_many :dms,
-    foreign_key: :dm_member_id,
-    class_name: :Dm
+    # has_many :dms,
+    # foreign_key: :dm_member_id,
+    # class_name: :Dm
 
     
     #find a user in the database 
