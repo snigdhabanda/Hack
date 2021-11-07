@@ -6,12 +6,13 @@ const MessagesReducer = (state= {}, action) => {
     const nextState = Object.assign({}, state)
     
     switch (action.type) {
-        // case RECEIVE_CHANNEL:
-        //     return action.messages 
+        case RECEIVE_CHANNEL:
+            if (action.messages) return action.messages 
+            else return {}
         case UPDATE_MESSAGE:
             nextState[action.message.id] = action.message
             return nextState; 
-        case DELETE_MESSAGE:
+        case DELETE_MESSAGE: 
             delete nextState[action.message.id]
             return nextState;
         case RECEIVE_MESSAGE: 

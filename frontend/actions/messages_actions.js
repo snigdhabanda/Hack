@@ -20,10 +20,16 @@ const removeMessage = (message) => ({
     message
 })
 
-const receiveMessage = (message) => ({
+// const receiveMessage = (message) => ({
+//     type: RECEIVE_MESSAGE,
+//     message
+// })
+
+export const createMessage = (message) => ({
     type: RECEIVE_MESSAGE,
     message
 })
+
 
 export const fetchMessages = () => dispatch => (
     MessageApiUtil.fetchMessages().then(
@@ -35,10 +41,7 @@ export const updateMessage = (message) => dispatch => (
         (message) => dispatch(changeMessage(message)))
 )
 
-export const createMessage = (message) => dispatch => (
-    MessageApiUtil.createMessage(message).then(
-        (message) => dispatch(receiveMessage(message)))
-)
+
 
 export const deleteMessage = (messageId) => dispatch => (
     MessageApiUtil.deleteMessage(messageId).then(

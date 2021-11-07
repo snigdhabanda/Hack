@@ -5,8 +5,7 @@ class MessageForm extends React.Component {
     super(props);
     this.state = { body: "" };
     this.currentUser = this.props.currentUser
-    this.channelId = this.props.channelId
-
+    
   }
   
   update(field) {
@@ -16,7 +15,7 @@ class MessageForm extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    App.cable.subscriptions.subscriptions[0].speak({ message: this.state.body, id: this.currentUser, channelId: this.channelId});
+    App.cable.subscriptions.subscriptions[0].speak({ message: this.state.body, id: this.currentUser, channelId: this.props.channelId});
     this.setState({ body: "" });
     console.log(this.state)
   }

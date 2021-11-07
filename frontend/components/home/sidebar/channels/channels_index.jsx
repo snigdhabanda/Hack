@@ -39,7 +39,7 @@ class ChannelsIndex extends React.Component{
     }
 
     render(){
-        const {channels, currentView, fetchChannel, currentUser, messages} = this.props
+        const {createMessage, channels, currentView, fetchChannel, currentUser, messages, users} = this.props
         console.log(currentView)
 
         return(
@@ -52,7 +52,7 @@ class ChannelsIndex extends React.Component{
                         ))} */}
                     {/* </ul> */}
                     {currentView ?
-                        <ChatRoom fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} channels={Object.values(channels)}/>
+                        <ChatRoom createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {Object.values(users)} channels={Object.values(channels)}/>
                         : ""}
 
                         {/* {currentView ? 
