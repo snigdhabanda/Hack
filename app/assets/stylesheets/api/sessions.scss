@@ -1,3 +1,100 @@
 // Place all the styles related to the api/sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.session-form-title {
+    size: 50px; 
+    color: red;
+   
+    
+}
+
+.session-form-instructions{
+    font-family: 'Arimo', sans-serif;
+    display: block; 
+    font-size: 48px; 
+    font-weight: 300;
+    line-height: 46px;
+    max-width: 700px;
+    letter-spacing: -.75px;
+    text-align: center;
+    margin: auto; 
+    margin-bottom: 32px; 
+
+}
+
+.session-form-email{
+    
+    font-family: 'Arimo', sans-serif;
+    font-size: 18px;
+     
+}
+
+.session-form-password{
+   
+    font-family: 'Arimo', sans-serif;
+    font-size: 18px;
+}
+
+.session-form-name{
+    font-family: 'Arimo', sans-serif;
+    font-size: 18px;
+}
+
+
+
+.inputs {
+    display: flex; 
+    flex-direction: column;
+    width: 400px;
+    height: 370px; 
+    margin: auto; 
+
+    .email-input{
+        width: 100%;
+        height: 36px;  
+        border: 1px solid black; 
+        padding: 11px 12px 13px;
+        box-sizing: border-box; 
+        font-size: 18px;
+        margin-bottom: 16px; 
+    }
+    
+    .password-input{
+        width: 100%; 
+        height: 36px;  
+        border: 1px solid black; 
+        padding: 11px 12px 13px;
+        box-sizing: border-box; 
+        font-size: 18px;
+        margin-bottom: 16px; 
+    
+    }
+    
+    .name_input{
+        width: 100%; 
+        height: 36px;  
+        border: 1px solid black; 
+        padding: 11px 12px 13px;
+        box-sizing: border-box; 
+        font-size: 18px; 
+        margin-bottom: 16px; 
+    }
+
+    .session-form-button{
+        background-color: #611f69;
+        cursor: pointer; 
+        align-items: center; 
+        color: #fff;
+        width: 100%; 
+        height: 36px;
+        font-size: 18px; 
+        font-family: 'Arimo', sans-serif;
+    }
+
+    a{
+        text-align: center;
+        margin-top: 20px; 
+    }
+}
+

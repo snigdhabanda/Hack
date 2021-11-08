@@ -6,8 +6,8 @@ const mapStateToProps = ({session, entities: {users}}) => ({
     currentUser: users[session.id]
 })
 
-// const mapDispatchToProps = dispatch => ({
-    
-// })
+const mapDispatchToProps = dispatch => ({
+    logoutUser: () => dispatch(logoutUser())
+})
 
 export default connect(mapStateToProps)(Render)

@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {Link, Switch} from 'react-router-dom'
 import {Route} from 'react-router'
 import React from 'react'
 import { Redirect } from 'react-router'
@@ -14,13 +14,15 @@ class App extends React.Component{
     render(){
         return (
             <div>
-                <ProtectedRoute exact path="/home" component={HomeContainer} />
-                <AuthRoute exact path="/starthere" component={SignUpFormContainer} />
-                <AuthRoute exact path="/login" component={LoginFormContainer} />
-                
+                <Switch>
+                    <AuthRoute exact path="/starthere" component={SignUpFormContainer} />
+                    <AuthRoute exact path="/login" component={LoginFormContainer} />
+                    <ProtectedRoute exact path="/home" component={HomeContainer} />
+                    <Route exact path="/" component={RenderContainer} />
+                </Switch>
 
-                <RenderContainer />
-                
+                {/* <RenderContainer /> */}
+
                 
                 {/* <Route to="/demo" component={Home} /> */}
                 {/* <Link to="/demo" /> */}

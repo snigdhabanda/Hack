@@ -10,9 +10,10 @@ class Home extends React.Component{
    render(){
       return (
          <div> 
-            <button onClick={() => this.props.logoutUser()}>Logout</button>
+            
             <UsersIndexContainer /> 
-            <ChannelsIndexContainer />     
+            <ChannelsIndexContainer />    
+            <button onClick={() => this.props.logoutUser()}>Logout</button> 
             
 
             {/* // <RenderMessagesContainer /> 
