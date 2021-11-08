@@ -1,5 +1,5 @@
 import React from 'react'
-import img from '../../../app/assets/images/slack-logo.png'
+// import img from '../../../app/assets/images/slack-logo.png'
 
 
 
@@ -30,9 +30,12 @@ class SessionForm extends React.Component {
 
         return (
             <form >
-                <img src={img} />
-
-                <h1 className="session-form-title">hack</h1>
+                <div className="header">
+                    <div className="header-nav">
+                        <img className="logo" src="https://github.com/snigdhabanda/Hack/blob/actioncables/app/assets/images/slack-logo.png?raw=true" />
+                        <h1 className="session-form-title">hack</h1>
+                    </div>
+                </div>
                     <h2 className="session-form-instructions">{this.props.formInstructions}</h2>
                 
                 <div className="inputs"> 

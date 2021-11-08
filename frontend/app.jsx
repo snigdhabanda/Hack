@@ -13,7 +13,7 @@ class App extends React.Component{
 
     render(){
         return (
-            <div>
+            <div className="routes">
                 <Switch>
                     <AuthRoute exact path="/starthere" component={SignUpFormContainer} />
                     <AuthRoute exact path="/login" component={LoginFormContainer} />
