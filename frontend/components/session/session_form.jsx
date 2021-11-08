@@ -32,7 +32,7 @@ class SessionForm extends React.Component {
             <form >
                 <div className="header">
                     <div className="header-nav">
-                        <img className="logo" src="https://github.com/snigdhabanda/Hack/blob/actioncables/app/assets/images/slack-logo.png?raw=true" />
+                        <img className="logo" src="https://github.com/snigdhabanda/Hack/blob/actioncables/app/assets/images/slack-logo-dark-purple.png?raw=true" />
                         <h1 className="session-form-title">hack</h1>
                     </div>
                 </div>
