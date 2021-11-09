@@ -39,27 +39,16 @@ class ChannelsIndex extends React.Component{
     }
 
     render(){
-        const {createMessage, channels, currentView, fetchChannel, currentUser, messages, users} = this.props
+        const {createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
         console.log(currentView)
 
         return(
-            <div>
+            <div className="chat-channels-and-messages">
                 {Object.keys(channels).length > 0 ? 
                 <div>
-                    {/* <ul> */}
-                        {/* {Object.values(channels).map((channel) => (
-                            <ChannelsIndexItem channel={channel} fetchChannel={fetchChannel} currentView={currentView}/>
-                        ))} */}
-                    {/* </ul> */}
                     {currentView ?
-                        <ChatRoom createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {Object.values(users)} channels={Object.values(channels)}/>
-                        : ""}
-
-                        {/* {currentView ? 
-                            
-                            <MessagesIndex currentView={currentView} fetchChannel={fetchChannel} messages={messages}/> 
-                        : nil} */}
-                        
+                        <ChatRoom createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} getTime={getTime} messages = {Object.values(messages)} users = {users} channels={channels}/>
+                        : ""}      
                 </div>
                 
                 : ""}
@@ -68,7 +57,7 @@ class ChannelsIndex extends React.Component{
                     <ChannelFormContainer />
                     
                 : null}
-                <button onClick={this.handleClick}>New Channel</button>
+                {/* <button onClick={this.handleClick}>New Channel</button> */}
             </div>
         )
     }

@@ -13,15 +13,16 @@ class UsersIndex extends React.Component {
    render(){
     const {users} = this.props
       return (
-         <div>
-            <h4>Members</h4>
-             {Object.keys(users).length > 0 ? 
-             Object.values(users).map((user) => (
-                <li>{user.displayName}</li> 
-             ))
-                :
-             ""}
-         </div>
+         <div></div>
+         // <div>
+         //    <h4>Members</h4>
+         //     {Object.keys(users).length > 0 ? 
+         //     Object.values(users).map((user) => (
+         //        <li>{user.displayName}</li> 
+         //     ))
+         //        :
+         //     ""}
+         // </div>
       )
    }
 } 

@@ -29,7 +29,7 @@ class SessionForm extends React.Component {
         else signup = false; 
 
         return (
-            <form >
+            <form className="session-form">
                 <div className="header">
                     <div className="header-nav">
                         <img className="logo" src="https://github.com/snigdhabanda/Hack/blob/actioncables/app/assets/images/slack-logo-dark-purple.png?raw=true" />

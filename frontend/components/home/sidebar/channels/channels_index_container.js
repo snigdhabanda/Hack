@@ -3,6 +3,7 @@ import { createChannel, fetchChannels, fetchChannel } from "../../../../actions/
 import ChannelsIndex from "./channels_index"
 import {createChannelMember} from '../../../../actions/channel_member_actions'
 import { createMessage } from "../../../../actions/messages_actions"
+import { getTime } from "../../../../actions/messages_actions"
 
 const mapStateToProps = (state) => ({
     channels: state.entities.channels,
@@ -18,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchChannels: () => dispatch(fetchChannels()),
     createChannel: (channel) => dispatch(createChannel(channel)),
     createMessage: (message) => dispatch(createMessage(message)),
+    getTime: (messageId) => dispatch(getTime(messageId)),
     createChannelMember: (channelMember) => dispatch(createChannelMember(channelMember))
 })
 

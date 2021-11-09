@@ -33,3 +33,11 @@ export const deleteMessage = (messageId) => (
         
     })
 )
+
+export const getTime = (messageId) => (
+    $.ajax({
+        method: "GET",
+        url: `/messages/${messageId}`,
+    })
+)
+

@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
         password: ""
     },
     formType: "Login",
-    formInstructions: "Sign into Dinner Party",
+    formInstructions: "Sign in to Dinner Party",
     link: <Link to="/starthere">Sign Up Instead</Link>
 })
 

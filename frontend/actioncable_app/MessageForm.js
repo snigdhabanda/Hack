@@ -22,15 +22,17 @@ class MessageForm extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className="send-message">
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input
+            className="message-form"
             type="text"
             value={this.state.body}
             onChange={this.update("body")}
-            placeholder="Type message here"
+            placeholder={`Send a message to #${this.props.channels[this.props.channelId].name.toLowerCase()}`}
           />
-          <input type="submit" />
+          <input class="message-buton" type="submit" />
+          
         </form>
       </div>
     );

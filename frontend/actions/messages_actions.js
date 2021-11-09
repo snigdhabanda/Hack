@@ -1,9 +1,11 @@
 import * as MessageApiUtil from './../util/message_api_util'
+import { receiveErrors } from './session/session_actions'
 
 export const RECEIVE_MESSAGES = "RECEIVE_MESSAGES"
 export const UPDATE_MESSAGE = "UPDATE_MESSAGE"
 export const DELETE_MESSAGE = "DELETE_MESSAGE"
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
+export const RECEIVE_TIME = "RECEIVE_TIME"
 
 const receiveMessages = (messages) => ({
     type: RECEIVE_MESSAGES,
@@ -30,6 +32,10 @@ export const createMessage = (message) => ({
     message
 })
 
+export const receiveTime = () => ({
+    type: RECEIVE_TIME
+})
+
 
 export const fetchMessages = () => dispatch => (
     MessageApiUtil.fetchMessages().then(
@@ -41,9 +47,14 @@ export const updateMessage = (message) => dispatch => (
         (message) => dispatch(changeMessage(message)))
 )
 
+export const getTime = (messageId) => dispatch => (
+    MessageApiUtil.getTime(messageId).then(
+        () => dispatch(receiveTime()))
+)
 
 
 export const deleteMessage = (messageId) => dispatch => (
     MessageApiUtil.deleteMessage(messageId).then(
         (message) => dispatch(removeMessage(message)))
 )
+

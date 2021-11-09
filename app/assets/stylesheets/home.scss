@@ -1,6 +1,8 @@
 html, body {
     margin: 0;
     height: 100%;
+    overflow-y:hidden;
+    overflow-x:hidden;
 }
 
 #root{
@@ -11,3 +13,189 @@ html, body {
 .routes{
     height: 100%; 
 }
+
+.header-nav{
+    width: 100%;
+    background-color: #350d36;
+    height: 50px; 
+    color: white; 
+    position: relative; 
+}
+
+.sidebar-nav{
+    width: 220px; 
+    height: 100%; 
+    background-color: #3F0E40;
+    color: white; 
+    position: absolute; 
+    // overflow-y: scroll;
+
+    .dinner-party{
+        background-color: #3F0E40; 
+        border-bottom: 1px solid rgb(82,38,83);
+        border-top: 1px solid rgb(82,38,83);
+        height: 50px;
+        padding: 10px 16px 10px 16px; 
+        font-size: 18px;
+        font-family: 'Lato', sans-serif; 
+        font-weight: bold; 
+        padding: 10px 10px 10px 16px; 
+        box-sizing: border-box;
+    }
+}
+
+.channels-messages{
+    font-family: 'Lato', sans-serif;
+    color: #CFC3CF;
+    font-size: 15px; 
+    margin-top: 80px; 
+     
+    .channel-title{
+        display: flex;
+        padding-left: 18px;  
+        padding-bottom: 12px; 
+
+        .channel-arrow-container{
+            padding-left: 5px;
+            height: 20px;
+            width: 15px; 
+            margin-right: 6px; 
+
+            .channel-arrow{
+                margin-right: 10px; 
+                
+            }
+        }
+
+        .channel-plus{
+            display: none; 
+        }
+       
+    }
+
+    .channel-title:hover{
+        cursor: pointer; 
+        
+        .channel-plus{
+            margin-left: 60px; 
+        }
+               
+    }
+
+
+    .channels-list{
+        
+        .channel{
+            text-transform: lowercase; 
+            padding: 6px 15px 12px 30px; 
+            display: flex; 
+            align-items: center;
+
+            .hashtag{
+                margin-right: 18px; 
+                height: 12px; 
+                width: auto; 
+            }
+        }
+
+        .channel:hover{
+            background-color: #350d36;
+            cursor: pointer; 
+        }
+    }
+
+    .message-list{
+        position: absolute; 
+        display: flex;
+        flex-direction: column-reverse;
+        top: 0px;
+        left: 220px; 
+        color: black; 
+        width: 400%; 
+        overflow-y: scroll;
+        height: 70%; 
+        overflow-x: hidden;
+    
+        .message-box{
+            height: 40px; 
+            width: 100%; 
+            list-style-type: none; 
+            padding-left: 20px; 
+            padding-top: 2px;
+            padding-bottom: 2px; 
+            margin: 4px 8px 0px 0px;
+            font-family: 'Lato', sans-serif;
+            box-sizing: border-box;
+            height: max-content;
+    
+            .message-author{
+                font-size: 15px;
+                font-weight: 700; 
+                color: #1D1C1D; 
+                margin-bottom: 8px; 
+                margin-top: 5px; 
+                display: flex; 
+                align-items: center;
+                
+            
+
+                .message-time{
+                    font-size: 12px;
+                    font-weight: normal; 
+                    padding-left: 10px;
+                     
+                }
+               
+            }
+    
+            .message-content{
+                font-size: 15px;
+                font-weight: 300;
+                color: #1D1C1D; 
+              
+            }
+
+            
+        }
+    
+        .message-box:hover{
+            background-color: #f7f7f7;  
+            color: #1D1C1D; 
+            z-index: 3; 
+        }
+       
+    }
+    
+    .send-message{
+        position: absolute;
+        top: 480px; 
+        left: 220px; 
+        display: flex; 
+        border-radius: 10px;
+        margin: 20px;  
+    
+        form .message-form{
+            width: 1480%; 
+            line-height: 50px; 
+            border-radius: 4px; 
+            border: 1px solid black; 
+            outline: none; 
+            font-family: 'Lato', sans-serif; 
+            font-size: 15px; 
+            text-align: left; 
+            padding-bottom: 30px;
+            padding-left: 8px; 
+            box-sizing: border-box;
+            margin-top: 15px;
+        } 
+
+        form .message-form:hover{
+            cursor: text; 
+        } 
+    
+        .message-button{
+    
+        }
+    }
+}
+
