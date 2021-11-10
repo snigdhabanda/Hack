@@ -36,5 +36,9 @@ class Api::MessagesController < ApplicationController
         params.require(:message).permit(:body, :author_id, :channel_id)
     end 
 
+    def params 
+        params[:parent_message_id]
+    end 
+
    
 end

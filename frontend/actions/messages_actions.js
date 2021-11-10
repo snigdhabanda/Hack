@@ -17,7 +17,7 @@ const changeMessage = (message) => ({
     message 
 })
 
-const removeMessage = (message) => ({
+export const removeMessage = (message) => ({
     type: DELETE_MESSAGE,
     message
 })
@@ -32,9 +32,9 @@ export const createMessage = (message) => ({
     message
 })
 
-export const receiveTime = () => ({
-    type: RECEIVE_TIME
-})
+// export const receiveTime = () => ({
+//     type: RECEIVE_TIME
+// })
 
 
 export const fetchMessages = () => dispatch => (

@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import { createChannel, fetchChannels, fetchChannel } from "../../../../actions/channel_actions"
 import ChannelsIndex from "./channels_index"
 import {createChannelMember} from '../../../../actions/channel_member_actions'
-import { createMessage } from "../../../../actions/messages_actions"
+import { createMessage, removeMessage } from "../../../../actions/messages_actions"
 import { getTime } from "../../../../actions/messages_actions"
 
 const mapStateToProps = (state) => ({
@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
     createChannel: (channel) => dispatch(createChannel(channel)),
     createMessage: (message) => dispatch(createMessage(message)),
     getTime: (messageId) => dispatch(getTime(messageId)),
+    removeMessage: (message) => dispatch(removeMessage(message)),
     createChannelMember: (channelMember) => dispatch(createChannelMember(channelMember))
 })
 
