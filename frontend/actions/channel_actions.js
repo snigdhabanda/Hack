@@ -18,6 +18,13 @@ const receiveChannel = ({channel, channelMembers, messages}) => ({
     messages 
 })
 
+const newChannel = ({channel, channelMembers, messages}) => ({
+    type: NEW_CHANNEL,
+    channel,
+    channelMembers,
+    messages 
+})
+
 const changeChannel = (channel) => ({
     type: UPDATE_CHANNEL,
     channel 

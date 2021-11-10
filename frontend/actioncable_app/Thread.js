@@ -6,30 +6,39 @@ import ReplyMessageForm from "./ReplyMessageForm";
 class Thread extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [this.props.message] };
+    this.state = { messages: [] };
   }
 
-  componentDidMount(){
+  getReplies(){
     const allMessages = [this.props.message]
     Object.values(this.props.messages).map((message) =>
     {
         if (message.parentMessageId && message.parentMessageId === this.props.message.id)
         {allMessages.push(message)}
     })
-    this.setState({messages: allMessages}) 
+    return allMessages
   }
 
-  componentDidUpdate(){
-    if (this.props.threadMessages.length > 0){
-      this.state.messages.concat(this.props.threadMessages)
+  componentDidMount(){
+    this.setState({messages: this.getReplies()}) 
+  }
+
+  componentDidUpdate(prevProps){
+    console.log("im in cdu")
+    if (prevProps.threadMessages !== this.props.threadMessages){
+      this.setState({messages: this.state.messages.concat(this.props.threadMessages)})
     }
-    console.log("updating")
+    if (prevProps.message !== this.props.message){
+      this.setState({messages: this.getReplies()})
+    }
+    
   }
   
   
   render() {
     console.log(this.state.messages, "thread")
-        const messageList = this.state.messages.concat(this.props.threadMessages).reverse().map((message, idx) => {
+
+        const messageList = this.state.messages.length > 0 ? this.state.messages.reverse().map((message, idx) => {
             let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")
             let timestamp = timeStampArray[1].slice(0,timeStampArray[1].length - 3) + " " + timeStampArray[2].toLowerCase()
         
@@ -40,7 +49,7 @@ class Thread extends React.Component {
                 </div>
                 <p className="message-content">{message.body}</p>
             </li>)
-        })
+        }) : ""
         return (
         <div className="thread-container">
             <div className="message-list" >{messageList}</div>

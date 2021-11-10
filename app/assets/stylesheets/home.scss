@@ -28,7 +28,8 @@ html, body {
     background-color: #3F0E40;
     color: white; 
     position: absolute; 
-    // overflow-y: scroll;
+    overflow-y: scroll;
+
 
     .dinner-party{
         background-color: #3F0E40; 
@@ -84,7 +85,7 @@ html, body {
 
 
     .channels-list{
-        
+
         .channel{
             text-transform: lowercase; 
             padding: 6px 15px 12px 30px; 
@@ -312,5 +313,9 @@ html, body {
     }
 
     
+}
+
+.all-users{
+    display: none; 
 }
 
