@@ -1,5 +1,5 @@
 import { RECEIVE_CHANNEL } from "../actions/channel_actions"
-const defaultState = {dmId: null, channelId: 1}
+const defaultState = {dmId: null, channelId: 2}
 
 const ViewReducer = (state=defaultState, action) =>{
     const nextState = Object.assign({}, state)

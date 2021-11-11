@@ -8,6 +8,7 @@ const receiveChannelMember = (channelMember) => ({
     channelMember
 })
 
-export const createChannelMember = (channelMember) => (
-    ChannelMemberApiUtil.createChannelMember(channelMember)
-)
+export const createChannelMember = (channelMember) => dispatch => (
+    ChannelMemberApiUtil.createChannelMember(channelMember).then(
+        (channelMember) => dispatch(receiveChannelMember(channelMember))
+))

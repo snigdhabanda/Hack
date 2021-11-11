@@ -3,7 +3,7 @@ class Api::ChannelMembersController < ApplicationController
     def create
         @channel_member = ChannelMember.new(channel_member_params) 
         if @channel_member.save
-            # render '/api/channel_members/channel_member'
+            render "/api/channel_members/show"
         else 
             render json: @channel_member.errors.full_messages
         end  

@@ -6,13 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHashtag, faSortDown, faPlus, faReply, faTrashAlt, faEdit} from '@fortawesome/fontawesome-free-solid'
 import Thread from './Thread'
 import ChannelForm from './../components/home/sidebar/channels/channel_form'
+import AddChannelMembers from "../components/home/sidebar/channels/add_channel_members.jsx";
 
 
 
 class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [], threadMessages: [], updatingMessage: false, replying: false, displayForm: false};
+    this.state = { messages: [], threadMessages: [], updatingMessage: false, replying: false, displayForm: false, submittingMessage: false, memberIds: []};
     this.bottom = React.createRef();
     this.channelQueue = [];
     
@@ -25,7 +26,6 @@ class ChatRoom extends React.Component {
     },
       {
         received: data => {
-          console.log(data)
           switch (data.type) {
             case "createMessage":
                 const message = {
@@ -35,7 +35,6 @@ class ChatRoom extends React.Component {
                 channelId: data.channel_id,
                 createdAt: data.created_at  
                 }
-                console.log(message)
                 this.props.createMessage(message) 
                 this.setState({
                   messages: this.props.messages.reverse()
@@ -82,6 +81,12 @@ class ChatRoom extends React.Component {
     )
     
   }
+  
+  componentDidUpdate(prevProps){
+    if (prevProps.channels !== this.props.channels){
+      this.setState({submittingMessage: true})
+    }
+  }
 
   unsubscribeFromChannel(){
     App.cable.disconnect()
@@ -125,24 +130,19 @@ class ChatRoom extends React.Component {
 
   handleClick(e){
     e.preventDefault()
-    console.log
     if (!this.state.displayForm) {this.setState({displayForm: true})}
 
 }
   
   render() {
-    
-    console.log(this.props.channels)
+    console.log(this.state.submittingMessage)
     if (this.channelQueue.length === 0 || this.channelQueue[this.channelQueue.length - 1] !== this.props.currentView){
       this.channelQueue.push(this.props.currentView)
       this.changeChannel(this.props.currentView)
     }
-    console.log("rendering in parent")
-    console.log(this.state.threadMessages)
-    console.log(this.state.replying)
+    
     const messageList = this.state.messages.map((message, idx) => {
       let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")
-      // console.log(timeStampArray)
       let timestamp = timeStampArray[1].slice(0,timeStampArray[1].length - 3) + " " + timeStampArray[2].toLowerCase()
       
       let numReplies = this.props.messages.filter(stateMessage => stateMessage.parentMessageId === message.id).length
@@ -201,12 +201,20 @@ class ChatRoom extends React.Component {
 
         {this.state.displayForm ? 
                 <div>
-                    <ChannelForm channels={this.props.channels} users={this.props.users} currentView = {this.props.currentView} createChannel={this.props.createChannel} fetchChannel={this.props.fetchChannel}/>
+                    <ChannelForm memberIds={this.state.memberIds} createChannelMember={this.props.createChannelMember} channels={this.props.channels} users={this.props.users} currentView = {this.props.currentView} createChannel={this.props.createChannel} fetchChannel={this.props.fetchChannel}/>
                     {this.state.displayForm = false}
                 </div>
                     
                 : null}
         <button onClick={this.handleClick.bind(this)}>New Channel</button>
+
+        {this.state.submittingMessage ? 
+                <div><AddChannelMembers createChannelMember = {this.props.createChannelMember} currentUser = {this.props.currentUser} currentView={this.props.currentView} memberIds={this.state.memberIds} />
+                {this.state.submittingMessage = false}
+                {this.state.memberIds = []}
+                </div> : ""
+                
+        }
              
         
         <div className="messages-and-threads">

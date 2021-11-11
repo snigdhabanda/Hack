@@ -1,7 +1,7 @@
 class Api::ChannelsController < ApplicationController
     def index
         @channels = Channel.all
-        render "api/channels/index" 
+        render "api/channels/index"
     end 
 
     def show
@@ -29,6 +29,7 @@ class Api::ChannelsController < ApplicationController
     def channel_params 
         params.require(:channel).permit(:name)
     end 
+
 
     
 end
