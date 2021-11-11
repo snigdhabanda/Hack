@@ -51,7 +51,7 @@ html, body {
     font-size: 15px; 
     margin-top: 80px; 
      
-    .channel-title{
+    .channel-title, .dm-title{
         display: flex;
         padding-left: 18px;  
         padding-bottom: 12px; 
@@ -69,25 +69,26 @@ html, body {
         }
 
         .channel-plus{
-            display: none; 
+            cursor: pointer; 
+            padding-left: 80px; 
         }
        
     }
 
-    .channel-title:hover{
-        cursor: pointer; 
+    // .channel-title:hover{
+    //     cursor: pointer; 
         
-        .channel-plus{
-            margin-left: 60px; 
-        }
+    //     .channel-plus{
+    //         margin-left: 60px; 
+    //     }
                
-    }
+    // }
 
 
-    .channels-list{
-        height: 100px; 
-        overflow-y: scroll;
-        .channel{
+    .channels-list, .dms-list{
+        height: 200px; 
+        overflow-y: auto;
+        .channel, .dm{
             text-transform: lowercase; 
             padding: 6px 15px 12px 30px; 
             display: flex; 
@@ -100,7 +101,7 @@ html, body {
             }
         }
 
-        .channel:hover{
+        .channel:hover, .dm:hover{
             background-color: #350d36;
             cursor: pointer; 
         }
@@ -116,16 +117,20 @@ html, body {
         width: 500%; 
         height: 70%;
         // justify-content: space-between;
+        border: 1px solid black; 
+        
         .message-list{
             
             display: flex;
             position: relative; 
             flex-direction: column-reverse;
-            width: 100%;
-            height: 100%;
+            width: 72%;
+            height: 98%;
             color: black; 
             overflow-x: hidden;
+            overflow-y: auto; 
             position: relative; 
+            z-index: 3; 
 
             .channel-name{
                 display: block; 
@@ -140,10 +145,10 @@ html, body {
                 padding: 15px 15px 6px 20px; 
                 box-sizing: border-box;
                 border: 1px solid rgb(189, 180, 180); 
-                z-index: 5; 
+                z-index: 8; 
             }
             .message-box{
-                height: 40px; 
+                height: 60px; 
                 width: 100%; 
                 list-style-type: none; 
                 padding-left: 20px; 
@@ -179,6 +184,18 @@ html, body {
                     cursor: text; 
                     overflow-wrap: break-word;
                 
+                }
+
+                .replies{
+                    width: max-content; 
+                    color: 10px; 
+                    font-size: 12px; 
+                    color: #1154A3;
+                    font-weight: bold; 
+                    margin-top: 8px; 
+                }
+                .replies:hover{
+                    cursor: pointer; 
                 }
                 
 
@@ -218,38 +235,52 @@ html, body {
         
         }
 
-        .thread-container{
-            height: 80%; 
-            width: 175%; 
-            .thread{
+        .thread{
+            height: 100%; 
+            width: 50%; 
+            position: absolute; 
+            left: 800px; 
+            border-left: 1px rgb(189, 180, 180);
+            z-index: 4; 
+
+            .thread-container{
                 height: 100%; 
                 border: 1px solid black; 
 
-                .message-list{
-                    display: flex;
-                    position: relative; 
-                    flex-direction: column-reverse;
-                    width: 100%;
-                    height: 100%;
+                .thread-name{
+                    display: block; 
+                    position: fixed; 
+                    font-size: 18px;
+                    font-weight: bold; 
+                    width: 100%; 
+                    height: 50px; 
+                    text-transform: lowercase;
+                    background-color: white;
+                    padding: 15px 15px 6px 20px; 
+                    box-sizing: border-box;
+                    border: 1px solid rgb(189, 180, 180); 
+                    z-index: 8; 
                     color: black; 
-                    overflow-y: scroll;        
-                    overflow-x: hidden;
-                    position: relative; 
+                     
+
                 }
+
+                
             }
 
 
 
             .reply-message{
                 position: fixed;
-                top: 490px; 
-                left: 1170px; 
+                top: 530px; 
+                left: 1000px; 
                 display: flex; 
                 border-radius: 10px;
                 margin: 20px;  
                 
                     form .message-form{
-                        width: 100%; 
+                        z-index: 8; 
+                        width: 150%; 
                         line-height: 50px; 
                         border-radius: 4px; 
                         border: 1px solid black; 
@@ -281,14 +312,15 @@ html, body {
     
     .send-message{
         position: fixed;
-        top: 487px; 
+        top: 530px; 
         left: 220px; 
         display: flex; 
         border-radius: 10px;
         margin: 20px;  
+        
     
         form .message-form{
-            width: 396%; 
+            width: 340%; 
             line-height: 50px; 
             border-radius: 4px; 
             border: 1px solid black; 
@@ -323,5 +355,125 @@ html, body {
 .new-channel-members{
     color: black; 
 }
+
+.new-channel-form{
+    display: block; 
+    border: 1px solid black;
+    position: absolute; 
+    height: 450px; 
+    width: 450px; 
+    left: 500px; 
+    top: 40px; 
+    border-radius: 4px; 
+    z-index: 8; 
+    color: black; 
+    padding: 15px 20px 20px 30px; 
+
+    h2{
+        font-size: 30px; 
+        font-weight: bolder; 
+        margin-bottom: 20px; 
+        margin-top: 20px; 
+         
+    }
+
+    p{
+        font-size: 15px; 
+        margin-bottom: 20px;
+    }
+
+    .all-input-tags{
+        display: flex;
+        flex-direction: column; 
+
+        .name-box, .description-box, .add-people-box{
+            display: flex;
+            flex-direction: column; 
+            height: max-content; 
+            margin-bottom: 10px; 
+            input{
+                outline: none; 
+                width: 350px; 
+                height: 30px;
+                padding-left: 12px; 
+                margin-bottom: 15px; 
+            }
+            label {
+                margin-bottom: 10px; 
+                width: 200px; 
+                height: 10px; 
+                display: block; 
+            }
+
+        
+        }
+
+        .add-people-box{
+            margin-bottom: 15px; 
+            
+            label{
+                margin-bottom: 20px; 
+            }
+            .all-users{
+                display: block; 
+                cursor: pointer; 
+                border: 1px solid black; 
+                border-radius: 4px;
+                width: 300px; 
+                padding-top: 5px; 
+                  
+                ul{
+                    list-style-type: none; 
+                }
+                .li-tag{
+                   padding-bottom: 5px;  
+                   padding-left: 15px; 
+                }
+                .li-tag:hover{
+                    background-color:#f7f7f7;  
+                }
+                
+            }
+        }
+    }
+
+    .create{
+        background: transparent;
+        outline: none; 
+        font-size: 15px; 
+        font-family: 'Lato', sans-serif;
+        background-color: #007A5A;
+        border: 1px solid #007A5A; 
+        color: white;
+        font-weight: bold; 
+        border-radius: 4px; 
+        padding-top: 5px;
+        padding-bottom: 5px; 
+        width: 100px; 
+        margin-left: 350px; 
+        
+    }
+    
+
+    .modal-disappear{
+        cursor: pointer;
+        font-size: 16px; 
+        font-weight: bold; 
+        position: absolute; 
+        top: 15px;
+        left: 475px; 
+    }
+}
+
+.dm-title{
+    padding-top: 40px; 
+    // padding-left: 18px; 
+    // padding-bottom: 30px;  
+}
+
+
+
+
+
 
 

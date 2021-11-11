@@ -30,7 +30,7 @@ class ChatRoom extends React.Component {
             case "createMessage":
                 const message = {
                 id: data.id,
-                body: data.message,
+                body: data,
                 authorId: data.author_id,
                 channelId: data.channel_id,
                 createdAt: data.created_at  
@@ -39,38 +39,37 @@ class ChatRoom extends React.Component {
                 this.setState({
                   messages: this.props.messages.reverse()
                 });
-            // case "editMessage":
-            //   const editedMessage = {
-            //     id: data.id,
-            //     body: data.message,
-            //     authorId: data.author_id,
-            //     channelId: data.channel_id,
-            //     createdAt: data.created_at  
-            //     }
-            // case "deleteMessage":
-            //   console.log(data.type)
-            //   this.props.deleteMessage(data.message)
-            //   this.setState({
-            //     messages: this.props.messages.reverse()
-            //   });
-            // case "replyMessage":
+            case "editMessage":
+              const editedMessage = {
+                id: data.id,
+                body: data.message,
+                authorId: data.author_id,
+                channelId: data.channel_id,
+                createdAt: data.created_at  
+                }
+            case "deleteMessage":
+              console.log(data.type)
+              this.props.deleteMessage(data.message)
+              this.setState({
+                messages: this.props.messages.reverse()
+              });
+            case "replyMessage":
               
-            //     const replyMessage = {
-            //     id: data.id,
-            //     body: data.message,
-            //     authorId: data.author_id,
-            //     channelId: data.channel_id,
-            //     createdAt: data.created_at,
-            //     parentMessageId: data.parent_message_id  
-            //     }
-            //     console.log(replyMessage)
-            //     this.props.createMessage(replyMessage) 
-            //     let thread = this.state.threadMessages.slice().concat(replyMessage)
-            //     this.setState({
-            //       threadMessages: thread
-            //     })
-            
-            
+                const replyMessage = {
+                id: data.id,
+                body: data.message,
+                authorId: data.author_id,
+                channelId: data.channel_id,
+                createdAt: data.created_at,
+                parentMessageId: data.parent_message_id  
+                }
+                console.log(replyMessage)
+                this.props.createMessage(replyMessage) 
+                let thread = this.state.threadMessages.slice().concat(replyMessage)
+                this.setState({
+                  threadMessages: thread
+                })
+
           }
         },
         speak: function(data) {return this.perform("speak", data)},
@@ -153,7 +152,7 @@ class ChatRoom extends React.Component {
             <p className="message-time">{timestamp}</p>
           </div>
           <p className="message-content">{message.body}</p>
-          <div className="replies">{numReplies > 0  ? `${numReplies} replies` : ""}</div>
+          <div onClick={this.reply.bind(this, message)} className="replies">{numReplies > 0 ? numReplies === 1  ?  `${numReplies} reply` : `${numReplies} replies` : ""}</div>
           
           {(this.state.updatingMessage && this.messageToUpdate.id === message.id) ? 
             <div><EditMessageForm 
@@ -185,19 +184,32 @@ class ChatRoom extends React.Component {
         <div className="channel-title">
             <div className="channel-arrow-container"><FontAwesomeIcon className="channel-arrow" icon={faSortDown} /> </div>
             Channels       
-           <FontAwesomeIcon className="channel-plus" icon={faPlus} />
+           <FontAwesomeIcon onClick={this.handleClick.bind(this)} className="channel-plus" icon={faPlus} />
         </div>
-       
+
+        
         <ul className="channels-list">
-          
-          {Object.values(this.props.channels).map((channel) =>
+        {Object.values(this.props.channels).filter(channel => !channel.dm).map((channel) =>(
               <li className="channel" onClick={this.props.fetchChannel.bind(this, channel.id)}>
                 <FontAwesomeIcon className="hashtag" icon={faHashtag} />
                 {channel.name}
               </li>
-              
-          )}
+        ))}
         </ul>
+        
+        
+        <ul className="dms-list">
+        <div className="dm-title">Direct Messages</div>
+        {Object.values(this.props.channels).filter(channel => channel.dm).map((channel) =>(
+              <li className="dm" onClick={this.props.fetchChannel.bind(this, channel.id)}>
+                {channel.name}
+              </li>
+            
+          ))}
+          
+        </ul>
+        
+        
 
         {this.state.displayForm ? 
                 <div>
@@ -206,7 +218,7 @@ class ChatRoom extends React.Component {
                 </div>
                     
                 : null}
-        <button onClick={this.handleClick.bind(this)}>New Channel</button>
+        {/* <button onClick={this.handleClick.bind(this)}>New Channel</button> */}
 
         {this.state.submittingMessage ? 
                 <div><AddChannelMembers createChannelMember = {this.props.createChannelMember} currentUser = {this.props.currentUser} currentView={this.props.currentView} memberIds={this.state.memberIds} />
@@ -223,15 +235,16 @@ class ChatRoom extends React.Component {
           <div className="channel-name">
             {this.props.channels[this.props.currentView].name}
           </div> : ""}
-          
+          <div id="for-scroll">
           {messageList}
+          </div>
         </div>
 
         {this.state.replying || this.state.threadMessages.length > 0 ? 
         <div className="thread">
-            {/* <Thread users={this.props.users} currentUser={this.props.currentUser} channelId={this.props.currentView} threadMessages={this.state.threadMessages} message={this.replyMessage} messages={this.props.messages}/>
+            <Thread users={this.props.users} currentUser={this.props.currentUser} channels={this.props.channels} channelId={this.props.currentView} threadMessages={this.state.threadMessages} message={this.replyMessage} messages={this.props.messages}/>
             {this.state.threadMessages = []}
-            {this.state.replying = false} */}
+            {this.state.replying = false}
             
         </div> : ""
         }

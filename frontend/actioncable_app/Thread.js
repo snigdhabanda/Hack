@@ -52,6 +52,8 @@ class Thread extends React.Component {
         }) : ""
         return (
         <div className="thread-container">
+            <div className="thread-name">{`Thread # ${this.props.channels[this.props.channelId].name.toLowerCase()}`}</div>
+            
             <div className="message-list" >{messageList}</div>
             <ReplyMessageForm currentUser={this.props.currentUser} parentMessageId={this.props.message.id} channelId={this.props.channelId}/>
             <button>Close</button>

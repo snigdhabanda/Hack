@@ -15,6 +15,7 @@ class ChannelForm extends React.Component {
 
         this.clickAddPeople = React.createRef();
         this.inputField = React.createRef();
+        this.modalDisappear = React.createRef();
         console.log(this.props.memberIds)
         // this.showUsers = this.showUsers.bind(this)
         // this.addPerson = this.addPerson.bind(this)
@@ -28,7 +29,8 @@ class ChannelForm extends React.Component {
         e.preventDefault()
         const channel = {
             name: this.state.channelName, 
-            description: this.state.channelDescription
+            description: this.state.channelDescription,
+            dm: false
         } 
         this.props.createChannel(channel)
         // this.state.memberIds.unshift(this.props.currentUser)
@@ -88,56 +90,77 @@ class ChannelForm extends React.Component {
           this.setState({ [field]: e.currentTarget.value });
     }
 
-    showUsers(){
-        var peopleDiv = this.clickAddPeople.current
-        console.log(peopleDiv.style)
-        if (peopleDiv.style.display === "none") {
-            console.log("working")
-            peopleDiv.style.display = "block";
-            this.setState({showUsers: true})
-        } 
+    // showUsers(){
+    //     var peopleDiv = this.clickAddPeople.current
+    //     console.log(peopleDiv.style)
+    //     if (peopleDiv.style.display === "none") {
+    //         console.log("working")
+    //         peopleDiv.style.display = "block";
+    //         this.setState({showUsers: true})
+    //     } 
 
-    }
+    // }
 
     addPerson(user){
-        this.inputField.current.style.value = user.displayName
-        console.log(this.inputField.current.style.value)
         console.log(user.id)
         this.props.memberIds.push(user.id)
         console.log(this.props.memberIds)
    
     }
+
+    modalDisappears(){
+        console.log(this.modalDisappear.current.display)
+        this.modalDisappear.current.style.display = "none"; 
+    }
     
     render() {
         console.log("rendering")
         return (
-            <form onSubmit={this.handleSubmit.bind(this)} >
-                <label>Name
+            <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
+                <h2>Create a channel</h2>
+                <p>Create a channel to communicate with anyone you're a fan of!</p>
+                
+                <div className="all-input-tags">
+                <div className="name-box">
+                <label>Name</label>
                     <input type="text" onChange={this.update('channelName')} />
-                </label>
-
-                <label>Description (optional)
+                </div>
+                
+                <div className="description-box">
+                <label>Description (optional)</label>
                     <input type="text" onChange={this.update('channelDescription')} />
-                </label>
+                </div>
 
                 {/* <label>Topic (optional)
                     <input type="text" onChange={this.handleInput('recipientName')} />
                 </label> */}
-
-                <label>Add people
-                    <div style={{display: "none"}} className="all-users" ref={this.clickAddPeople}>
-                        {this.state.showUsers ? Object.values(this.props.users).map((user) => (
-                            <li onClick={this.addPerson.bind(this, user)}>{user.displayName}</li>
-                        )) : ""}
+                <div className="add-people-box">
+                <label>Add people</label>
+                    <div className="all-users">
+                        <ul>
+                        {Object.values(this.props.users).map((user) => 
+                    
+                            <li className="li-tag" ref={this.clickAddPeople} onClick={this.addPerson.bind(this, user)}>{user.displayName}</li>)
+                        }
+                        </ul>
                     </div>
-                    <input type="text" className="new-channel-members" ref={this.inputField} onChange={this.showUsers.bind(this)}  />
+                </div>
+                </div>
+                
+                
+                    {/* <div className="all-users" ref={this.clickAddPeople}>
+                        {this.state.showUsers ? Object.values(this.props.users).map((user) => (
+                            
+                        )) : ""} */}
+                    {/* </div> */}
+                    {/* <input type="text" className="new-channel-members" ref={this.inputField} onChange={this.showUsers.bind(this)}  /> */}
                     {/* value ={this.state.memberIds.map(id => this.props.users[id].displayName)} */}
                     
-                </label>
                             
-                                
-                <input type="submit" />
-               
+                {/* <input className="create" type="submit" /> */}
+                <div className="modal-disappear" onClick={this.modalDisappears.bind(this)} >X</div>
+                <button className="create" type="submit" >Create</button>
+
             </form>
         )
     }

@@ -7,7 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Channel.find(10).destroy!
-Channel.find(1).destroy!
+# Channel.destroy_all
+
+# channel3 = Channel.create({name: "General", dm: false})
+# channel4 = Channel.create({name: "General", dm: false})
+
+# channel5 = Channel.create({name: "Meg Thee Stallion", dm: false})
+# channel6 = Channel.create({name: "Fauci", dm: false})
+channel7 = Channel.create({name: "Obama", dm: true})
+channel8 = Channel.create({name: "Hilary", dm: true})
 
 # channel1 = Channel.create({name: "General"})
 # channel2 = Channel.create({name: "Random"})
@@ -28,9 +36,15 @@ Channel.find(1).destroy!
 # m2 = Message.create({body: "hello!", author_id: 9, recipient_id: 9, channel_id: 2})
 
 
+channel7.save!
+channel8.save!
 
-# channel1.save!
-# channel2.save! 
+# channel3.save!
+# channel4.save! 
+# channel5.save!
+# channel6.save! 
+
+# puts(channel3)
 # cm1.save!
 # cm2.save!
 # cm3.save!
