@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane} from '@fortawesome/fontawesome-free-solid'
 
 class MessageForm extends React.Component {
   constructor(props) {
@@ -30,7 +32,9 @@ class MessageForm extends React.Component {
             onChange={this.update("body")}
             placeholder={`Send a message to #${this.props.channels[this.props.channelId].name.toLowerCase()}`}
           />
-          <input className="message-buton" type="submit" />
+          <button className="message-button" type="submit">
+          <FontAwesomeIcon className="paper-plane-icon" icon={faPaperPlane} />
+          </button>
           
         </form>
       </div>
