@@ -238,8 +238,8 @@ class ChatRoom extends React.Component {
           {this.props.channels && this.props.currentView ? 
           <div className="channel-name">
             {this.props.channels[this.props.currentView].name}
-            <div onClick={this.showMembers.bind(this)} className = "numMembers">
-              {this.props.channelMembers.length}
+            <div onClick={this.showMembers.bind(this)} className = "num-members">
+              {Object.values(this.props.channelMembers).length}
               <FontAwesomeIcon className="user-icon" icon={faUser} />
               </div>
             

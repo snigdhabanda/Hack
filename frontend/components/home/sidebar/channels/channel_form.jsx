@@ -109,7 +109,6 @@ class ChannelForm extends React.Component {
     }
 
     modalDisappears(){
-        console.log(this.modalDisappear.current.display)
         this.modalDisappear.current.style.display = "none"; 
     }
     

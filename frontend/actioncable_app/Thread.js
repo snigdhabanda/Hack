@@ -7,6 +7,7 @@ class Thread extends React.Component {
   constructor(props) {
     super(props);
     this.state = { messages: [] };
+    this.closeThread = React.createRef();
   }
 
   getReplies(){
@@ -33,6 +34,9 @@ class Thread extends React.Component {
     }
     
   }
+  modalDisappears(){
+    this.closeThread.current.style.display = "none"; 
+  }
   
   
   render() {
@@ -51,12 +55,12 @@ class Thread extends React.Component {
             </li>)
         }) : ""
         return (
-        <div className="thread-container">
-            <div className="thread-name">{`Thread # ${this.props.channels[this.props.channelId].name.toLowerCase()}`}</div>
+        <div ref={this.closeThread} className="thread-container">
+            <div className="thread-name">{`Thread #${this.props.channels[this.props.channelId].name.toLowerCase()}`}</div>
             
             <div className="message-list" >{messageList}</div>
             <ReplyMessageForm currentUser={this.props.currentUser} parentMessageId={this.props.message.id} channelId={this.props.channelId}/>
-            <button>Close</button>
+            <button className="close-thread" onClick={this.modalDisappears.bind(this)}>X</button>
         </div>
         )
   }

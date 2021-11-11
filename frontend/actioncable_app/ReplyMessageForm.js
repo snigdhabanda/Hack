@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane} from '@fortawesome/fontawesome-free-solid'
 
 class ReplyMessageForm extends React.Component {
   constructor(props) {
@@ -29,7 +31,9 @@ class ReplyMessageForm extends React.Component {
             onChange={this.update("body")}
             placeholder="Reply..."
           />
-          <input className="message-buton" type="submit" />
+          <button className="reply-message-button" type="submit">
+            <FontAwesomeIcon className="paper-plane-icon" icon={faPaperPlane} />
+          </button>
           
         </form>
     </div>
