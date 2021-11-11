@@ -46,7 +46,7 @@ group :development, :test do
   gem "annotate" 
   gem "bcrypt"
   gem "jquery-rails"
-  gem 'local_time'
+  gem "rails-ujs"
 end
 
 group :development do
