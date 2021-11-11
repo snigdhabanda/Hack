@@ -34,7 +34,7 @@ class ChannelsIndex extends React.Component{
     
     render(){
 
-        const {dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
+        const {channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
         console.log(this.state.displayForm)
 
         return(
@@ -42,7 +42,7 @@ class ChannelsIndex extends React.Component{
                 {Object.keys(channels).length > 0 ? 
                 <div>
                     {currentView ?
-                        <ChatRoom dynamicView={dynamicView} createChannelMember={createChannelMember} deleteMessage = {removeMessage} createChannel={createChannel} createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {users} channels={channels}/>
+                        <ChatRoom channelMembers={channelMembers} dynamicView={dynamicView} createChannelMember={createChannelMember} deleteMessage = {removeMessage} createChannel={createChannel} createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {users} channels={channels}/>
                         : ""}      
                 </div>
                 

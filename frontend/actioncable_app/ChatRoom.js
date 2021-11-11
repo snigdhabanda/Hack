@@ -3,7 +3,7 @@ import MessageForm from "./MessageForm.js";
 import EditMessageForm from "./EditMessageForm"
 import {getTime} from '../util/message_api_util'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHashtag, faSortDown, faPlus, faReply, faTrashAlt, faEdit} from '@fortawesome/fontawesome-free-solid'
+import { faHashtag, faSortDown, faPlus, faReply, faTrashAlt, faEdit, faUser} from '@fortawesome/fontawesome-free-solid'
 import Thread from './Thread'
 import ChannelForm from './../components/home/sidebar/channels/channel_form'
 import AddChannelMembers from "../components/home/sidebar/channels/add_channel_members.jsx";
@@ -131,7 +131,11 @@ class ChatRoom extends React.Component {
     e.preventDefault()
     if (!this.state.displayForm) {this.setState({displayForm: true})}
 
-}
+  }
+
+  showMembers(){
+    
+  }
   
   render() {
     console.log(this.state.submittingMessage)
@@ -234,6 +238,11 @@ class ChatRoom extends React.Component {
           {this.props.channels && this.props.currentView ? 
           <div className="channel-name">
             {this.props.channels[this.props.currentView].name}
+            <div onClick={this.showMembers.bind(this)} className = "numMembers">
+              {this.props.channelMembers.length}
+              <FontAwesomeIcon className="user-icon" icon={faUser} />
+              </div>
+            
           </div> : ""}
           <div id="for-scroll">
           {messageList}
