@@ -13,7 +13,6 @@ class ChannelsIndexItem extends React.Component {
     }
 
     render(){
-        console.log("indexitem")
         const {channel} = this.props
         return(
             <div>

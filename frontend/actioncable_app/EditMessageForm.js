@@ -14,13 +14,11 @@ class EditMessageForm extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    console.log("submitting")
     App.cable.subscriptions.subscriptions[0].update({ id: this.props.message.id, message: this.state.body, authorId: this.props.currentUser, channelId: this.props.channelId});
     this.setState({ body: "" });
   }
   
   render() {
-      console.log("in editing form")
     return (
       <div className="edit-message">
         <form onSubmit={this.handleSubmit.bind(this)}>

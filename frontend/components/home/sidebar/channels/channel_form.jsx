@@ -16,7 +16,6 @@ class ChannelForm extends React.Component {
         this.clickAddPeople = React.createRef();
         this.inputField = React.createRef();
         this.modalDisappear = React.createRef();
-        console.log(this.props.memberIds)
         // this.showUsers = this.showUsers.bind(this)
         // this.addPerson = this.addPerson.bind(this)
     }
@@ -102,9 +101,7 @@ class ChannelForm extends React.Component {
     // }
 
     addPerson(user){
-        console.log(user.id)
         this.props.memberIds.push(user.id)
-        console.log(this.props.memberIds)
    
     }
 
@@ -113,7 +110,6 @@ class ChannelForm extends React.Component {
     }
     
     render() {
-        console.log("rendering")
         return (
             <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>Create a channel</h2>

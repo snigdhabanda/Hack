@@ -40,7 +40,6 @@ class Thread extends React.Component {
   
   
   render() {
-    console.log(this.state.messages, "thread")
 
         const messageList = this.state.messages.length > 0 ? this.state.messages.reverse().map((message, idx) => {
             let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")

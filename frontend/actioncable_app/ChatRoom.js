@@ -26,7 +26,6 @@ class ChatRoom extends React.Component {
     },
       {
         received: data => {
-          console.log(data)
 
           if (data.type === "createMessage"){
             const message = {
@@ -37,19 +36,15 @@ class ChatRoom extends React.Component {
                     createdAt: data.created_at  
                     }
                     this.props.createMessage(message) 
-                    console.log(this.props.messages)
                     this.setState({
                       messages: this.props.messages
                     })
-                    console.log(this.props.messages)
           }
           else if (data.type==="deleteMessage"){
-          console.log(data.type)
               this.props.deleteMessage(data.message)
               this.setState({
                 messages: this.props.messages
               })
-              console.log(data.type, message)}
           else if (data.type=== "replyMessage"){
             const replyMessage = {
                     id: data.id,
@@ -59,7 +54,6 @@ class ChatRoom extends React.Component {
                     createdAt: data.created_at,
                     parentMessageId: data.parent_message_id  
                     }
-                    console.log(replyMessage, data.type)
                     this.props.createMessage(replyMessage) 
                     let thread = this.state.threadMessages.slice().concat(replyMessage)
                     this.setState({
@@ -161,7 +155,6 @@ class ChatRoom extends React.Component {
   }
 
   deleteMessage(message){
-    console.log("deleting message")
     App.cable.subscriptions.subscriptions[0].delete({ message: message});
   }
 
@@ -181,7 +174,6 @@ class ChatRoom extends React.Component {
   }
   
   render() {
-    console.log(this.state.submittingMessage)
     if (this.channelQueue.length === 0 || this.channelQueue[this.channelQueue.length - 1] !== this.props.currentView){
       this.channelQueue.push(this.props.currentView)
       this.changeChannel(this.props.currentView)

@@ -9,15 +9,12 @@ const ChannelMembersReducer = (state= {}, action) => {
             if (action.channelMembers) return action.channelMembers 
             else return {}
         case RECEIVE_CHANNEL_MEMBER:
-            console.log(action.channelMember)
-            console.log(Object.values(state))
             if (Object.values(state).length === 0) {
                 const newState = {}
                 newState[action.channelMember.id] = action.channelMember
                 return newState;
             }
             else{
-                console.log("hello")
                 nextState[action.channelMember.id] = action.channelMember
                 return nextState;
             }

@@ -35,7 +35,6 @@ class ChannelsIndex extends React.Component{
     render(){
 
         const {channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
-        console.log(this.state.displayForm)
 
         return(
             <div className="chat-channels-and-messages">
