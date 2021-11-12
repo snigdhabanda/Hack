@@ -1,12 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-
-
 ## What is Hack?
 Our favorite live events such as shows, interviews, and concerts have dwindled during the pandemic. Hack (a social rendition of Slack, the workplace messaging app) is now making connections with your favorite social figures possible. With Hack, you can chat with any social icons about their art and content. Log in now to the Dinner Party workspace to meet your favorites! 
 
@@ -101,7 +94,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 ```
 
-Threads:
+### Threads
 * Threads allow a user to reply to a message on the main chat channel. When the local state updates in the ChatRoom to “replying” upon a click, the Thread component is rendered. 
 * The Thread component renders a ReplyMessageForm component that invokes the Action Cable “reply” function and saves the reply on the backend. When the ChatRoom’s message props update, the component rerenders with relevant messages.
 
