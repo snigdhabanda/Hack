@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
         email: "",
         password: "",
         displayName: "",
-        imageUrl: "test"
+        imageUrl: ""
     },
     formType: "Sign Up",
     formInstructions: "First, enter your email",

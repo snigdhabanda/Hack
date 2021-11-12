@@ -9,11 +9,42 @@ class SessionForm extends React.Component {
         this.state = this.props.user 
 
         this.handleSubmit = this.handleSubmit.bind(this)
+
+        this.lettersHash = {
+            "a": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_a.png",
+            "b": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_b.png",
+            "c": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_c.png",
+            "d": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_d.png",
+            "e": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_e.png",
+            "f": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_f.png",
+            "g": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_g.png",
+            "h": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_h.png",
+            "i": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_i.png",
+            "j": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_j.png",
+            "k": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_k.png",
+            "l": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_l.png",
+            "m": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_m.png",
+            "n": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_n.png",
+            "o": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_o.png",
+            "p": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_p.png",
+            "q": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_q.png",
+            "r": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_r.png",
+            "s": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_s.png",
+            "t": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_t.png",
+            "u": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_u.png",
+            "v": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_v.png",
+            "w": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_w.png",
+            "x": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_x.png",
+            "y": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_y.png",
+            "z": "https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/letter_z.png"
+
+        }
     }
 
     handleSubmit(e){
         
         e.preventDefault()
+        this.state.imageUrl = this.lettersHash[this.state.displayName[0].toLowerCase()]
         this.props.processForm(this.state)
             // if (loginType === 'newUser')
 
