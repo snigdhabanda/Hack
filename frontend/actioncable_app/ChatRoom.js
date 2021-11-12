@@ -13,7 +13,13 @@ import AddChannelMembers from "../components/home/sidebar/channels/add_channel_m
 class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [], threadMessages: [], updatingMessage: false, replying: false, displayForm: false, submittingMessage: false, memberIds: []};
+    this.state = { messages: [], 
+      threadMessages: [], 
+      updatingMessage: false, 
+      replying: false, 
+      displayForm: false, 
+      submittingMessage: 
+      false, memberIds: []};
     this.bottom = React.createRef();
     this.channelQueue = [];
     
@@ -29,85 +35,38 @@ class ChatRoom extends React.Component {
 
           if (data.type === "createMessage"){
             const message = {
-                    id: data.id,
-                    body: data.message,
-                    authorId: data.author_id,
-                    channelId: data.channel_id,
-                    createdAt: data.created_at  
-                    }
-                    this.props.createMessage(message) 
-                    this.setState({
-                      messages: this.props.messages
-                    })
+              id: data.id,
+              body: data.message,
+              authorId: data.author_id,
+              channelId: data.channel_id,
+              createdAt: data.created_at  
+              }
+              this.props.createMessage(message) 
+              this.setState({
+                messages: this.props.messages
+              })
           }
           else if (data.type==="deleteMessage"){
               this.props.deleteMessage(data.message)
               this.setState({
                 messages: this.props.messages
               })
+            }
           else if (data.type=== "replyMessage"){
             const replyMessage = {
-                    id: data.id,
-                    body: data.message,
-                    authorId: data.author_id,
-                    channelId: data.channel_id,
-                    createdAt: data.created_at,
-                    parentMessageId: data.parent_message_id  
-                    }
-                    this.props.createMessage(replyMessage) 
-                    let thread = this.state.threadMessages.slice().concat(replyMessage)
-                    this.setState({
-                      threadMessages: thread
-                    })
+              id: data.id,
+              body: data.message,
+              authorId: data.author_id,
+              channelId: data.channel_id,
+              createdAt: data.created_at,
+              parentMessageId: data.parent_message_id  
+              }
+              this.props.createMessage(replyMessage) 
+              let thread = this.state.threadMessages.slice().concat(replyMessage)
+              this.setState({
+                threadMessages: thread
+              })
           }
-            
-          // switch (data.type) {
-          //   case "createMessage":
-          //       const message = {
-          //       id: data.id,
-          //       body: data.message,
-          //       authorId: data.author_id,
-          //       channelId: data.channel_id,
-          //       createdAt: data.created_at  
-          //       }
-          //       console.log(data.type, message)
-          //       this.props.createMessage(message) 
-          //       this.setState({
-          //         messages: this.props.messages.reverse()
-          //       });
-          //   // case "editMessage":
-          //   //   const editedMessage = {
-          //   //     id: data.id,
-          //   //     body: data.message,
-          //   //     authorId: data.author_id,
-          //   //     channelId: data.channel_id,
-          //   //     createdAt: data.created_at  
-          //   //     }
-          //   case "deleteMessage":
-          //     console.log(data.type)
-          //     this.props.deleteMessage(data.message)
-          //     this.setState({
-          //       messages: this.props.messages.reverse()
-          //     })
-          //     console.log(data.type, message);
-          //   case "replyMessage":
-              
-          //       const replyMessage = {
-          //       id: data.id,
-          //       body: data.message,
-          //       authorId: data.author_id,
-          //       channelId: data.channel_id,
-          //       createdAt: data.created_at,
-          //       parentMessageId: data.parent_message_id  
-          //       }
-          //       console.log(replyMessage, data.type)
-          //       this.props.createMessage(replyMessage) 
-          //       let thread = this.state.threadMessages.slice().concat(replyMessage)
-          //       this.setState({
-          //         threadMessages: thread
-          //       })
-
-          // }
         },
         speak: function(data) {return this.perform("speak", data)},
         update: function(data) {return this.perform("update", data)},
@@ -117,6 +76,8 @@ class ChatRoom extends React.Component {
     )
     
   }
+
+  
   
   componentDidUpdate(prevProps){
     if (prevProps.channels !== this.props.channels){
@@ -182,17 +143,25 @@ class ChatRoom extends React.Component {
     const messageList = this.state.messages.map((message, idx) => {
       let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")
       let timestamp = timeStampArray[1].slice(0,timeStampArray[1].length - 3) + " " + timeStampArray[2].toLowerCase()
-      
+      console.log(this.props.users[message.authorId].imageUrl)
       let numReplies = this.props.messages.filter(stateMessage => stateMessage.parentMessageId === message.id).length
       if (!message.parentMessageId){
       return (
         <li className="message-box" key={message.id}>
-          <div className="message-author">{this.props.users[message.authorId].displayName}
-            <p className="message-time">{timestamp}</p>
+          <div className="flex-box-img-content">
+            {this.props.users[message.authorId].imageUrl !== "test" ? 
+          <img className="author-icon" src={`${this.props.users[message.authorId].imageUrl}`} />
+          : ""
+        }
+            <div className="holds-message-properties">
+              <div className="message-author">{this.props.users[message.authorId].displayName}
+                <p className="message-time">{timestamp}</p>
+              </div>
+              <p className="message-content">{message.body}</p>
+              <div onClick={this.reply.bind(this, message)} className="replies">{numReplies > 0 ? numReplies === 1  ?  `${numReplies} reply` : `${numReplies} replies` : ""}</div>
+            </div>
           </div>
-          <p className="message-content">{message.body}</p>
-          <div onClick={this.reply.bind(this, message)} className="replies">{numReplies > 0 ? numReplies === 1  ?  `${numReplies} reply` : `${numReplies} replies` : ""}</div>
-          
+
           {(this.state.updatingMessage && this.messageToUpdate.id === message.id) ? 
             <div><EditMessageForm 
             currentUser={this.props.currentUser} 
@@ -200,14 +169,18 @@ class ChatRoom extends React.Component {
             message={this.messageToUpdate} />{this.state.updatingMessage = false}
             </div>: ""
           }
-          
+        
           <div className="edit-delete-reply">
+            {this.props.users[message.authorId].id === this.props.currentUser ?
             <button className="update-message" onClick={this.updateMessage.bind(this, message)}>
               <FontAwesomeIcon className="edit-icon" icon={faEdit} />
-            </button>
-            <button className="delete-message" onClick={this.deleteMessage.bind(this, message)}>
+            </button> : ""
+            }
+            {this.props.users[message.authorId].id === this.props.currentUser ? 
+              <button className="delete-message" onClick={this.deleteMessage.bind(this, message)}>
               <FontAwesomeIcon className="trash-icon" icon={faTrashAlt} />
-            </button>
+            </button> : ""
+            } 
             <button className="reply-message" onClick={this.reply.bind(this, message)}>
               <FontAwesomeIcon className="reply-icon" icon={faReply} />
             </button>
@@ -229,7 +202,7 @@ class ChatRoom extends React.Component {
         
         <ul className="channels-list">
         {Object.values(this.props.channels).filter(channel => !channel.dm).map((channel) =>(
-              <li className="channel" tabindex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
+              <li className="channel" tabIndex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
                 <FontAwesomeIcon className="hashtag" icon={faHashtag} />
                 {channel.name}
               </li>

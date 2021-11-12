@@ -28,6 +28,10 @@ html, body {
     background-color: #3F0E40;
     color: white; 
     position: absolute; 
+
+    img .profile-component{
+         
+    }
    
 
 
@@ -196,47 +200,69 @@ html, body {
                 box-sizing: border-box;
                 height: max-content;
                 position: relative; 
-        
-                .message-author{
-                    font-size: 15px;
-                    font-weight: 700; 
-                    color: #1D1C1D; 
-                    margin-bottom: 8px; 
-                    margin-top: 5px; 
+
+                .flex-box-img-content{
+                    max-width: content; 
+
                     display: flex; 
-                    align-items: center;
                     
-                    .message-time{
-                        font-size: 12px;
-                        font-weight: normal; 
-                        padding-left: 10px;
-                        
+                    .author-icon{
+                        padding-left: 0px; 
+                        width: 8%;
+                        height: auto;  
+                        border-radius: 4px;  
                     }
-                }
-        
-                .message-content{
-                    font-size: 15px;
-                    font-weight: 300;
-                    color: #1D1C1D;
-                    cursor: text; 
-                    overflow-wrap: break-word;
-                
-                }
+                    
+                    .holds-message-properties{
+                        padding-left: 20px; 
 
-                .replies{
-                    width: max-content; 
-                    color: 10px; 
-                    font-size: 12px; 
-                    color: #1154A3;
-                    font-weight: bold; 
-                    margin-top: 8px; 
-                }
-                .replies:hover{
-                    cursor: pointer; 
-                }
-                
+                    .message-author{
+                        font-size: 15px;
+                        font-weight: 700; 
+                        color: #1D1C1D; 
+                        margin-bottom: 8px; 
+                        margin-top: 5px; 
+                        display: flex; 
+                        align-items: center;
+                        
+                        .message-time{
+                            font-size: 12px;
+                            font-weight: normal; 
+                            padding-left: 10px;
+                            
+                        }
+                    }
+            
+                    .message-content{
+                        font-size: 15px;
+                        font-weight: 300;
+                        color: #1D1C1D;
+                        cursor: text; 
+                        overflow-wrap: break-word;
+                    
+                    }
 
-                .edit-delete-reply{
+                    .replies{
+                        width: max-content; 
+                        color: 10px; 
+                        font-size: 12px; 
+                        color: #1154A3;
+                        font-weight: bold; 
+                        margin-top: 8px; 
+                    }
+                    .replies:hover{
+                        cursor: pointer; 
+                    }
+                 }
+
+                
+            }
+                
+                // .edit-delete-reply{
+                //     display: none; 
+                // }
+
+                .flex-box-img-content:hover + .edit-delete-reply{
                     width: max-content; 
                     // padding: 3px 2px 3px 2px; 
                     border: 1px solid rgb(189, 180, 180); 
@@ -245,7 +271,7 @@ html, body {
                     align-items: center; 
                     // box-shadow: 0px 2px 1px red;
                     position: absolute; 
-                    left: 140px;   
+                    left: 250px;   
                     top: 0px;                    
 
                     .update-message, .delete-message, .reply-message{
@@ -258,6 +284,10 @@ html, body {
                     .update-message, .delete-message, .reply-message:hover{
                         cursor: pointer; 
                     }
+                }
+
+                .edit-delete-reply{
+                    display: none; 
                 }
                 
 

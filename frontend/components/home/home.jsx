@@ -13,11 +13,13 @@ class Home extends React.Component{
             <nav className="header-nav">
                {/* UserComponent */}
                {/* SearchBar */}
+            <img className="profile-component" src={`${this.props.users[this.props.currentUserId].imageUrl}`} /> 
             </nav>
             <nav className="sidebar-nav" >
                <div className="dinner-party">Dinner Party</div>
                <UsersIndexContainer /> 
                <ChannelsIndexContainer />  
+               
             </nav>  
             <button className="logout-button" onClick={() => this.props.logoutUser()}>Logout</button> 
             
