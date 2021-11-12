@@ -139,7 +139,7 @@ class ChannelForm extends React.Component {
                         <ul>
                         {Object.values(this.props.users).map((user) => 
                     
-                            <li className="li-tag" ref={this.clickAddPeople} onClick={this.addPerson.bind(this, user)}>{user.displayName}</li>)
+                            <li tabindex={`${user.id}`} className="li-tag" ref={this.clickAddPeople} onClick={this.addPerson.bind(this, user)}>{user.displayName}</li>)
                         }
                         </ul>
                     </div>

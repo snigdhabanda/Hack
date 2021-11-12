@@ -88,7 +88,10 @@ html, body {
     .channels-list, .dms-list{
         height: 200px; 
         overflow-y: auto;
-        .channel, .dm{
+        li:focus{
+            background-color: #1164A3 
+        }
+        .channel{
             text-transform: lowercase; 
             padding: 6px 15px 12px 30px; 
             display: flex; 
@@ -99,6 +102,23 @@ html, body {
                 height: 12px; 
                 width: auto; 
             }
+        }
+
+        .dm-title{
+            padding-top: 30px; 
+            padding-left: 40px; 
+            padding-bottom: 15px;  
+        }
+
+        .dm{
+            text-transform: capitalize; 
+            padding: 6px 15px 12px 55px; 
+            display: flex; 
+            align-items: center;
+        }
+
+        li:focus{
+            background-color: #1164A3; 
         }
 
         .channel:hover, .dm:hover{
@@ -148,7 +168,18 @@ html, body {
 
                 .num-members{
                     z-index: 10; 
-                    border: 1px solid rgb(189, 180, 180); 
+                    border: 1px solid rgb(189, 180, 180);
+                    position: fixed; 
+                    width: max-content; 
+                    padding: 5px 5px 5px 5px; 
+                    top: 60px; 
+                    left: 940px; 
+                    border-radius: 4px; 
+
+                    .user-icon{
+                        margin-left: 12px; 
+                    }
+
 
 
                 }
@@ -348,7 +379,7 @@ html, body {
         
     
         form .message-form{
-            width: 340%; 
+            width: 480%; 
             line-height: 50px; 
             border-radius: 4px; 
             border: 1px solid black; 
@@ -369,10 +400,10 @@ html, body {
     
         .message-button{
             position: fixed; 
-            top: 622px; 
+            top: 620px; 
             height: 25px; 
             width: 50px; 
-            left: 735px; 
+            left: 957px; 
             border: none; 
             background: transparent; 
             background-color: #007A5A;
@@ -461,14 +492,22 @@ html, body {
                   
                 ul{
                     list-style-type: none; 
+                    
+                    li:focus{
+                        background-color: #1164A3;
+                        color: white; 
+                    }
+                    
                 }
                 .li-tag{
                    padding-bottom: 5px;  
                    padding-left: 15px; 
                 }
+                
                 .li-tag:hover{
                     background-color:#f7f7f7;  
                 }
+                
                 
             }
         }
@@ -502,11 +541,27 @@ html, body {
     }
 }
 
-.dm-title{
-    padding-top: 40px; 
-    // padding-left: 18px; 
-    // padding-bottom: 30px;  
-}
+.channels-list::-webkit-scrollbar {
+    width: 0em;
+    background: #3F0E40;
+  }
+
+  .dms-list::-webkit-scrollbar {
+    width: 0em;
+    background: #3F0E40;
+  }
+
+  .message-list::-webkit-scrollbar {
+    width: 0.7em;
+    background: white;
+  }
+
+  .all-users::-webkit-scrollbar {
+    width: 0em;
+    background: white;
+  }
+
+
 
 
 

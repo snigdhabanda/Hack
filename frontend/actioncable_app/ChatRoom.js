@@ -26,51 +26,94 @@ class ChatRoom extends React.Component {
     },
       {
         received: data => {
-          switch (data.type) {
-            case "createMessage":
-                const message = {
-                id: data.id,
-                body: data,
-                authorId: data.author_id,
-                channelId: data.channel_id,
-                createdAt: data.created_at  
-                }
-                this.props.createMessage(message) 
-                this.setState({
-                  messages: this.props.messages.reverse()
-                });
-            case "editMessage":
-              const editedMessage = {
-                id: data.id,
-                body: data.message,
-                authorId: data.author_id,
-                channelId: data.channel_id,
-                createdAt: data.created_at  
-                }
-            case "deleteMessage":
-              console.log(data.type)
+          console.log(data)
+
+          if (data.type === "createMessage"){
+            const message = {
+                    id: data.id,
+                    body: data.message,
+                    authorId: data.author_id,
+                    channelId: data.channel_id,
+                    createdAt: data.created_at  
+                    }
+                    this.props.createMessage(message) 
+                    console.log(this.props.messages)
+                    this.setState({
+                      messages: this.props.messages
+                    })
+                    console.log(this.props.messages)
+          }
+          else if (data.type==="deleteMessage"){
+          console.log(data.type)
               this.props.deleteMessage(data.message)
               this.setState({
-                messages: this.props.messages.reverse()
-              });
-            case "replyMessage":
-              
-                const replyMessage = {
-                id: data.id,
-                body: data.message,
-                authorId: data.author_id,
-                channelId: data.channel_id,
-                createdAt: data.created_at,
-                parentMessageId: data.parent_message_id  
-                }
-                console.log(replyMessage)
-                this.props.createMessage(replyMessage) 
-                let thread = this.state.threadMessages.slice().concat(replyMessage)
-                this.setState({
-                  threadMessages: thread
-                })
-
+                messages: this.props.messages
+              })
+              console.log(data.type, message)}
+          else if (data.type=== "replyMessage"){
+            const replyMessage = {
+                    id: data.id,
+                    body: data.message,
+                    authorId: data.author_id,
+                    channelId: data.channel_id,
+                    createdAt: data.created_at,
+                    parentMessageId: data.parent_message_id  
+                    }
+                    console.log(replyMessage, data.type)
+                    this.props.createMessage(replyMessage) 
+                    let thread = this.state.threadMessages.slice().concat(replyMessage)
+                    this.setState({
+                      threadMessages: thread
+                    })
           }
+            
+          // switch (data.type) {
+          //   case "createMessage":
+          //       const message = {
+          //       id: data.id,
+          //       body: data.message,
+          //       authorId: data.author_id,
+          //       channelId: data.channel_id,
+          //       createdAt: data.created_at  
+          //       }
+          //       console.log(data.type, message)
+          //       this.props.createMessage(message) 
+          //       this.setState({
+          //         messages: this.props.messages.reverse()
+          //       });
+          //   // case "editMessage":
+          //   //   const editedMessage = {
+          //   //     id: data.id,
+          //   //     body: data.message,
+          //   //     authorId: data.author_id,
+          //   //     channelId: data.channel_id,
+          //   //     createdAt: data.created_at  
+          //   //     }
+          //   case "deleteMessage":
+          //     console.log(data.type)
+          //     this.props.deleteMessage(data.message)
+          //     this.setState({
+          //       messages: this.props.messages.reverse()
+          //     })
+          //     console.log(data.type, message);
+          //   case "replyMessage":
+              
+          //       const replyMessage = {
+          //       id: data.id,
+          //       body: data.message,
+          //       authorId: data.author_id,
+          //       channelId: data.channel_id,
+          //       createdAt: data.created_at,
+          //       parentMessageId: data.parent_message_id  
+          //       }
+          //       console.log(replyMessage, data.type)
+          //       this.props.createMessage(replyMessage) 
+          //       let thread = this.state.threadMessages.slice().concat(replyMessage)
+          //       this.setState({
+          //         threadMessages: thread
+          //       })
+
+          // }
         },
         speak: function(data) {return this.perform("speak", data)},
         update: function(data) {return this.perform("update", data)},
@@ -93,7 +136,7 @@ class ChatRoom extends React.Component {
   
 
   loadMessages() {
-    const messages = this.props.messages.reverse()
+    const messages = this.props.messages
     this.setState({ messages: messages });
   }
 
@@ -194,7 +237,7 @@ class ChatRoom extends React.Component {
         
         <ul className="channels-list">
         {Object.values(this.props.channels).filter(channel => !channel.dm).map((channel) =>(
-              <li className="channel" onClick={this.props.fetchChannel.bind(this, channel.id)}>
+              <li className="channel" tabindex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
                 <FontAwesomeIcon className="hashtag" icon={faHashtag} />
                 {channel.name}
               </li>
@@ -205,7 +248,7 @@ class ChatRoom extends React.Component {
         <ul className="dms-list">
         <div className="dm-title">Direct Messages</div>
         {Object.values(this.props.channels).filter(channel => channel.dm).map((channel) =>(
-              <li className="dm" onClick={this.props.fetchChannel.bind(this, channel.id)}>
+              <li className="dm" tabindex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
                 {channel.name}
               </li>
             
