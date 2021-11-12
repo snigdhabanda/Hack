@@ -148,3 +148,25 @@ F, [2021-11-11T15:39:04.544208 #76722] FATAL -- : [7be3aa2f-e81e-46b9-a9e3-637db
 [7be3aa2f-e81e-46b9-a9e3-637db86bd868] puma (3.12.6) lib/puma/server.rb:476:in `process_client'
 [7be3aa2f-e81e-46b9-a9e3-637db86bd868] puma (3.12.6) lib/puma/server.rb:334:in `block in run'
 [7be3aa2f-e81e-46b9-a9e3-637db86bd868] puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+I, [2021-11-11T19:24:50.811682 #97930]  INFO -- : [9c69cf79-0e61-40b6-b0f4-150844a55f87] Started GET "/cable" for 127.0.0.1 at 2021-11-11 19:24:50 -0500
+I, [2021-11-11T19:24:50.831676 #97930]  INFO -- : [9c69cf79-0e61-40b6-b0f4-150844a55f87] Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2021-11-11 19:24:50 -0500
+I, [2021-11-11T19:24:50.831763 #97930]  INFO -- : [9c69cf79-0e61-40b6-b0f4-150844a55f87] Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+E, [2021-11-11T19:24:50.863807 #97930] ERROR -- : Could not execute command from ({"command"=>"subscribe", "identifier"=>"{\"channel\":\"ChatChannel\",\"id\":120}"}) [ActiveRecord::NoDatabaseError - FATAL:  role "Hack" does not exist
+]: /Users/snigdhabanda/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:696:in `rescue in connect' | /Users/snigdhabanda/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:691:in `connect' | /Users/snigdhabanda/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:223:in `initialize' | /Users/snigdhabanda/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `new' | /Users/snigdhabanda/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `postgresql_connection'
+I, [2021-11-11T19:24:56.732971 #97930]  INFO -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] Started GET "/" for 127.0.0.1 at 2021-11-11 19:24:56 -0500
+I, [2021-11-11T19:24:56.735114 #97930]  INFO -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] Processing by StaticPagesController#root as HTML
+I, [2021-11-11T19:24:56.765779 #97930]  INFO -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]   Rendering static_pages/root.html.erb within layouts/application
+I, [2021-11-11T19:24:56.922568 #97930]  INFO -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]   Rendered static_pages/root.html.erb within layouts/application (156.2ms)
+I, [2021-11-11T19:24:56.923051 #97930]  INFO -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] Completed 500 Internal Server Error in 188ms
+F, [2021-11-11T19:24:56.925397 #97930] FATAL -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]   
+F, [2021-11-11T19:24:56.925584 #97930] FATAL -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] ActionView::Template::Error (FATAL:  role "Hack" does not exist
+):
+F, [2021-11-11T19:24:56.925927 #97930] FATAL -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]     1: <% if logged_in? %>
+[4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]     2:     <script type="text/javascript">
+[4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]     3:         window.currentUser = <%= render(
+[4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]     4:             "api/users/user.json.jbuilder",
+F, [2021-11-11T19:24:56.926012 #97930] FATAL -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9]   
+F, [2021-11-11T19:24:56.926082 #97930] FATAL -- : [4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] app/controllers/application_controller.rb:17:in `current_user'
+[4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] app/controllers/application_controller.rb:21:in `logged_in?'
+[4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] app/views/static_pages/root.html.erb:1:in `_app_views_static_pages_root_html_erb__1802440921146018510_70298472890800'
+[4813a3a3-d4dd-4a33-9a1b-fcd55e2d55a9] app/controllers/static_pages_controller.rb:3:in `root'
