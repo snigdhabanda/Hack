@@ -245,7 +245,7 @@ html, body {
                     align-items: center; 
                     // box-shadow: 0px 2px 1px red;
                     position: absolute; 
-                    left: 130px;   
+                    left: 140px;   
                     top: 0px;                    
 
                     .update-message, .delete-message, .reply-message{
@@ -422,6 +422,7 @@ html, body {
 
 .new-channel-members{
     color: black; 
+    
 }
 
 .new-channel-form{
@@ -436,6 +437,7 @@ html, body {
     z-index: 8; 
     color: black; 
     padding: 15px 20px 20px 30px; 
+    background-color: rgb(189, 180, 180);
 
     h2{
         font-size: 30px; 
@@ -539,6 +541,20 @@ html, body {
         top: 15px;
         left: 475px; 
     }
+}
+
+.logout-button{
+    position: absolute; 
+    z-index: 25; 
+    outline: none;
+    background: transparent;
+    border: 1px solid white; 
+    border-radius: 4px; 
+    color: white; 
+    top: 20px; 
+    left: 1300px; 
+    cursor: pointer; 
+
 }
 
 .channels-list::-webkit-scrollbar {

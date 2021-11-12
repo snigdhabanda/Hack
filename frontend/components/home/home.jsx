@@ -13,14 +13,13 @@ class Home extends React.Component{
             <nav className="header-nav">
                {/* UserComponent */}
                {/* SearchBar */}
-               Search goes here
             </nav>
             <nav className="sidebar-nav" >
                <div className="dinner-party">Dinner Party</div>
                <UsersIndexContainer /> 
                <ChannelsIndexContainer />  
             </nav>  
-            <button onClick={() => this.props.logoutUser()}>Logout</button> 
+            <button className="logout-button" onClick={() => this.props.logoutUser()}>Logout</button> 
             
 
             {/* // <RenderMessagesContainer /> 
