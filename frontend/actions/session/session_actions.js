@@ -7,7 +7,8 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 
 export const receiveUser = (user) => ({
     type: RECEIVE_USER,
-    user
+    user, 
+    channels 
 })
 
 export const removeUser = (user) => ({
@@ -32,12 +33,6 @@ export const signupUser = (user) => dispatch => (
     )
 )
 
-export const fetchUsers = () => dispatch => (
-    SessionApiUtil.fetchUsers().then(
-        (users) => dispatch(receiveUsers(users)),
-        (errs) => dispatch(receiveErrors(errs.responseJSON))
-    )
-)
 
 export const loginUser = (user) => dispatch => (
     SessionApiUtil.loginUser(user).then(

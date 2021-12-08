@@ -11,7 +11,5 @@ class Channel < ApplicationRecord
     class_name: :Message,
     dependent: :destroy 
 
-    def self.get_channels_by_user(current_user)
-        Channel.joins(:channel_members).where('channel_members.member_id = ?', current_user.id)
-    end 
+     
 end

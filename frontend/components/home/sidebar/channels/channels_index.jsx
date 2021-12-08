@@ -2,7 +2,8 @@ import React from 'react'
 import ChannelsIndexItem from './channels_index_item'
 import MessagesIndex from '../../messages/messages_index'
 import ChatRoom from "../../../../actioncable_app/ChatRoom"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHashtag} from '@fortawesome/fontawesome-free-solid'
 
 
 class ChannelsIndex extends React.Component{
@@ -13,22 +14,19 @@ class ChannelsIndex extends React.Component{
     }
     
     componentDidMount(){
-        //create new channel member associations (enrolling a user into existing channels)
         this.props.fetchChannels()
-        // .then(() => {
-        //     let i = 0; 
-        //     while (i < Object.values(this.props.channels).length) {
-        //         console.log(Object.values(this.props.channels)[i])
-        //         let channelMember = {
-        //             channelId: this.props.channels[i].id,
-        //             memberId: this.props.currentUser,
-        //             creator: false 
-        //         }
-        //         this.props.createChannelMember(channelMember)
-        //         i++
-                
-        //     }
-        // })
+        
+    }
+
+    unsubscribeFromChannel(){
+        App.cable.disconnect()
+    }
+
+    changeChannel(channelId){
+        //unsubscribe from previous channel 
+        this.unsubscribeFromChannel()
+        //calling RECEIVE_CHANNEL for viewreducer && loading messages
+        this.props.fetchChannel(channelId)
     }
 
     
@@ -37,15 +35,42 @@ class ChannelsIndex extends React.Component{
         const {channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
 
         return(
-            <div className="chat-channels-and-messages">
-                {Object.keys(channels).length > 0 ? 
+
+        <div className="chat-channels-and-messages">
+                <ul className="channels-list">
+            {Object.values(this.props.channels).filter(channel => !channel.dm).map((channel) =>(
+              <li className="channel" tabIndex={`${channel.id}`} onClick={this.changeChannel.bind(this, channel.id)}>
+                <FontAwesomeIcon className="hashtag" icon={faHashtag} />
+                {channel.name}
+              </li>
+        ))}
+        </ul>
+        
+        <ul className="dms-list">
+        <div className="dm-title">Direct Messages</div>
+        {Object.values(this.props.channels).filter(channel => channel.dm).map((channel) =>(
+              <li className="dm" tabindex={`${channel.id}`} onClick={this.changeChannel.bind(this, channel.id)}>
+                {channel.name}
+              </li>
+            
+          ))}
+        </ul>
+
+
+
+
+
+
+
+
+                {/* {Object.keys(channels).length > 0 ? 
                 <div>
                     {currentView ?
                         <ChatRoom channelMembers={channelMembers} dynamicView={dynamicView} createChannelMember={createChannelMember} deleteMessage = {removeMessage} createChannel={createChannel} createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {users} channels={channels}/>
                         : ""}      
                 </div>
                 
-                : ""}
+                : ""} */}
                 
             </div>
         )

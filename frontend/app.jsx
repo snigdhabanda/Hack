@@ -21,11 +21,6 @@ class App extends React.Component{
                     <Route exact path="/" component={RenderContainer} />
                 </Switch>
 
-                {/* <RenderContainer /> */}
-
-                
-                {/* <Route to="/demo" component={Home} /> */}
-                {/* <Link to="/demo" /> */}
             </div> 
         )
     }

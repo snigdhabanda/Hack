@@ -46,7 +46,6 @@ class SessionForm extends React.Component {
         e.preventDefault()
         this.state.imageUrl = this.lettersHash[this.state.displayName[0].toLowerCase()]
         this.props.processForm(this.state)
-            // if (loginType === 'newUser')
 
     }
 

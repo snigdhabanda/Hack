@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
     },
     formType: "Sign Up",
     formInstructions: "First, enter your email",
-    link: <Link to="login">Already using Hack? Login Instead</Link>
+    link: <Link to="/login">Already using Hack? Login Instead</Link>
 })
 
 const mapDispatchToProps = (dispatch) => ({

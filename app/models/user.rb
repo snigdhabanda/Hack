@@ -14,13 +14,19 @@ class User < ApplicationRecord
     # foreign_key: :recipient_id,
     # class_name: :Message
 
-    has_many :channels,
+    has_many :channel_members,
     foreign_key: :member_id,
     class_name: :ChannelMember
+
+    has_many :channels,
+    through: :channel_members,
+    source: :channel 
 
     # has_many :dms,
     # foreign_key: :dm_member_id,
     # class_name: :Dm
+
+   
 
     
     #find a user in the database 

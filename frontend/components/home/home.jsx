@@ -8,19 +8,22 @@ class Home extends React.Component{
    }
 
    render(){
+      const {currentUser, channels, channelId} = this.props
       return (
          <div> 
             <nav className="header-nav">
                {/* UserComponent */}
                {/* SearchBar */}
-            <img className="profile-component" src={`${this.props.users[this.props.currentUserId].imageUrl}`} /> 
+            <img className="profile-component" src={`${currentUser.imageUrl}`} /> 
             </nav>
             <nav className="sidebar-nav" >
                <div className="dinner-party">Dinner Party</div>
-               <UsersIndexContainer /> 
-               <ChannelsIndexContainer />  
+               <ChannelsIndex channelId={channelId} />  
                
-            </nav>  
+            </nav> 
+            <div className="chatroom">
+               <ChatRoom channelId={channelId}/>
+            </div> 
             <button className="logout-button" onClick={() => this.props.logoutUser()}>Logout</button> 
             
 

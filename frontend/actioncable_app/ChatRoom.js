@@ -200,26 +200,7 @@ class ChatRoom extends React.Component {
         </div>
 
         
-        <ul className="channels-list">
-        {Object.values(this.props.channels).filter(channel => !channel.dm).map((channel) =>(
-              <li className="channel" tabIndex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
-                <FontAwesomeIcon className="hashtag" icon={faHashtag} />
-                {channel.name}
-              </li>
-        ))}
-        </ul>
         
-        
-        <ul className="dms-list">
-        <div className="dm-title">Direct Messages</div>
-        {Object.values(this.props.channels).filter(channel => channel.dm).map((channel) =>(
-              <li className="dm" tabindex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
-                {channel.name}
-              </li>
-            
-          ))}
-          
-        </ul>
         
         
 

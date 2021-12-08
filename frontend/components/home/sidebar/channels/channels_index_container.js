@@ -18,12 +18,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     fetchChannel: (channelId) => dispatch(fetchChannel(channelId)),
-    fetchChannels: () => dispatch(fetchChannels()),
-    createChannel: (channel) => dispatch(createChannel(channel)),
-    createMessage: (message) => dispatch(createMessage(message)),
-    getTime: (messageId) => dispatch(getTime(messageId)),
-    removeMessage: (message) => dispatch(removeMessage(message)),
-    createChannelMember: (channelMember) => dispatch(createChannelMember(channelMember))
+    // fetchChannels: () => dispatch(fetchChannels()),
+    // createChannel: (channel) => dispatch(createChannel(channel)),
+    // createMessage: (message) => dispatch(createMessage(message)),
+    // getTime: (messageId) => dispatch(getTime(messageId)),
+    // removeMessage: (message) => dispatch(removeMessage(message)),
+    // createChannelMember: (channelMember) => dispatch(createChannelMember(channelMember))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelsIndex)

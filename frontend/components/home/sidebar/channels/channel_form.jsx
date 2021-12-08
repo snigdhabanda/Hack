@@ -11,7 +11,8 @@ class ChannelForm extends React.Component {
             channelDescription: "",
             showUsers: false,
             submittedMessage: false,
-            channelMembers: false}
+            channelMembers: false,
+            showModal: false}
 
         this.clickAddPeople = React.createRef();
         this.inputField = React.createRef();
@@ -106,12 +107,13 @@ class ChannelForm extends React.Component {
     }
 
     modalDisappears(){
-        this.modalDisappear.current.style.display = "none"; 
+        // this.modalDisappear.current.style.display = "none"; 
+        this.setState({showModal: false})
     }
     
     render() {
         return (
-            <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
+            <form className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>Create a channel</h2>
                 <p>Create a channel to communicate with anyone you're a fan of!</p>
                 
@@ -126,9 +128,7 @@ class ChannelForm extends React.Component {
                     <input type="text" onChange={this.update('channelDescription')} />
                 </div>
 
-                {/* <label>Topic (optional)
-                    <input type="text" onChange={this.handleInput('recipientName')} />
-                </label> */}
+                
                 <div className="add-people-box">
                 <label>Add people</label>
                     <div className="all-users">
