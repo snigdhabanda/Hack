@@ -47,9 +47,9 @@ class Thread extends React.Component {
         
         return (   
             <li className="message-box" key={message.id}>
-                <div className="message-author">{this.props.users[message.authorId].displayName}
+                {/* <div className="message-author">{this.props.users[message.authorId].displayName}
                         <p className="message-time">{timestamp}</p>
-                </div>
+                </div> */}
                 <p className="message-content">{message.body}</p>
             </li>)
         }) : ""

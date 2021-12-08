@@ -2,8 +2,8 @@ import {connect} from 'react-redux'
 import { logoutUser } from '../../actions/session/session_actions'
 import Render from './render'
 
-const mapStateToProps = ({session, entities: {users}}) => ({
-    currentUser: users[session.id]
+const mapStateToProps = ({session}) => ({
+    currentUser: session.id
 })
 
 const mapDispatchToProps = dispatch => ({

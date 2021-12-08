@@ -130,7 +130,7 @@ class ChannelForm extends React.Component {
                     <input type="text" onChange={this.handleInput('recipientName')} />
                 </label> */}
                 <div className="add-people-box">
-                <label>Add people</label>
+                {/* <label>Add people</label>
                     <div className="all-users">
                         <ul>
                         {Object.values(this.props.users).map((user) => 
@@ -138,7 +138,7 @@ class ChannelForm extends React.Component {
                             <li tabindex={`${user.id}`} className="li-tag" ref={this.clickAddPeople} onClick={this.addPerson.bind(this, user)}>{user.displayName}</li>)
                         }
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
                 </div>
                 

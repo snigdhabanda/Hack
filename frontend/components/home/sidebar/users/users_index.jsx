@@ -7,11 +7,9 @@ class UsersIndex extends React.Component {
    }
 
    componentDidMount(){
-       this.props.fetchUsers()
    }
 
    render(){
-    const {users} = this.props
       return (
          <div></div>
          // <div>

@@ -14,7 +14,7 @@ class ChannelsIndex extends React.Component{
     
     componentDidMount(){
         //create new channel member associations (enrolling a user into existing channels)
-        this.props.fetchChannels()
+        // this.props.fetchChannels()
         // .then(() => {
         //     let i = 0; 
         //     while (i < Object.values(this.props.channels).length) {
@@ -34,14 +34,14 @@ class ChannelsIndex extends React.Component{
     
     render(){
 
-        const {channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
+        const {channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages} = this.props
 
         return(
             <div className="chat-channels-and-messages">
                 {Object.keys(channels).length > 0 ? 
                 <div>
                     {currentView ?
-                        <ChatRoom channelMembers={channelMembers} dynamicView={dynamicView} createChannelMember={createChannelMember} deleteMessage = {removeMessage} createChannel={createChannel} createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {users} channels={channels}/>
+                        <ChatRoom channelMembers={channelMembers} dynamicView={dynamicView} createChannelMember={createChannelMember} deleteMessage = {removeMessage} createChannel={createChannel} createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} channels={channels}/>
                         : ""}      
                 </div>
                 

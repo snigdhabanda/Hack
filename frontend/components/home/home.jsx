@@ -13,11 +13,11 @@ class Home extends React.Component{
             <nav className="header-nav">
                {/* UserComponent */}
                {/* SearchBar */}
-            <img className="profile-component" src={`${this.props.users[this.props.currentUserId].imageUrl}`} /> 
+            <img className="profile-component" src={`${this.props.currentUser.imageUrl}`} /> 
             </nav>
             <nav className="sidebar-nav" >
                <div className="dinner-party">Dinner Party</div>
-               <UsersIndexContainer /> 
+               {/* <UsersIndexContainer />  */}
                <ChannelsIndexContainer />  
                
             </nav>  

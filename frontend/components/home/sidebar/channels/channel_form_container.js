@@ -1,9 +1,8 @@
 import {connect} from 'react-redux'
 import ChannelForm from './channel_form'
 
-const mapStateToProps = ({entities: {users}, session, currentView}) => ({
+const mapStateToProps = ({session, currentView}) => ({
     memberId: [session.id],
-    users: Object.values(users),
     currentViewId: currentView.channelId
 })
 

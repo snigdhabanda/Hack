@@ -6,10 +6,10 @@ export const UPDATE_CHANNEL = "UPDATE_CHANNEL"
 export const DELETE_CHANNEL = "DELETE_CHANNEL"
 export const NEW_CHANNEL = "NEW_CHANNEL"
 
-const receiveChannels = (channels) => ({
-    type: RECEIVE_CHANNELS,
-    channels: channels
-})
+// const receiveChannels = (channels) => ({
+//     type: RECEIVE_CHANNELS,
+//     channels: channels
+// })
 
 const receiveChannel = ({channel, channelMembers, messages}) => ({
     type: RECEIVE_CHANNEL,
@@ -35,11 +35,11 @@ const removeChannel = (channel) => ({
     channel
 })
 
-export const fetchChannels = () => dispatch => (
-    ChannelApiUtil.fetchChannels().then(
-        (channels) => dispatch(receiveChannels(channels))
-    )
-)
+// export const fetchChannels = () => dispatch => (
+//     ChannelApiUtil.fetchChannels().then(
+//         (channels) => dispatch(receiveChannels(channels))
+//     )
+// )
 
 export const fetchChannel = (channelId) => dispatch => (
     ChannelApiUtil.fetchChannel(channelId).then(

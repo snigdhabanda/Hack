@@ -17,7 +17,7 @@ class ChatRoom extends React.Component {
       threadMessages: [], 
       updatingMessage: false, 
       replying: false, 
-      displayForm: false, 
+      displayChannelForm: false, 
       submittingMessage: 
       false, memberIds: []};
     this.bottom = React.createRef();
@@ -124,9 +124,10 @@ class ChatRoom extends React.Component {
     this.replyMessage = message
   }
 
-  handleClick(e){
+  newChannel(e){
     e.preventDefault()
-    if (!this.state.displayForm) {this.setState({displayForm: true})}
+    if (!this.state.displayForm) 
+    {this.setState({displayForm: true})}
 
   }
 
@@ -143,7 +144,7 @@ class ChatRoom extends React.Component {
     const messageList = this.state.messages.map((message, idx) => {
       let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")
       let timestamp = timeStampArray[1].slice(0,timeStampArray[1].length - 3) + " " + timeStampArray[2].toLowerCase()
-      console.log(this.props.users[message.authorId].imageUrl)
+    
       let numReplies = this.props.messages.filter(stateMessage => stateMessage.parentMessageId === message.id).length
       if (!message.parentMessageId){
       return (
@@ -196,7 +197,7 @@ class ChatRoom extends React.Component {
         <div className="channel-title">
             <div className="channel-arrow-container"><FontAwesomeIcon className="channel-arrow" icon={faSortDown} /> </div>
             Channels       
-           <FontAwesomeIcon onClick={this.handleClick.bind(this)} className="channel-plus" icon={faPlus} />
+           <FontAwesomeIcon onClick={this.newChannel.bind(this)} className="channel-plus" icon={faPlus} />
         </div>
 
         
@@ -221,16 +222,22 @@ class ChatRoom extends React.Component {
           
         </ul>
         
-        
 
         {this.state.displayForm ? 
                 <div>
-                    <ChannelForm memberIds={this.state.memberIds} createChannelMember={this.props.createChannelMember} channels={this.props.channels} users={this.props.users} currentView = {this.props.currentView} createChannel={this.props.createChannel} fetchChannel={this.props.fetchChannel}/>
-                    {this.state.displayForm = false}
+                    <ChannelForm 
+                    memberIds={this.state.memberIds} 
+                    createChannelMember={this.props.createChannelMember} 
+                    channels={this.props.channels} 
+                    currentView = {this.props.currentView} 
+                    createChannel={this.props.createChannel} 
+                    fetchChannel={this.props.fetchChannel}
+                    displayForm = {this.state.displayForm}
+                    />
+                   
                 </div>
                     
-                : null}
-        {/* <button onClick={this.handleClick.bind(this)}>New Channel</button> */}
+                : ""}
 
         {this.state.submittingMessage ? 
                 <div><AddChannelMembers createChannelMember = {this.props.createChannelMember} currentUser = {this.props.currentUser} currentView={this.props.currentView} memberIds={this.state.memberIds} />
@@ -259,7 +266,7 @@ class ChatRoom extends React.Component {
 
         {this.state.replying || this.state.threadMessages.length > 0 ? 
         <div className="thread">
-            <Thread users={this.props.users} currentUser={this.props.currentUser} channels={this.props.channels} channelId={this.props.currentView} threadMessages={this.state.threadMessages} message={this.replyMessage} messages={this.props.messages}/>
+            <Thread  currentUser={this.props.currentUser} channels={this.props.channels} channelId={this.props.currentView} threadMessages={this.state.threadMessages} message={this.replyMessage} messages={this.props.messages}/>
             {this.state.threadMessages = []}
             {this.state.replying = false}
             

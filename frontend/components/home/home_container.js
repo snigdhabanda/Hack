@@ -2,10 +2,9 @@ import {connect} from 'react-redux'
 import { logoutUser } from '../../actions/session/session_actions'
 import Home from './home'
 
-const mapStateToProps = ({session, currentView, entities: {users}}) => ({
-    currentUserId: session.id,
+const mapStateToProps = ({session, currentView}) => ({
+    currentUser: session,
     channelId: currentView.channelId,
-    users: users
 })
 
 const mapDispatchToProps = dispatch => ({

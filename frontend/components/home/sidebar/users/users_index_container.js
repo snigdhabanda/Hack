@@ -1,10 +1,9 @@
 import {connect} from 'react-redux'
 import UsersIndex from './users_index'
-import {fetchUsers} from '../../../../actions/session/session_actions'
 
 
-const mapStateToProps = ({entities: {users}}) => ({
-    users: users
+const mapStateToProps = () => ({
+    
 })
 
 const mapDispatchToProps = dispatch => ({
