@@ -14,14 +14,24 @@ class User < ApplicationRecord
     # foreign_key: :recipient_id,
     # class_name: :Message
 
-    has_many :channels,
+    has_many :channel_members,
     foreign_key: :member_id,
     class_name: :ChannelMember
+
+    has_many :channels,
+    through: :channel_members,
+    source: :channel  
+
 
     # has_many :dms,
     # foreign_key: :dm_member_id,
     # class_name: :Dm
 
+    
+    def self.get_channels(user)
+        puts("hello")
+       User.joins(:channels).where('channel_members.member_id = ?', user.id)
+    end 
     
     #find a user in the database 
     def self.find_by_credentials(email, password)

@@ -14,7 +14,7 @@ class ChannelsIndex extends React.Component{
     
     componentDidMount(){
         //create new channel member associations (enrolling a user into existing channels)
-        this.props.fetchChannels()
+        // this.props.fetchChannels()
         // .then(() => {
         //     let i = 0; 
         //     while (i < Object.values(this.props.channels).length) {

@@ -20,6 +20,11 @@ class Api::UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save 
             login!(@user)
+            @channel_member = ChannelMember.create({channel_id: 120, member_id: @user.id, creator: false})
+            @channel_member.save!
+            @channel_member2 = ChannelMember.create({channel_id: 130, member_id: @user.id, creator: false})
+            @channel_member2.save!
+            @channels = Channel.get_channels_by_user(@user)
             render "api/users/show" 
         else 
             render json: @user.errors.full_messages, status: 422 

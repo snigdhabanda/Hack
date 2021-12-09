@@ -42,12 +42,12 @@ class SessionForm extends React.Component {
     }
 
     handleSubmit(e){
-        
         e.preventDefault()
-        this.state.imageUrl = this.lettersHash[this.state.displayName[0].toLowerCase()]
+        if (this.props.formType === "Sign Up"){
+            console.log("hello")
+            this.state.imageUrl = this.lettersHash[this.state.displayName[0].toLowerCase()]
+        }
         this.props.processForm(this.state)
-            // if (loginType === 'newUser')
-
     }
 
     update(field){
@@ -55,6 +55,7 @@ class SessionForm extends React.Component {
     }
 
     render() {
+        console.log(this.state)
         let signup; 
         if (this.props.formType === "Sign Up") signup = true; 
         else signup = false; 

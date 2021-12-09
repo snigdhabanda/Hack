@@ -11,7 +11,11 @@ class Channel < ApplicationRecord
     class_name: :Message,
     dependent: :destroy 
 
-    def self.get_channels_by_user(current_user)
-        Channel.joins(:channel_members).where('channel_members.member_id = ?', current_user.id)
+    has_many :members,
+    through: :channel_members,
+    source: :member
+
+    def self.get_channels_by_user(user)
+        Channel.joins(:members).where('channel_members.member_id = ?', user.id)
     end 
 end

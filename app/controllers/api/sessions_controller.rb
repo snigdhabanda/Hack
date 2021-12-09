@@ -4,6 +4,7 @@ class Api::SessionsController < ApplicationController
         @user = User.find_by_credentials(params[:user][:email], params[:user][:password])
         if @user 
             login!(@user)
+            @channels = Channel.get_channels_by_user(@user)
             render "api/users/show" 
         else 
             render json: ["Invalid login credentials"], status: 401
@@ -14,7 +15,7 @@ class Api::SessionsController < ApplicationController
         @user = current_user
         if @user
             logout
-            render "api/users/show"
+            render "api/users/delete"
         else
             render json: ["Nobody signed in"], status: 404
         end

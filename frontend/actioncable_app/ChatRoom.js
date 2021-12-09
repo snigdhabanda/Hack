@@ -143,7 +143,6 @@ class ChatRoom extends React.Component {
     const messageList = this.state.messages.map((message, idx) => {
       let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")
       let timestamp = timeStampArray[1].slice(0,timeStampArray[1].length - 3) + " " + timeStampArray[2].toLowerCase()
-      console.log(this.props.users[message.authorId].imageUrl)
       let numReplies = this.props.messages.filter(stateMessage => stateMessage.parentMessageId === message.id).length
       if (!message.parentMessageId){
       return (

@@ -13,11 +13,13 @@ const mapStateToProps = (state) => ({
     },
     formType: "Sign Up",
     formInstructions: "First, enter your email",
-    link: <Link to="login">Already using Hack? Login Instead</Link>
+    link: <Link to="/login">Already using Hack? Login Instead</Link>,
+    channelId: state.currentView.channelId,
+    currentUser: state.session.id 
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    processForm: (user) => dispatch(signupUser(user))
+    processForm: (user) => dispatch(signupUser(user)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionForm)
