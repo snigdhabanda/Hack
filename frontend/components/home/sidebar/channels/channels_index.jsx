@@ -13,6 +13,7 @@ class ChannelsIndex extends React.Component{
     }
     
     componentDidMount(){
+        this.props.fetchCurrentUser(this.props.currentUser)
         //create new channel member associations (enrolling a user into existing channels)
         // this.props.fetchChannels()
         // .then(() => {
@@ -34,14 +35,26 @@ class ChannelsIndex extends React.Component{
     
     render(){
 
-        const {channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
+        const {updateChannel, deleteChannel, channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users, fetchCurrentUser} = this.props
 
         return(
             <div className="chat-channels-and-messages">
                 {Object.keys(channels).length > 0 ? 
                 <div>
                     {currentView ?
-                        <ChatRoom channelMembers={channelMembers} dynamicView={dynamicView} createChannelMember={createChannelMember} deleteMessage = {removeMessage} createChannel={createChannel} createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {users} channels={channels}/>
+                        <ChatRoom channelMembers={channelMembers} 
+                        fetchCurrentUser={fetchCurrentUser} 
+                        dynamicView={dynamicView} 
+                        createChannelMember={createChannelMember} 
+                        deleteMessage = {removeMessage} 
+                        createChannel={createChannel} 
+                        createMessage={createMessage} 
+                        fetchChannel={fetchChannel} 
+                        currentUser={currentUser} 
+                        currentView={currentView} 
+                        updateChannel={updateChannel}
+                        deleteChannel={deleteChannel}
+                        messages = {Object.values(messages)} users = {users} channels={channels}/>
                         : ""}      
                 </div>
                 

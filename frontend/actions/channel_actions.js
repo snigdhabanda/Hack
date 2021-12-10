@@ -5,6 +5,7 @@ export const RECEIVE_CHANNEL = "RECEIVE_CHANNEL"
 export const UPDATE_CHANNEL = "UPDATE_CHANNEL"
 export const DELETE_CHANNEL = "DELETE_CHANNEL"
 export const NEW_CHANNEL = "NEW_CHANNEL"
+export const RECEIVE_CHANNEL_ERRORS = "RECEIVE_CHANNEL_ERRORS"
 
 // const receiveChannels = (channels) => ({
 //     type: RECEIVE_CHANNELS,
@@ -18,21 +19,15 @@ const receiveChannel = ({channel, channelMembers, messages}) => ({
     messages 
 })
 
-const newChannel = ({channel, channelMembers, messages}) => ({
-    type: NEW_CHANNEL,
-    channel,
-    channelMembers,
-    messages 
-})
-
-const changeChannel = (channel) => ({
-    type: UPDATE_CHANNEL,
-    channel 
-})
 
 const removeChannel = (channel) => ({
     type: DELETE_CHANNEL,
     channel
+})
+
+const receiveChannelErrors = (errors) => ({
+    type: RECEIVE_CHANNEL_ERRORS,
+    errors
 })
 
 export const fetchChannels = () => dispatch => (
@@ -49,12 +44,14 @@ export const fetchChannel = (channelId) => dispatch => (
 
 export const updateChannel = (channel) => dispatch => (
     ChannelApiUtil.updateChannel(channel).then(
-        (channel) => dispatch(changeChannel(channel)))
+        (channel) => dispatch(receiveChannel(channel)),
+        (errs) => dispatch(receiveChannelErrors(errs.responseJSON)))
 )
 
 export const createChannel = (channel) => dispatch => (
     ChannelApiUtil.createChannel(channel).then(
-        (channel) => dispatch(receiveChannel(channel)))
+        (channel) => dispatch(receiveChannel(channel)),
+        (errs) => dispatch(receiveChannelErrors(errs.responseJSON)))
 )
 
 export const deleteChannel = (channelId) => dispatch => (

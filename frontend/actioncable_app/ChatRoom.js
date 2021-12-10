@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHashtag, faSortDown, faPlus, faReply, faTrashAlt, faEdit, faUser} from '@fortawesome/fontawesome-free-solid'
 import Thread from './Thread'
 import ChannelForm from './../components/home/sidebar/channels/channel_form'
+import EditChannelForm from "../components/home/sidebar/channels/edit_channel_form.jsx";
 import AddChannelMembers from "../components/home/sidebar/channels/add_channel_members.jsx";
-
+import ShowChannel from "../components/home/sidebar/channels/show_channel.jsx";
 
 
 class ChatRoom extends React.Component {
@@ -18,6 +19,7 @@ class ChatRoom extends React.Component {
       updatingMessage: false, 
       replying: false, 
       displayForm: false, 
+      displayEditForm: false, 
       submittingMessage: 
       false, memberIds: []};
     this.bottom = React.createRef();
@@ -77,6 +79,10 @@ class ChatRoom extends React.Component {
     
   }
 
+  componentDidMount(){
+    this.props.fetchCurrentUser()
+  }
+
   
   
   componentDidUpdate(prevProps){
@@ -114,6 +120,9 @@ class ChatRoom extends React.Component {
     this.messageToUpdate = message; 
     
   }
+  showMembers(){
+
+  }
 
   deleteMessage(message){
     App.cable.subscriptions.subscriptions[0].delete({ message: message});
@@ -130,8 +139,10 @@ class ChatRoom extends React.Component {
 
   }
 
-  showMembers(){
-    
+  editFormAppears(e){
+    e.preventDefault()
+    this.setState({displayEditForm: true})
+
   }
   
   render() {
@@ -139,6 +150,8 @@ class ChatRoom extends React.Component {
       this.channelQueue.push(this.props.currentView)
       this.changeChannel(this.props.currentView)
     }
+
+    
     
     const messageList = this.state.messages.map((message, idx) => {
       let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")
@@ -222,7 +235,7 @@ class ChatRoom extends React.Component {
         
         
 
-        {this.state.displayForm ? 
+        {this.state.displayForm && !this.state.displayEditForm ? 
                 <div>
                     <ChannelForm memberIds={this.state.memberIds} createChannelMember={this.props.createChannelMember} channels={this.props.channels} users={this.props.users} currentView = {this.props.currentView} createChannel={this.props.createChannel} fetchChannel={this.props.fetchChannel}/>
                     {this.state.displayForm = false}
@@ -231,6 +244,24 @@ class ChatRoom extends React.Component {
                 : null}
         {/* <button onClick={this.handleClick.bind(this)}>New Channel</button> */}
 
+        {this.state.displayEditForm && !this.state.displayForm ? 
+             (Object.values(this.props.channelMembers).filter(channelMember =>
+              channelMember.memberId === this.props.currentUser && 
+              channelMember.channelId === this.props.currentView)[0]).creator ? 
+                <div>
+                    <EditChannelForm channel={this.props.channels[this.props.currentView]} 
+                    currentUser={this.props.currentUser}
+                    updateChannel={this.props.updateChannel} 
+                    deleteChannel={this.props.deleteChannel}/>
+                    {this.state.displayEditForm = false}
+                </div>
+                    
+                : <div><ShowChannel 
+                    channel={this.props.channels[this.props.currentView]} 
+                    currentUser={this.props.currentUser}
+                /></div>
+                : null}
+               {this.state.displayEditForm = false}
         {this.state.submittingMessage ? 
                 <div><AddChannelMembers createChannelMember = {this.props.createChannelMember} currentUser = {this.props.currentUser} currentView={this.props.currentView} memberIds={this.state.memberIds} />
                 {this.state.submittingMessage = false}
@@ -244,7 +275,8 @@ class ChatRoom extends React.Component {
         <div className="message-list" >
           {this.props.channels && this.props.currentView ? 
           <div className="channel-name">
-            {this.props.channels[this.props.currentView].name}
+            <div onClick= {this.editFormAppears.bind(this)} 
+            className="name-of-channel">{this.props.channels[this.props.currentView].name}</div>
             <div onClick={this.showMembers.bind(this)} className = "num-members">
               {Object.values(this.props.channelMembers).length}
               <FontAwesomeIcon className="user-icon" icon={faUser} />

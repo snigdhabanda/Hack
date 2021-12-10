@@ -8,21 +8,24 @@ class AddChannelMembers extends React.Component {
     }
 
     componentDidMount(){
-
-        if (this.props.memberIds.length > 0){
+        console.log('mounting')
         this.props.memberIds.push(this.props.currentUser)
         let uniqueIds = [...new Set(this.props.memberIds)];
+        console.log(uniqueIds)
         uniqueIds.forEach((id, idx) => {
             let channelMember = {
                 channelId: this.props.currentView,
                 memberId: id,
                 creator: false 
             }
-            if (id === this.props.currentUser) {channelMember.creator = true}
+            uniqueIds.pop()
+            if (id === this.props.currentUser) 
+            {channelMember.creator = true}
+            console.log("creating")
             this.props.createChannelMember(channelMember)
             
         })
-    }
+    
         
 }
 

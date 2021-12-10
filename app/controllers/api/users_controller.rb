@@ -12,6 +12,7 @@ class Api::UsersController < ApplicationController
     #retrieve a single user
     def show 
         @user = User.find(params[:id])
+        @channels = Channel.get_channels_by_user(@user)
         render "api/users/show" 
     end 
 

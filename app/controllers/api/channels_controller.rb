@@ -14,7 +14,7 @@ class Api::ChannelsController < ApplicationController
         if @channel.save 
             render "api/channels/show"
         else
-            render json: @channel.errors.full_messages 
+            render json: ["That channel name has already been taken"], status: 400
         end 
     end 
 
@@ -24,10 +24,17 @@ class Api::ChannelsController < ApplicationController
     end 
 
     def update 
+        @channel = Channel.find(params[:id])
+        puts @channel
+        if @channel.update(channel_params)
+            render "api/channels/show"
+        else 
+            render json: ["That channel name has already been taken"], status: 400
+        end 
     end 
 
     def channel_params 
-        params.require(:channel).permit(:name, :description, :dm)
+        params.require(:channel).permit(:name, :topic, :description, :dm)
     end 
 
 

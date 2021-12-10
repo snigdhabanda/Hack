@@ -1,7 +1,7 @@
 class ChannelMember < ApplicationRecord
     validates :member_id, :channel_id, presence: true 
     validates :creator, inclusion: {in: [true, false]}
-    validates :channel_id, uniqueness: { scope: :member_id }
+    validates :member_id, uniqueness: { scope: :channel_id  }
 
     belongs_to :member,
     foreign_key: :member_id,
