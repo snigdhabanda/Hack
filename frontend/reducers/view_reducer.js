@@ -1,4 +1,5 @@
 import { RECEIVE_CHANNEL, DELETE_CHANNEL } from "../actions/channel_actions"
+import { REMOVE_CHANNEL_MEMBER } from "../actions/channel_member_actions"
 const defaultState = {dmId: null, channelId: 120}
 
 const ViewReducer = (state=defaultState, action) =>{
@@ -13,7 +14,9 @@ const ViewReducer = (state=defaultState, action) =>{
             nextState.dmId = null
             return nextState;
         case DELETE_CHANNEL:
-            return defaultState; 
+            return defaultState;
+        case REMOVE_CHANNEL_MEMBER:
+            return defaultState;  
         default:
             return state;
     }

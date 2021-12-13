@@ -1,10 +1,16 @@
 import * as ChannelMemberApiUtil from './../util/channel_member_api_util'
 import { receiveErrors } from './session/session_actions'
 export const RECEIVE_CHANNEL_MEMBER = "RECEIVE_CHANNEL_MEMBER"
+export const REMOVE_CHANNEL_MEMBER = "REMOVE_CHANNEL_MEMBER"
 export const RECEIVE_CHANNEL_MEMBER_ERRORS = "RECEIVE_CHANNEL_MEMBER_ERRORS"
 
 const receiveChannelMember = (channelMember) => ({
     type: RECEIVE_CHANNEL_MEMBER,
+    channelMember
+})
+
+const removeChannelMember = (channelMember) => ({
+    type: REMOVE_CHANNEL_MEMBER,
     channelMember
 })
 
@@ -18,3 +24,9 @@ export const createChannelMember = (channelMember) => dispatch => (
         (channelMember) => dispatch(receiveChannelMember(channelMember)),
         (errs) => dispatch(receiveChannelMemberErrors(errs))
 ))
+
+export const leaveChannel = (channelMemberId) => dispatch => (
+    ChannelMemberApiUtil.deleteChannelMember(channelMemberId).then(
+        (channelMember) => dispatch(removeChannelMember(channelMember))
+    )
+)

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import configureStore from './store/store.js'
 import Root from './root'
+import {fetchFilteredUsers} from "../frontend/actions/user_actions"
 
 document.addEventListener("DOMContentLoaded", () => {
     let store; 
@@ -21,8 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
       store = configureStore();
     }
 
-  
+    
     window.store = store; 
+    window.fetchFilteredUsers = fetchFilteredUsers
     const root = document.getElementById("root")
     ReactDOM.render(<Root store={store}/>, root)
 })

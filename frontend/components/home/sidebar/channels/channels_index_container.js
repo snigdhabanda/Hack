@@ -1,10 +1,11 @@
 import { connect } from "react-redux"
 import { createChannel, fetchChannels, fetchChannel, updateChannel, deleteChannel } from "../../../../actions/channel_actions"
 import ChannelsIndex from "./channels_index"
-import {createChannelMember} from '../../../../actions/channel_member_actions'
+import {createChannelMember, leaveChannel} from '../../../../actions/channel_member_actions'
 import { createMessage, removeMessage } from "../../../../actions/messages_actions"
 import { getTime } from "../../../../actions/messages_actions"
 import { fetchCurrentUser } from "../../../../actions/session/session_actions"
+import {fetchFilteredUsers} from "../../../../actions/user_actions"
 
 const mapStateToProps = (state) => ({
     channels: state.entities.channels,
@@ -27,6 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
     createMessage: (message) => dispatch(createMessage(message)),
     getTime: (messageId) => dispatch(getTime(messageId)),
     removeMessage: (message) => dispatch(removeMessage(message)),
+    leaveChannel: (channelId) => dispatch(leaveChannel(channelId)),
     createChannelMember: (channelMember) => dispatch(createChannelMember(channelMember))
 })
 

@@ -1,6 +1,6 @@
 import { UPDATE_CHANNEL, DELETE_CHANNEL, RECEIVE_CHANNEL, RECEIVE_CHANNELS } from "../actions/channel_actions"
 import { RECEIVE_USER } from "../actions/session/session_actions"
-
+import { REMOVE_CHANNEL_MEMBER } from "../actions/channel_member_actions"
 
 const ChannelsReducer = (state= {}, action) => {
     Object.freeze(state)
@@ -15,6 +15,9 @@ const ChannelsReducer = (state= {}, action) => {
             return nextState; 
         case DELETE_CHANNEL:
             delete nextState[action.channel.id]
+            return nextState;
+        case REMOVE_CHANNEL_MEMBER:
+            delete nextState[action.channelMember.channelId]
             return nextState;
         case RECEIVE_CHANNEL: 
             nextState[action.channel.id] = action.channel

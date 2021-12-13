@@ -9,6 +9,13 @@ class Api::ChannelMembersController < ApplicationController
         end  
     end 
 
+    def destroy
+        @channel_member = ChannelMember.find(params[:id])
+        @channel_member.destroy!
+        render "/api/channel_members/delete"
+        
+    end
+
 
     def channel_member_params 
         params.require(:channel_member).permit(:channel_id, :member_id, :creator)

@@ -33,7 +33,7 @@ class EditChannelForm extends React.Component {
 
     handleDelete(e){
         e.preventDefault()
-        this.props.deleteChannel(this.props.channel.id)
+        this.props.deleteChannel(this.props.channel.id).then(() => this.props.fetchCurrentUser(this.props.currentUser))
         //need to close modal
     }
 

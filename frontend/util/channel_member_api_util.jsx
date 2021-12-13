@@ -8,3 +8,11 @@ export const createChannelMember = (channelMember) => (
         
     })
 )
+
+export const deleteChannelMember = (channelMemberId) => (
+    $.ajax({
+        method: "DELETE",
+        url: `/api/channel_members/${channelMemberId}`
+       
+    })
+)

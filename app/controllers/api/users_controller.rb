@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
     before_action :require_logged_in, only: [:show, :index]
 
     def index 
-        @users = User.all
+        @users = User.search(params[:search])
         render "api/users/index" 
     end 
 
@@ -34,7 +34,7 @@ class Api::UsersController < ApplicationController
 
     #require a user to enter following params
     def user_params 
-        params.require(:user).permit(:email, :password, :display_name, :image_url)
+        params.require(:user).permit(:email, :password, :display_name, :image_url, :search)
     end 
 
 end

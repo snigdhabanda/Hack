@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import ReactDOM from 'react-dom'
 import AddChannelMembersContainer from './add_channel_members_container'
-
 
 class ChannelForm extends React.Component {
     constructor(props){
@@ -9,9 +8,12 @@ class ChannelForm extends React.Component {
         this.state = {
             channelName: "",
             channelDescription: "",
+            search: "",
             showUsers: false,
             submittedMessage: false,
-            channelMembers: false}
+            channelMembers: false,
+            filters: [],
+        }
 
         this.clickAddPeople = React.createRef();
         this.inputField = React.createRef();
@@ -36,27 +38,16 @@ class ChannelForm extends React.Component {
         // if (this.state.memberIds.length > 2) {
         //     
         this.setState({submittedMessage: true})
+        this.timerId = 0; 
        
         // } 
     
     }
 
     componentDidUpdate(prevProps){
-        // console.log("im updating")
-        // if (prevProps.currentView !== this.props.currentView){
-        //     console.log("view changed")
-        // }
-        // if (this.state.submittedMessage){
-        //     const channel = {
-        //         name: this.state.channelName, 
-        //         description: this.state.channelDescription
-        //     } 
-        // this.props.createChannel(channel)
-        // this.state.submittedMessage = false; 
-        
-        // if (this.props.memberIds.length > 1) this.setState({channelMembers: true}) 
-        // }
-        // console.log(this.state)
+        if (prevProps.filteredUsers !== this.props.filteredUsers){
+            this.setState({filters: Object.values(this.props.filteredUsers)})
+        }
     }
 
     // componentDidUpdate(prevProps){
@@ -80,13 +71,24 @@ class ChannelForm extends React.Component {
     // }
 
     
+    debounce(){
+        let search = this.state.search
+        clearTimeout(this.timerId) 
+        this.timerId = setTimeout(() => this.props.fetchFilteredUsers(search), 200)
+
+    }
 
     
 
     update(field) {
-        console.log(field)
         return e =>
           this.setState({ [field]: e.currentTarget.value });
+    }
+
+    updateSearch(field) {
+        return e =>
+          this.setState({ [field]: e.currentTarget.value },
+        () => {this.debounce()});
     }
 
     // showUsers(){
@@ -101,7 +103,14 @@ class ChannelForm extends React.Component {
     // }
 
     addPerson(user){
-        this.props.memberIds.push(user.id)
+        console.log(this.props.memberIds, user)
+        if (this.props.memberIds.includes(user.id)){
+            this.props.memberIds.pop(user.id)
+        }
+        else{
+            this.props.memberIds.push(user.id)
+        }
+        console.log(this.props.memberIds)
    
     }
 
@@ -110,6 +119,8 @@ class ChannelForm extends React.Component {
     }
     
     render() {
+        console.log(this.props)
+        console.log(this.state.filters)
         return (
             <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>Create a channel</h2>
@@ -118,26 +129,38 @@ class ChannelForm extends React.Component {
                 <div className="all-input-tags">
                 <div className="name-box">
                 <label>Name</label>
-                    <input type="text" onChange={this.update('channelName')} />
+                    <input className="name-input" type="text" onChange={this.update('channelName')} />
                 </div>
                 
                 <div className="description-box">
                 <label>Description (optional)</label>
-                    <input type="text" onChange={this.update('channelDescription')} />
+                    <input className="description-input" type="text" onChange={this.update('channelDescription')} />
                 </div>
 
                 {/* <label>Topic (optional)
                     <input type="text" onChange={this.handleInput('recipientName')} />
                 </label> */}
                 <div className="add-people-box">
-                <label>Add people</label>
-                    <div className="all-users">
-                        <ul>
+                <label>Add members</label>
+                    <input className="search-box" type="text" value={this.state.search} placeholder="Enter a name" onChange={this.updateSearch('search')} />
+                    
+                        <div className="search-results">
+                        {this.state.filters.length > 0 ? 
+                        this.state.filters.map((user) => 
+                            <div tabindex="0" className="user-search" onClick={this.addPerson.bind(this, user)}>
+                            <img className="search-icon" width="30px" src={user.imageUrl}></img>
+                            <div className="user-search-name">{user.displayName}</div>
+                            
+                            </div>
+                        ) : ""}
+                        
+                       
+                        {/* <ul>
                         {Object.values(this.props.users).map((user) => 
                     
                             <li tabindex={`${user.id}`} className="li-tag" ref={this.clickAddPeople} onClick={this.addPerson.bind(this, user)}>{user.displayName}</li>)
                         }
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
                 </div>

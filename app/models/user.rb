@@ -28,10 +28,18 @@ class User < ApplicationRecord
     # class_name: :Dm
 
     
-    def self.get_channels(user)
-        puts("hello")
-       User.joins(:channels).where('channel_members.member_id = ?', user.id)
-    end 
+    def self.search(search)
+        if search 
+            users = User.where('display_name LIKE ?', "%#{search}%")
+            if users 
+                return users
+            else 
+                User.all 
+            end 
+        else 
+            User.all
+        end 
+    end  
     
     #find a user in the database 
     def self.find_by_credentials(email, password)

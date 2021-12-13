@@ -9,6 +9,7 @@ import ChannelForm from './../components/home/sidebar/channels/channel_form'
 import EditChannelForm from "../components/home/sidebar/channels/edit_channel_form.jsx";
 import AddChannelMembers from "../components/home/sidebar/channels/add_channel_members.jsx";
 import ShowChannel from "../components/home/sidebar/channels/show_channel.jsx";
+import ChannelFormContainer from "../components/home/sidebar/channels/channel_form_container"
 
 
 class ChatRoom extends React.Component {
@@ -236,10 +237,19 @@ class ChatRoom extends React.Component {
         
 
         {this.state.displayForm && !this.state.displayEditForm ? 
-                <div>
-                    <ChannelForm memberIds={this.state.memberIds} createChannelMember={this.props.createChannelMember} channels={this.props.channels} users={this.props.users} currentView = {this.props.currentView} createChannel={this.props.createChannel} fetchChannel={this.props.fetchChannel}/>
+                <div className="modal-background">
+                    <ChannelFormContainer 
+                    memberIds={this.state.memberIds} 
+                    createChannelMember={this.props.createChannelMember} 
+                    channels={this.props.channels} 
+                    users={this.props.users} 
+                    currentView = {this.props.currentView} 
+                    createChannel={this.props.createChannel} 
+                    fetchChannel={this.props.fetchChannel}
+                    />
                     {this.state.displayForm = false}
                 </div>
+                
                     
                 : null}
         {/* <button onClick={this.handleClick.bind(this)}>New Channel</button> */}
@@ -248,17 +258,23 @@ class ChatRoom extends React.Component {
              (Object.values(this.props.channelMembers).filter(channelMember =>
               channelMember.memberId === this.props.currentUser && 
               channelMember.channelId === this.props.currentView)[0]).creator ? 
-                <div>
+                <div className="modal-background">
                     <EditChannelForm channel={this.props.channels[this.props.currentView]} 
                     currentUser={this.props.currentUser}
                     updateChannel={this.props.updateChannel} 
+                    fetchCurrentUser={this.props.fetchCurrentUser}
                     deleteChannel={this.props.deleteChannel}/>
                     {this.state.displayEditForm = false}
                 </div>
                     
-                : <div><ShowChannel 
+                : <div className="modal-background"><ShowChannel 
                     channel={this.props.channels[this.props.currentView]} 
                     currentUser={this.props.currentUser}
+                    currentView={this.props.currentView}
+                    users={Object.values(this.props.users)}
+                    channelMembers={Object.values(this.props.channelMembers)}
+                    leaveChannel={this.props.leaveChannel}
+                    fetchCurrentUser={this.props.fetchCurrentUser}
                 /></div>
                 : null}
                {this.state.displayEditForm = false}
