@@ -13,11 +13,13 @@ class ChannelForm extends React.Component {
             submittedMessage: false,
             channelMembers: false,
             filters: [],
+            names: []
         }
 
         this.clickAddPeople = React.createRef();
         this.inputField = React.createRef();
         this.modalDisappear = React.createRef();
+        this.timerId = 0; 
         // this.showUsers = this.showUsers.bind(this)
         // this.addPerson = this.addPerson.bind(this)
     }
@@ -38,7 +40,7 @@ class ChannelForm extends React.Component {
         // if (this.state.memberIds.length > 2) {
         //     
         this.setState({submittedMessage: true})
-        this.timerId = 0; 
+        
        
         // } 
     
@@ -131,6 +133,8 @@ class ChannelForm extends React.Component {
                 <label>Name</label>
                     <input className="name-input" type="text" onChange={this.update('channelName')} />
                 </div>
+
+                <div className="channel-errors">{this.props.errors}</div>
                 
                 <div className="description-box">
                 <label>Description (optional)</label>

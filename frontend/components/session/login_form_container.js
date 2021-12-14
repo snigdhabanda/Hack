@@ -14,7 +14,8 @@ const mapStateToProps = (state) => ({
     formInstructions: "Sign in to Dinner Party",
     link: <Link to="/starthere">Sign Up Instead</Link>,
     channelId: state.currentView.channelId,
-    currentUser: state.session.id 
+    currentUser: state.session.id,
+    errors: state.errors.session 
 })
 
 const mapDispatchToProps = (dispatch) => ({

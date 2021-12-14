@@ -15,7 +15,8 @@ const mapStateToProps = (state) => ({
     formInstructions: "First, enter your email",
     link: <Link to="/login">Already using Hack? Login Instead</Link>,
     channelId: state.currentView.channelId,
-    currentUser: state.session.id 
+    currentUser: state.session.id,
+    errors: state.errors.session
 })
 
 const mapDispatchToProps = (dispatch) => ({

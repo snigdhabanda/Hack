@@ -1,6 +1,6 @@
 import { RECEIVE_CHANNEL, DELETE_CHANNEL } from "../actions/channel_actions"
 import { REMOVE_CHANNEL_MEMBER } from "../actions/channel_member_actions"
-const defaultState = {dmId: null, channelId: 120}
+const defaultState = {dmId: null, channelId: 130}
 
 const ViewReducer = (state=defaultState, action) =>{
     const nextState = Object.assign({}, state)

@@ -18,7 +18,8 @@
         .logo{
             margin: auto; 
             margin-left: 0px;
-            margin-right: 0px; 
+            margin-right: 5px; 
+           
             width: 30%;
             height: auto; 
         }
@@ -155,6 +156,16 @@
         text-align: center;
         margin-top: 20px; 
         color: #36C5F0; 
+    }
+
+    .session-errors{
+        text-align: center;
+        font-family: 'Source Sans Pro', sans-serif;
+        color: red; 
+        margin-top: 15px; 
+        font-size: 16px; 
+
+
     }
 }
 

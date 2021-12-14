@@ -14,7 +14,8 @@ const mapStateToProps = (state) => ({
     messages: state.entities.messages,
     users: state.entities.users,
     dynamicView: state.currentView,
-    channelMembers: state.entities.channelMembers
+    channelMembers: state.entities.channelMembers,
+    errors: state.errors.channels
     
 })
 

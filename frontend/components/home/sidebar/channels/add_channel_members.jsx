@@ -8,7 +8,6 @@ class AddChannelMembers extends React.Component {
     }
 
     componentDidMount(){
-        console.log('mounting')
         this.props.memberIds.push(this.props.currentUser)
         let uniqueIds = [...new Set(this.props.memberIds)];
         console.log(uniqueIds)

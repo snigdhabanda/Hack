@@ -39,7 +39,6 @@ class EditChannelForm extends React.Component {
 
 
     update(field) {
-        console.log(field)
         return e =>
           this.setState({ [field]: e.currentTarget.value });
     }
@@ -55,6 +54,7 @@ class EditChannelForm extends React.Component {
     }
     
     render() {
+        console.log("rendering")
         const {channel, channelMembers, currentUser} = this.props
         return (
             <form ref={this.modalDisappear} className="edit-channel-form" onSubmit={this.handleSubmit.bind(this)} >
@@ -65,6 +65,8 @@ class EditChannelForm extends React.Component {
                 <label>Rename this Channel</label>
                     <input className="name-input" type="text" value={this.state.name} onChange={this.update('name')} />
                 </div>
+
+                <div className="channel-errors">{this.props.errors}</div>
                 
                 <div className="description-box">
                 <label>Edit Description </label>

@@ -20,9 +20,9 @@ export const receiveUsers = (users) => ({
     users
 })
 
-export const receiveErrors = (errs) => ({
+export const receiveErrors = (errors) => ({
     type: RECEIVE_ERRORS,
-    errs 
+    errors
 })
 
 export const signupUser = (user) => dispatch => (

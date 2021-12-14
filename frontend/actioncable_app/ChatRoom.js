@@ -6,11 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHashtag, faSortDown, faPlus, faReply, faTrashAlt, faEdit, faUser} from '@fortawesome/fontawesome-free-solid'
 import Thread from './Thread'
 import ChannelForm from './../components/home/sidebar/channels/channel_form'
-import EditChannelForm from "../components/home/sidebar/channels/edit_channel_form.jsx";
 import AddChannelMembers from "../components/home/sidebar/channels/add_channel_members.jsx";
 import ShowChannel from "../components/home/sidebar/channels/show_channel.jsx";
 import ChannelFormContainer from "../components/home/sidebar/channels/channel_form_container"
-
+import DmFormContainer from "../components/home/sidebar/dm_form_container"
+import EditChannelFormContainer from "../components/home/sidebar/channels/edit_channel_form_container"
 
 class ChatRoom extends React.Component {
   constructor(props) {
@@ -20,7 +20,8 @@ class ChatRoom extends React.Component {
       updatingMessage: false, 
       replying: false, 
       displayForm: false, 
-      displayEditForm: false, 
+      displayEditForm: false,
+      displayDmForm: false, 
       submittingMessage: 
       false, memberIds: []};
     this.bottom = React.createRef();
@@ -140,11 +141,22 @@ class ChatRoom extends React.Component {
 
   }
 
+  handleDm(e){
+    e.preventDefault()
+    if (!this.state.displayDmForm) {this.setState({displayDmForm: true})}
+  }
+
   editFormAppears(e){
     e.preventDefault()
     this.setState({displayEditForm: true})
 
   }
+
+  handleDelete(channelId){
+    this.props.deleteChannel(channelId).then(() => this.props.fetchCurrentUser(this.props.currentUser))
+    //need to close modal
+    
+}
   
   render() {
     if (this.channelQueue.length === 0 || this.channelQueue[this.channelQueue.length - 1] !== this.props.currentView){
@@ -162,7 +174,9 @@ class ChatRoom extends React.Component {
       return (
         <li className="message-box" key={message.id}>
           <div className="flex-box-img-content">
-            {this.props.users[message.authorId].imageUrl !== "test" ? 
+            {this.props.users[message.authorId].imageUrl !== "test" && 
+            this.props.users[message.authorId].imageUrl
+            ? 
           <img className="author-icon" src={`${this.props.users[message.authorId].imageUrl}`} />
           : ""
         }
@@ -207,7 +221,6 @@ class ChatRoom extends React.Component {
     return (
       <div className="channels-messages">
         <div className="channel-title">
-            <div className="channel-arrow-container"><FontAwesomeIcon className="channel-arrow" icon={faSortDown} /> </div>
             Channels       
            <FontAwesomeIcon onClick={this.handleClick.bind(this)} className="channel-plus" icon={faPlus} />
         </div>
@@ -223,12 +236,22 @@ class ChatRoom extends React.Component {
         </ul>
         
         
+        
+        <div className="dm-title">Direct Messages
+        <FontAwesomeIcon onClick={this.handleDm.bind(this)} className="channel-plus" icon={faPlus} />
+        </div>
         <ul className="dms-list">
-        <div className="dm-title">Direct Messages</div>
         {Object.values(this.props.channels).filter(channel => channel.dm).map((channel) =>(
-              <li className="dm" tabindex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
+              <div className="holds-dm-name" tabindex={`${channel.id}`}>
+              <li className="dm-message" onClick={this.props.fetchChannel.bind(this, channel.id)}>
                 {channel.name}
+                {/* {channel.name.split(", ").includes(this.props.users[this.props.currentUser].displayName.toLowerCase()) ?
+                channel.name.split(", ").slice(channel.name.split(", ").indexOf(this.props.users[this.props.currentUser].displayName), 1): channel.name}
+                 */}
               </li>
+              <div className="dm-x-hover" onClick={this.handleDelete.bind(this, channel.id)}>X</div>
+              
+              </div>
             
           ))}
           
@@ -259,11 +282,15 @@ class ChatRoom extends React.Component {
               channelMember.memberId === this.props.currentUser && 
               channelMember.channelId === this.props.currentView)[0]).creator ? 
                 <div className="modal-background">
-                    <EditChannelForm channel={this.props.channels[this.props.currentView]} 
+                    <EditChannelFormContainer
+                    
+                    channel={this.props.channels[this.props.currentView]} 
                     currentUser={this.props.currentUser}
                     updateChannel={this.props.updateChannel} 
                     fetchCurrentUser={this.props.fetchCurrentUser}
-                    deleteChannel={this.props.deleteChannel}/>
+                    errors={this.props.errors}
+                    deleteChannel={this.props.deleteChannel}
+                    />
                     {this.state.displayEditForm = false}
                 </div>
                     
@@ -285,6 +312,21 @@ class ChatRoom extends React.Component {
                 </div> : ""
                 
         }
+
+          {(this.state.displayDmForm && !this.state.DisplayEditForm && !this.state.displayForm) ? 
+            <div className="modal-background"><DmFormContainer
+                    memberIds={this.state.memberIds} 
+                    createChannelMember={this.props.createChannelMember} 
+                    channels={this.props.channels} 
+                    users={this.props.users} 
+                    currentView = {this.props.currentView} 
+                    createChannel={this.props.createChannel} 
+                    fetchChannel={this.props.fetchChannel}
+            />
+            {this.state.displayDmForm = false}
+            </div>: ""
+          } 
+          
              
         
         <div className="messages-and-threads">

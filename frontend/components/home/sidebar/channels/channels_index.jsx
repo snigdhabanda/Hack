@@ -35,14 +35,15 @@ class ChannelsIndex extends React.Component{
     
     render(){
 
-        const { leaveChannel, updateChannel, deleteChannel, channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users, fetchCurrentUser} = this.props
+        const { errors, leaveChannel, updateChannel, deleteChannel, channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users, fetchCurrentUser} = this.props
 
         return(
             <div className="chat-channels-and-messages">
                 {Object.keys(channels).length > 0 ? 
                 <div>
                     {currentView ?
-                        <ChatRoom channelMembers={channelMembers} 
+                        <ChatRoom 
+                        channelMembers={channelMembers} 
                         leaveChannel={leaveChannel}
                         fetchCurrentUser={fetchCurrentUser} 
                         dynamicView={dynamicView} 
@@ -53,8 +54,6 @@ class ChannelsIndex extends React.Component{
                         fetchChannel={fetchChannel} 
                         currentUser={currentUser} 
                         currentView={currentView} 
-                        updateChannel={updateChannel}
-                        deleteChannel={deleteChannel}
                         messages = {Object.values(messages)} users = {users} channels={channels}/>
                         : ""}      
                 </div>

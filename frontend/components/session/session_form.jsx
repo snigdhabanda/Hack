@@ -43,8 +43,7 @@ class SessionForm extends React.Component {
 
     handleSubmit(e){
         e.preventDefault()
-        if (this.props.formType === "Sign Up"){
-            console.log("hello")
+        if (this.props.formType === "Sign Up" && this.state.displayName.length > 0){
             this.state.imageUrl = this.lettersHash[this.state.displayName[0].toLowerCase()]
         }
         this.props.processForm(this.state)
@@ -55,7 +54,6 @@ class SessionForm extends React.Component {
     }
 
     render() {
-        console.log(this.state)
         let signup; 
         if (this.props.formType === "Sign Up") signup = true; 
         else signup = false; 
@@ -89,6 +87,7 @@ class SessionForm extends React.Component {
                 {/* <button type="submit" onClick={this.handleSubmit('demo')}>Login As A Demo User</button> */}
                 
                 {this.props.link}
+                <div className="session-errors">{this.props.errors}</div>
                 </div>
             </form>
         )

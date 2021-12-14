@@ -2,14 +2,15 @@ import {connect} from 'react-redux'
 import ChannelForm from './channel_form'
 import { fetchFilteredUsers } from '../../../../actions/user_actions'
 
-const mapStateToProps = ({entities: {filters, channelMembers, users}}, ownProps) => ({
+const mapStateToProps = ({entities: {filters, channelMembers, users}, errors}, ownProps) => ({
     // memberId: state.session.id,
     users: Object.values(users),
     currentView: ownProps.currentView,
     channels: ownProps.channels,
     memberIds: ownProps.memberIds,
     filteredUsers: Object.values(filters),
-    channelMembers: Object.values(channelMembers)
+    channelMembers: Object.values(channelMembers),
+    errors: errors.channels 
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
