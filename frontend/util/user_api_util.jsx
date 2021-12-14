@@ -7,6 +7,14 @@ export const fetchCurrentUser = (userId) => (
     })
 )
 
+export const updateUser = (user) => (
+    $.ajax({
+        method: "PATCH",
+        url: `/api/users/${user.id}`,
+        data: snakeize({user})
+    })
+)
+
 export const fetchFilteredUsers = (search) => (
     $.ajax({
         method: "GET",

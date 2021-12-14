@@ -10,6 +10,7 @@ class AddChannelMembers extends React.Component {
     componentDidMount(){
         this.props.memberIds.push(this.props.currentUser)
         let uniqueIds = [...new Set(this.props.memberIds)];
+        let channelMembers = [];
         console.log(uniqueIds)
         uniqueIds.forEach((id, idx) => {
             let channelMember = {
@@ -17,7 +18,6 @@ class AddChannelMembers extends React.Component {
                 memberId: id,
                 creator: false 
             }
-            uniqueIds.pop()
             if (id === this.props.currentUser) 
             {channelMember.creator = true}
             console.log("creating")
@@ -30,6 +30,7 @@ class AddChannelMembers extends React.Component {
 
 
     render(){
+        console.log("I rendered")
         return (
             <div className="adding-channel-members"></div>
         )

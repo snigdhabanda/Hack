@@ -29,9 +29,7 @@ html, body {
     color: white; 
     position: absolute; 
 
-    img .profile-component{
-         
-    }
+    
    
 
 
@@ -847,6 +845,140 @@ html, body {
 .dm-list{
     margin-top: 50px; 
 }
+
+.profile-component{
+    background: white;
+    width: 60px; 
+    position: absolute; 
+    left: 90%; 
+
+}
+
+.profile-component:hover{
+    cursor: pointer; 
+}
+
+
+
+.profile-dropdown{
+    position: absolute; 
+    display: flex; 
+    flex-direction: column; 
+    border: 0.5px solid gray;
+    left: 90%; 
+    top: 100%; 
+    z-index: 30; 
+    color: black; 
+    border-radius: 4px; 
+    font-family: 'Lato', sans-serif; 
+
+
+    .logout{
+        border-bottom: 0.5px solid gray;
+        padding: 5px 3px 5px 3px;
+         background-color: rgb(235, 235, 235);
+
+
+    }
+
+    .logout:hover{
+        cursor: pointer; 
+        background-color: white;  
+
+    }
+
+    .edit-profile{
+        padding: 5px 9px 5px 3px;
+        background-color: rgb(235, 235, 235);
+    }
+
+    .edit-profile:hover{
+        cursor: pointer;
+        background-color: white;  
+    }
+
+    
+    
+}
+
+.profile-form{
+    display: block; 
+    border: 1px solid black;
+    position: absolute; 
+    height: 300px; 
+    width: 220px; 
+    left: 500px; 
+    top: 120px; 
+    border-radius: 4px; 
+    z-index: 20; 
+    color: black; 
+    padding: 15px 20px 20px 30px; 
+    background-color: rgb(238, 234, 234);
+    font-family: 'Lato', sans-serif; 
+
+    label {
+        margin-bottom: 10px; 
+        width: 100px; 
+        height: 10px; 
+        display: block; 
+    }
+
+    h2{
+        font-size: 30px; 
+        font-weight: bolder; 
+        margin-bottom: 20px; 
+        margin-top: 20px; 
+         
+    }
+
+    .name-input{
+        outline: none; 
+        border: 1px solid black; 
+        border-radius: 4px; 
+        width: 200px; 
+        height: 20px;
+        padding-left: 12px; 
+        margin-bottom: 15px; 
+    }
+    .name-box{
+            display: flex;
+            flex-direction: column; 
+            height: max-content; 
+            margin-bottom: 10px;
+    }
+
+    .update-profile{
+        background: transparent;
+        outline: none; 
+        font-size: 15px; 
+        font-family: 'Lato', sans-serif;
+        background-color: #007A5A;
+        border: 1px solid #007A5A; 
+        color: white;
+        font-weight: bold; 
+        border-radius: 4px; 
+        padding-top: 5px;
+        padding-bottom: 5px; 
+        width: 120px; 
+        margin-left: 350px;
+        position: absolute; 
+        left: -215px; 
+        top: 280px; 
+    }
+
+    .close-profile-modal{
+        position: absolute; 
+        top: 20px;
+        left: 250px; 
+    }
+         
+             
+}
+
+
+
+
+
 
 
 

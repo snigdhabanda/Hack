@@ -53,6 +53,11 @@ class SessionForm extends React.Component {
         return (e) => (this.setState({[field]: e.currentTarget.value}))
     }
 
+    loginDemo(e){
+        e.preventDefault()
+        this.props.loginUser({email: "demouser@yahoo.com", password: "password"}).then(this.props.history.push("/home"))
+    }
+
     render() {
         let signup; 
         if (this.props.formType === "Sign Up") signup = true; 
@@ -85,7 +90,7 @@ class SessionForm extends React.Component {
                 
                 <button className="session-form-button" type="submit" onClick={this.handleSubmit}>Continue</button>
                 {/* <button type="submit" onClick={this.handleSubmit('demo')}>Login As A Demo User</button> */}
-                
+                <button className="session-form-button demo-user" type="button" onClick={this.loginDemo.bind(this)}>Demo</button>
                 {this.props.link}
                 <div className="session-errors">{this.props.errors}</div>
                 </div>

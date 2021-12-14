@@ -81,9 +81,9 @@ class ChatRoom extends React.Component {
     
   }
 
-  componentDidMount(){
-    this.props.fetchCurrentUser()
-  }
+  // componentDidMount(){
+  //   this.props.fetchCurrentUser()
+  // }
 
   
   

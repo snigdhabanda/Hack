@@ -121,8 +121,6 @@ class ChannelForm extends React.Component {
     }
     
     render() {
-        console.log(this.props)
-        console.log(this.state.filters)
         return (
             <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>Create a channel</h2>

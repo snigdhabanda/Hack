@@ -21,8 +21,8 @@ class Api::UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save 
             login!(@user)
-            @channel_member = ChannelMember.create({channel_id: 120, member_id: @user.id, creator: false})
-            @channel_member.save!
+            # @channel_member = ChannelMember.create({channel_id: 120, member_id: @user.id, creator: false})
+            # @channel_member.save!
             @channel_member2 = ChannelMember.create({channel_id: 130, member_id: @user.id, creator: false})
             @channel_member2.save!
             @channels = Channel.get_channels_by_user(@user)
@@ -30,6 +30,16 @@ class Api::UsersController < ApplicationController
         else 
             render json: @user.errors.full_messages, status: 422 
         end 
+    end 
+
+    def update 
+        @user = User.find(params[:id])
+        if @user.update(user_params)
+            render "api/users/edit" 
+        else 
+            render json: ["That email has already been taken"], status: 400
+        end 
+
     end 
 
     #require a user to enter following params

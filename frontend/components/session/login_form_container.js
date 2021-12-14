@@ -4,6 +4,8 @@ import SessionForm from './session_form'
 import React from 'react'
 import { loginUser } from '../../actions/session/session_actions'
 import { createChannelMember } from '../../actions/channel_member_actions'
+import { withRouter } from "react-router-dom";
+
 
 const mapStateToProps = (state) => ({
     user: {
@@ -20,7 +22,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     processForm: (user) => dispatch(loginUser(user)),
+    loginUser: (user) => dispatch(loginUser(user))
     
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SessionForm)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SessionForm))
