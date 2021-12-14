@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 
 const Render = ({currentUser}) => {
    const redirect = () => (
-        <Redirect to="/starthere" />
+        <Redirect to="/welcome" />
        
    )
 

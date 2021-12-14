@@ -32,11 +32,15 @@ html, body {
     
    
 
-
-    .dinner-party{
-        background-color: #3F0E40; 
+    .sidebar-icon{
+        display: flex;
         border-bottom: 1px solid rgb(82,38,83);
         border-top: 1px solid rgb(82,38,83);
+        align-items: center; 
+    
+    .dinner-party{
+        background-color: #3F0E40; 
+        margin-top: 10px; 
         height: 50px;
         padding: 10px 16px 10px 16px; 
         font-size: 18px;
@@ -44,6 +48,15 @@ html, body {
         font-weight: bold; 
         padding: 10px 10px 10px 16px; 
         box-sizing: border-box;
+    }
+
+    .wine-glass{
+        margin: 10px 10px 10px 15px; 
+        width: auto;
+        height: 30px; 
+        border-radius: 4px; 
+        background: black; 
+    }
     }
 }
 
@@ -246,12 +259,14 @@ html, body {
                     max-width: content; 
 
                     display: flex; 
+                    align-items: flex-start; 
                     
                     .author-icon{
                         padding-left: 0px; 
-                        width: 8%;
-                        height: auto;  
-                        border-radius: 4px;  
+                        width: 5%;
+                        height: 5%;  
+                        border-radius: 4px; 
+                        margin-top: 5px;  
                     }
                     
                     .holds-message-properties{
@@ -299,9 +314,9 @@ html, body {
                 
             }
                 
-                // .edit-delete-reply{
-                //     display: none; 
-                // }
+                .edit-delete-reply{
+                    display: none; 
+                }
 
                 .flex-box-img-content:hover + .edit-delete-reply{
                     width: max-content; 
@@ -313,7 +328,9 @@ html, body {
                     // box-shadow: 0px 2px 1px red;
                     position: absolute; 
                     left: 250px;   
-                    top: 0px;                    
+                    top: 0px; 
+                    margin-left: 100px; 
+                                      
 
                     .update-message, .delete-message, .reply-message{
                         border: none; 
@@ -321,13 +338,33 @@ html, body {
                         outline: none; 
                         opacity: .5; 
                     }
+
+                    .update-message:hover, .delete-message:hover, .reply-message:hover{
+                        display: block; 
+                        cursor: pointer; 
+                        
+                    }
     
                     
                 }
 
-                .edit-delete-reply{
-                    display: none; 
+                .edit-delete-reply:hover{
+                    
+                    width: max-content; 
+                    // padding: 3px 2px 3px 2px; 
+                    border: 1px solid rgb(189, 180, 180); 
+                    border-radius: 3px; 
+                    display: flex; 
+                    align-items: center; 
+                    // box-shadow: 0px 2px 1px red;
+                    position: absolute; 
+                    left: 250px;   
+                    top: 0px; 
+                    margin-left: 100px; 
+                    cursor: pointer; 
                 }
+
+                
                 
 
  
@@ -345,7 +382,7 @@ html, body {
             height: 100%; 
             width: 50%; 
             position: absolute; 
-            left: 800px; 
+            left: 75%; 
             border-left: 1px rgb(189, 180, 180);
             z-index: 4; 
 
@@ -382,6 +419,20 @@ html, body {
                     border: none; 
                 }
 
+                .thread-list{
+            
+                    display: flex;
+                    position: relative; 
+                    flex-direction: column-reverse;
+                    width: 72%;
+                    height: 98%;
+                    color: black; 
+                    overflow-x: hidden;
+                    overflow-y: auto; 
+                    position: relative; 
+                    z-index: 3; 
+                }
+
                 
             }
 
@@ -389,15 +440,16 @@ html, body {
 
             .reply-message{
                 position: fixed;
-                top: 530px; 
-                left: 1000px; 
+                top: 77%; 
+                left: 72%; 
                 display: flex; 
                 border-radius: 10px;
                 margin: 20px;  
+                width: 25%;
                 
                     form .message-form{
                         z-index: 8; 
-                        width: 150%; 
+                        width: 180%; 
                         line-height: 50px; 
                         border-radius: 4px; 
                         border: 1px solid black; 
@@ -418,15 +470,16 @@ html, body {
                 
                     .reply-message-button{
                         position: fixed; 
-                        top: 620px; 
+                        top: 89%; 
                         height: 25px; 
                         width: 50px; 
-                        left: 1210px; 
+                        left: 95%; 
                         border: none; 
                         background: transparent; 
                         background-color: #007A5A;
                         border-radius: 4px; 
                         box-shadow: 0px 2px 1px gray;
+                        z-index: 15; 
 
                 
                     }
@@ -440,15 +493,17 @@ html, body {
     
     .send-message{
         position: fixed;
-        top: 530px; 
+        top: 77%; 
         left: 220px; 
         display: flex; 
         border-radius: 10px;
         margin: 20px;  
+        width: 90%;
+
         
     
         form .message-form{
-            width: 480%; 
+            width: 60%; 
             line-height: 50px; 
             border-radius: 4px; 
             border: 1px solid black; 
@@ -469,15 +524,19 @@ html, body {
     
         .message-button{
             position: fixed; 
-            top: 620px; 
+            top: 89%; 
             height: 25px; 
             width: 50px; 
-            left: 957px; 
+            left: 67.5%; 
             border: none; 
             background: transparent; 
             background-color: #007A5A;
             border-radius: 4px; 
             box-shadow: 0px 2px 1px gray;
+        }
+
+        .message-button:hover{
+            cursor: pointer; 
         }
     }
 
@@ -973,6 +1032,56 @@ html, body {
     }
          
              
+}
+
+.message-box{
+    list-style: none; 
+    padding-left: 20px; 
+    margin-bottom: 20px; 
+.thread-flex-box{
+    display: flex; 
+    max-width: content; 
+    list-style: none; 
+    align-items: flex-start; 
+
+    .author-icon{
+        padding-left: 0px; 
+        width: 10%;
+        height: 10%; 
+        border-radius: 4px;  
+        margin-top: 5px; 
+    }
+    
+    .holds-message-properties{
+        padding-left: 20px; 
+
+    .message-author{
+        font-size: 15px;
+        font-weight: 700; 
+        color: #1D1C1D; 
+        margin-bottom: 8px; 
+        margin-top: 5px; 
+        display: flex; 
+        align-items: center;
+        
+        .message-time{
+            font-size: 12px;
+            font-weight: normal; 
+            padding-left: 10px;
+            
+        }
+    }
+
+    .message-content{
+        font-size: 15px;
+        font-weight: 300;
+        color: #1D1C1D;
+        cursor: text; 
+        overflow-wrap: break-word;
+    
+    }
+}
+}
 }
 
 

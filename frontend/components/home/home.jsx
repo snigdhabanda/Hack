@@ -82,7 +82,10 @@ class Home extends React.Component{
             
             </nav>
             <nav className="sidebar-nav" >
+               <div className="sidebar-icon">
                <div className="dinner-party">Dinner Party</div>
+               <img className="wine-glass" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/wine_glass.png?raw=true"></img>
+               </div>
                <UsersIndexContainer /> 
                <ChannelsIndexContainer />  
                

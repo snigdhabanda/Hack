@@ -24,7 +24,7 @@ class ReplyMessageForm extends React.Component {
   render() {
     return (
     <div className="reply-message">
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form className="reply-message" onSubmit={this.handleSubmit.bind(this)}>
           <input
             className="message-form"
             type="text"
