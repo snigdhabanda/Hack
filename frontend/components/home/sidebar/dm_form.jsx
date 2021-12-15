@@ -31,7 +31,6 @@ class DmForm extends React.Component {
         let currentUsername = (this.props.users.filter(user => user.id === this.props.currentUser)[0]).displayName
         this.state.names.map(user => onlyNames.push(user.displayName))
         onlyNames.push(currentUsername)
-        console.log(onlyNames)
         const channel = {
             name: onlyNames.join(", "), 
             dm: true
@@ -105,8 +104,7 @@ class DmForm extends React.Component {
     }
     
     render() {
-        console.log(this.state.names)
-        console.log(this.props.memberIds)
+        
         return (
             <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>Direct message</h2>

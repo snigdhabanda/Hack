@@ -86,13 +86,13 @@ class ChatRoom extends React.Component {
   // }
 
   rerenderParent = () => {
-    if (this.state.displayForm){
+    
       this.setState({displayForm: false})
-    }
-    if (this.state.displayEditForm){
+    
+    
       
       this.setState({displayEditForm: false})
-    }
+    
   }
   
   componentDidUpdate(prevProps){
@@ -120,10 +120,7 @@ class ChatRoom extends React.Component {
     this.subscribeToChannel()
   }
 
-  // getTime(messageId){
-  //   console.log("gettingtime")
-  //   getTime(messageId);
-  // }
+  
 
   updateMessage(message){
     this.setState({updatingMessage: true})
@@ -156,7 +153,10 @@ class ChatRoom extends React.Component {
 
   editFormAppears(e){
     e.preventDefault()
-    this.setState({displayEditForm: true})
+    if(!this.props.channels[this.props.currentView].dm){
+      this.setState({displayEditForm: true})
+    }
+    
 
   }
 
@@ -182,14 +182,14 @@ class ChatRoom extends React.Component {
       return (
         <li className="message-box" key={message.id}>
           <div className="flex-box-img-content">
-            {this.props.users[message.authorId].imageUrl !== "test" && 
+            {this.props.users && this.props.users[message.authorId] && this.props.users[message.authorId].imageUrl !== "test" && 
             this.props.users[message.authorId].imageUrl
             ? 
           <img className="author-icon" src={`${this.props.users[message.authorId].imageUrl}`} />
           : ""
         }
             <div className="holds-message-properties">
-              <div className="message-author">{this.props.users[message.authorId].displayName}
+              <div className="message-author">{this.props.users && this.props.users[message.authorId] ? this.props.users[message.authorId].displayName : ""}
                 <p className="message-time">{timestamp}</p>
               </div>
               <p className="message-content">{message.body}</p>
@@ -280,7 +280,7 @@ class ChatRoom extends React.Component {
                     displayForm={this.state.displayForm}
                     rerenderParent={this.rerenderParent}
                     />
-                    
+                    {this.state.displayForm = false}
                 </div>
                 
                     
@@ -316,9 +316,15 @@ class ChatRoom extends React.Component {
                     rerenderParent={this.rerenderParent}
                     displayEditForm={this.state.displayEditForm}
                 /></div>
+                
                 : null}
+                {this.state.displayEditForm = false}
         {this.state.submittingMessage ? 
-                <div><AddChannelMembers createChannelMember = {this.props.createChannelMember} currentUser = {this.props.currentUser} currentView={this.props.currentView} memberIds={this.state.memberIds} />
+                <div><AddChannelMembers createChannelMember = 
+                {this.props.createChannelMember} 
+                currentUser = {this.props.currentUser} 
+                currentView={this.props.currentView} 
+                memberIds={this.state.memberIds} />
                 {this.state.submittingMessage = false}
                 {this.state.memberIds = []}
                 </div> : ""

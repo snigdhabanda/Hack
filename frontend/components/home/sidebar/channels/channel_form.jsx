@@ -53,26 +53,6 @@ class ChannelForm extends React.Component {
         }
     }
 
-    // componentDidUpdate(prevProps){
-    //     console.log(Object.values(prevProps.channels)[Object.values(prevProps.channels).length - 1].id)
-    //         this.state.memberIds.forEach((id, idx) => {
-    //         console.log(this.props.dynamicView)
-    //         let channelMember = {
-    //             channelId: this.props.dynamicView.channelId,
-    //             channelMemberId: id,
-    //             creator: false 
-    //         }
-    //         if (id === this.props.currentUser) {channelMember.creator = true}
-    //         this.props.createChannelMember(channelMember)
-    //         this.state = {
-    //             channelName: "",
-    //             channelDescription: "",
-    //             memberIds: [],
-    //             showUsers: false
-    //         }
-    //     })
-    // }
-
     
     debounce(){
         let search = this.state.search
@@ -94,26 +74,15 @@ class ChannelForm extends React.Component {
         () => {this.debounce()});
     }
 
-    // showUsers(){
-    //     var peopleDiv = this.clickAddPeople.current
-    //     console.log(peopleDiv.style)
-    //     if (peopleDiv.style.display === "none") {
-    //         console.log("working")
-    //         peopleDiv.style.display = "block";
-    //         this.setState({showUsers: true})
-    //     } 
-
-    // }
+    
 
     addPerson(user){
-        console.log(this.props.memberIds, user)
         if (this.props.memberIds.includes(user.id)){
             this.props.memberIds.pop(user.id)
         }
         else{
             this.props.memberIds.push(user.id)
         }
-        console.log(this.props.memberIds)
    
     }
 

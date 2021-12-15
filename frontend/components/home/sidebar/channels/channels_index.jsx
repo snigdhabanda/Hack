@@ -14,22 +14,7 @@ class ChannelsIndex extends React.Component{
     
     componentDidMount(){
         this.props.fetchCurrentUser(this.props.currentUser)
-        //create new channel member associations (enrolling a user into existing channels)
-        // this.props.fetchChannels()
-        // .then(() => {
-        //     let i = 0; 
-        //     while (i < Object.values(this.props.channels).length) {
-        //         console.log(Object.values(this.props.channels)[i])
-        //         let channelMember = {
-        //             channelId: this.props.channels[i].id,
-        //             memberId: this.props.currentUser,
-        //             creator: false 
-        //         }
-        //         this.props.createChannelMember(channelMember)
-        //         i++
-                
-        //     }
-        // })
+       
     }
 
     
@@ -54,6 +39,7 @@ class ChannelsIndex extends React.Component{
                         fetchChannel={fetchChannel} 
                         currentUser={currentUser} 
                         currentView={currentView} 
+                        deleteChannel={deleteChannel}
                         messages = {Object.values(messages)} users = {users} channels={channels}/>
                         : ""}      
                 </div>

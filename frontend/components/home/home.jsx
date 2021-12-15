@@ -69,7 +69,7 @@ class Home extends React.Component{
             }
 
             {this.state.showModal ? 
-            <form className="profile-form modal-background" onSubmit={this.handleSubmit.bind(this)}>
+            <form className="profile-form" onSubmit={this.handleSubmit.bind(this)}>
                <h2>Update Profile</h2>
                <div className="close-profile-modal" onClick={this.closeModal.bind(this)}>X</div>
                 <div className="name-box">

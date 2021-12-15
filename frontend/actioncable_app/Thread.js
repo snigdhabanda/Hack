@@ -25,7 +25,6 @@ class Thread extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    console.log("im in cdu")
     if (prevProps.threadMessages !== this.props.threadMessages){
       this.setState({messages: this.state.messages.concat(this.props.threadMessages)})
     }

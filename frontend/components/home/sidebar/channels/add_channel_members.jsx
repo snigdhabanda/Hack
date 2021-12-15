@@ -19,7 +19,7 @@ class AddChannelMembers extends React.Component {
             }
             if (id === this.props.currentUser) 
             {channelMember.creator = true}
-            // this.props.createChannelMember(channelMember)
+            this.props.createChannelMember(channelMember)
             
         })
     
