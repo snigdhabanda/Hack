@@ -7,7 +7,7 @@ import { loginUser } from '../actions/session/session_actions';
 
 
 const mapStateToProps = (state) => ({
-    signupLink: <Link to="/starthere">Get Started Today</Link>,
+    signupLink: <Link className="get-started" to="/starthere">Get Started Today</Link>,
     demoLink: <Link to="/login">Try a Demo</Link>,
     currentUser: state.session.id
 })

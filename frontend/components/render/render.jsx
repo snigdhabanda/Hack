@@ -14,7 +14,7 @@ const Render = ({currentUser}) => {
         </div>
    )
 
-   return currentUser ? redirect() : displayHome()
+   return currentUser ? displayHome() : redirect()
     
 }
 

@@ -24,7 +24,7 @@ class Welcome extends React.Component {
 
     loginDemo(e){
         e.preventDefault()
-        this.props.loginUser({email: "demouser@gmail.com", password: "password"}).then(this.props.history.push("/home"))
+        this.props.loginUser({email: "demouser@gmail.com", password: "password"}).then(() => this.props.history.push("/home"))
     }
 
     render() {
@@ -35,10 +35,21 @@ class Welcome extends React.Component {
         return (
             <div className="welcome-page">
                 <div className="header-nav-welcome">
+                            <div className="header-and-logo">
                             <img className="logo-welcome" src="https://github.com/snigdhabanda/Hack/blob/actioncables/app/assets/images/slack-logo-dark-purple.png?raw=true" />
                             <h1 className="session-form-title-welcome">hack</h1>
+                            </div>
+
                             <div className="signup-link">
+                               
+                                <a className="github-welcome" href="https://github.com/snigdhabanda/Hack" >
+                                    <img className="github-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/github.png?raw=true"></img>
+                                </a>
+                                <a className="linkedin-welcome" href="https://www.linkedin.com/in/snigdhabanda0/">
+                                    <img className="linkedin-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/linkedin-transparent.png?raw=true" ></img>
+                                </a>
                                 {this.props.signupLink}
+                            
                             </div>
                 </div>
                 <div className="ad">
