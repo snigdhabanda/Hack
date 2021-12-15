@@ -42,16 +42,20 @@ class SessionForm extends React.Component {
     }
 
     handleSubmit(e){
-        
         e.preventDefault()
-        this.state.imageUrl = this.lettersHash[this.state.displayName[0].toLowerCase()]
+        if (this.props.formType === "Sign Up" && this.state.displayName.length > 0){
+            this.state.imageUrl = this.lettersHash[this.state.displayName[0].toLowerCase()]
+        }
         this.props.processForm(this.state)
-            // if (loginType === 'newUser')
-
     }
 
     update(field){
         return (e) => (this.setState({[field]: e.currentTarget.value}))
+    }
+
+    loginDemo(e){
+        e.preventDefault()
+        this.props.loginUser({email: "demouser@gmail.com", password: "password"}).then(() => this.props.history.push("/home"))
     }
 
     render() {
@@ -86,8 +90,9 @@ class SessionForm extends React.Component {
                 
                 <button className="session-form-button" type="submit" onClick={this.handleSubmit}>Continue</button>
                 {/* <button type="submit" onClick={this.handleSubmit('demo')}>Login As A Demo User</button> */}
-                
+                <button className="session-form-button demo-user" type="button" onClick={this.loginDemo.bind(this)}>Demo</button>
                 {this.props.link}
+                <div className="session-errors">{this.props.errors}</div>
                 </div>
             </form>
         )

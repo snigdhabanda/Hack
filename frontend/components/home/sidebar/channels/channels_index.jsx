@@ -13,35 +13,34 @@ class ChannelsIndex extends React.Component{
     }
     
     componentDidMount(){
-        //create new channel member associations (enrolling a user into existing channels)
-        this.props.fetchChannels()
-        // .then(() => {
-        //     let i = 0; 
-        //     while (i < Object.values(this.props.channels).length) {
-        //         console.log(Object.values(this.props.channels)[i])
-        //         let channelMember = {
-        //             channelId: this.props.channels[i].id,
-        //             memberId: this.props.currentUser,
-        //             creator: false 
-        //         }
-        //         this.props.createChannelMember(channelMember)
-        //         i++
-                
-        //     }
-        // })
+        this.props.fetchCurrentUser(this.props.currentUser)
+       
     }
 
     
     render(){
 
-        const {channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users} = this.props
+        const { errors, leaveChannel, updateChannel, deleteChannel, channelMembers, dynamicView, removeMessage, createChannel, createChannelMember, createMessage, channels, currentView, fetchChannel, getTime, currentUser, messages, users, fetchCurrentUser} = this.props
 
         return(
             <div className="chat-channels-and-messages">
                 {Object.keys(channels).length > 0 ? 
                 <div>
                     {currentView ?
-                        <ChatRoom channelMembers={channelMembers} dynamicView={dynamicView} createChannelMember={createChannelMember} deleteMessage = {removeMessage} createChannel={createChannel} createMessage={createMessage} fetchChannel={fetchChannel} currentUser={currentUser} currentView={currentView} messages = {Object.values(messages)} users = {users} channels={channels}/>
+                        <ChatRoom 
+                        channelMembers={channelMembers} 
+                        leaveChannel={leaveChannel}
+                        fetchCurrentUser={fetchCurrentUser} 
+                        dynamicView={dynamicView} 
+                        createChannelMember={createChannelMember} 
+                        deleteMessage = {removeMessage} 
+                        createChannel={createChannel} 
+                        createMessage={createMessage} 
+                        fetchChannel={fetchChannel} 
+                        currentUser={currentUser} 
+                        currentView={currentView} 
+                        deleteChannel={deleteChannel}
+                        messages = {Object.values(messages)} users = {users} channels={channels}/>
                         : ""}      
                 </div>
                 

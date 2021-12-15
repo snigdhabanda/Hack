@@ -1,5 +1,5 @@
 import * as SessionApiUtil from '../../util/session_api_util'
-
+import * as UserApiUtil from "../../util/user_api_util"
 export const RECEIVE_USERS = "RECEIVE_USERS"
 export const RECEIVE_USER = "RECEIVE_USER"
 export const REMOVE_USER = "REMOVE_USER"
@@ -20,9 +20,9 @@ export const receiveUsers = (users) => ({
     users
 })
 
-export const receiveErrors = (errs) => ({
+export const receiveErrors = (errors) => ({
     type: RECEIVE_ERRORS,
-    errs 
+    errors
 })
 
 export const signupUser = (user) => dispatch => (
@@ -49,5 +49,11 @@ export const loginUser = (user) => dispatch => (
 export const logoutUser = () => dispatch => (
     SessionApiUtil.logoutUser().then(
         (user) => dispatch(removeUser(user))
+    )
+)
+
+export const fetchCurrentUser = (userId) => dispatch => (
+    UserApiUtil.fetchCurrentUser(userId).then (
+        (user) => dispatch(receiveUser(user))
     )
 )

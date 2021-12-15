@@ -25,7 +25,6 @@ class Thread extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    console.log("im in cdu")
     if (prevProps.threadMessages !== this.props.threadMessages){
       this.setState({messages: this.state.messages.concat(this.props.threadMessages)})
     }
@@ -47,17 +46,29 @@ class Thread extends React.Component {
         
         return (   
             <li className="message-box" key={message.id}>
+            <div className="thread-flex-box">
+            {this.props.users[message.authorId].imageUrl !== "test" && 
+            this.props.users[message.authorId].imageUrl
+            ? 
+            <img className="author-icon" src={`${this.props.users[message.authorId].imageUrl}`} />
+            : ""
+          }
+              <div className="holds-message-properties">
                 <div className="message-author">{this.props.users[message.authorId].displayName}
                         <p className="message-time">{timestamp}</p>
                 </div>
+              
+
                 <p className="message-content">{message.body}</p>
+                </div>
+                </div>
             </li>)
         }) : ""
         return (
         <div ref={this.closeThread} className="thread-container">
             <div className="thread-name">{`Thread #${this.props.channels[this.props.channelId].name.toLowerCase()}`}</div>
             
-            <div className="message-list" >{messageList}</div>
+            <div className="thread-list" >{messageList}</div>
             <ReplyMessageForm currentUser={this.props.currentUser} parentMessageId={this.props.message.id} channelId={this.props.channelId}/>
             <button className="close-thread" onClick={this.modalDisappears.bind(this)}>X</button>
         </div>

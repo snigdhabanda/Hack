@@ -7,8 +7,10 @@ import { faHashtag, faSortDown, faPlus, faReply, faTrashAlt, faEdit, faUser} fro
 import Thread from './Thread'
 import ChannelForm from './../components/home/sidebar/channels/channel_form'
 import AddChannelMembers from "../components/home/sidebar/channels/add_channel_members.jsx";
-
-
+import ShowChannel from "../components/home/sidebar/channels/show_channel.jsx";
+import ChannelFormContainer from "../components/home/sidebar/channels/channel_form_container"
+import DmFormContainer from "../components/home/sidebar/dm_form_container"
+import EditChannelFormContainer from "../components/home/sidebar/channels/edit_channel_form_container"
 
 class ChatRoom extends React.Component {
   constructor(props) {
@@ -18,6 +20,8 @@ class ChatRoom extends React.Component {
       updatingMessage: false, 
       replying: false, 
       displayForm: false, 
+      displayEditForm: false,
+      displayDmForm: false, 
       submittingMessage: 
       false, memberIds: []};
     this.bottom = React.createRef();
@@ -77,7 +81,19 @@ class ChatRoom extends React.Component {
     
   }
 
-  
+  // componentDidMount(){
+  //   this.props.fetchCurrentUser()
+  // }
+
+  rerenderParent = () => {
+    
+      this.setState({displayForm: false})
+    
+    
+      
+      this.setState({displayEditForm: false})
+    
+  }
   
   componentDidUpdate(prevProps){
     if (prevProps.channels !== this.props.channels){
@@ -104,15 +120,15 @@ class ChatRoom extends React.Component {
     this.subscribeToChannel()
   }
 
-  // getTime(messageId){
-  //   console.log("gettingtime")
-  //   getTime(messageId);
-  // }
+  
 
   updateMessage(message){
     this.setState({updatingMessage: true})
     this.messageToUpdate = message; 
     
+  }
+  showMembers(){
+
   }
 
   deleteMessage(message){
@@ -130,31 +146,50 @@ class ChatRoom extends React.Component {
 
   }
 
-  showMembers(){
-    
+  handleDm(e){
+    e.preventDefault()
+    if (!this.state.displayDmForm) {this.setState({displayDmForm: true})}
   }
+
+  editFormAppears(e){
+    e.preventDefault()
+    if(!this.props.channels[this.props.currentView].dm){
+      this.setState({displayEditForm: true})
+    }
+    
+
+  }
+
+  handleDelete(channelId){
+    this.props.deleteChannel(channelId).then(() => this.props.fetchCurrentUser(this.props.currentUser))
+    //need to close modal
+    
+}
   
   render() {
     if (this.channelQueue.length === 0 || this.channelQueue[this.channelQueue.length - 1] !== this.props.currentView){
       this.channelQueue.push(this.props.currentView)
       this.changeChannel(this.props.currentView)
     }
+
+    
     
     const messageList = this.state.messages.map((message, idx) => {
       let timeStampArray = new Date(`${message.createdAt}`).toLocaleString().split(" ")
       let timestamp = timeStampArray[1].slice(0,timeStampArray[1].length - 3) + " " + timeStampArray[2].toLowerCase()
-      console.log(this.props.users[message.authorId].imageUrl)
       let numReplies = this.props.messages.filter(stateMessage => stateMessage.parentMessageId === message.id).length
       if (!message.parentMessageId){
       return (
         <li className="message-box" key={message.id}>
           <div className="flex-box-img-content">
-            {this.props.users[message.authorId].imageUrl !== "test" ? 
+            {this.props.users && this.props.users[message.authorId] && this.props.users[message.authorId].imageUrl !== "test" && 
+            this.props.users[message.authorId].imageUrl
+            ? 
           <img className="author-icon" src={`${this.props.users[message.authorId].imageUrl}`} />
           : ""
         }
             <div className="holds-message-properties">
-              <div className="message-author">{this.props.users[message.authorId].displayName}
+              <div className="message-author">{this.props.users && this.props.users[message.authorId] ? this.props.users[message.authorId].displayName : ""}
                 <p className="message-time">{timestamp}</p>
               </div>
               <p className="message-content">{message.body}</p>
@@ -194,7 +229,6 @@ class ChatRoom extends React.Component {
     return (
       <div className="channels-messages">
         <div className="channel-title">
-            <div className="channel-arrow-container"><FontAwesomeIcon className="channel-arrow" icon={faSortDown} /> </div>
             Channels       
            <FontAwesomeIcon onClick={this.handleClick.bind(this)} className="channel-plus" icon={faPlus} />
         </div>
@@ -210,12 +244,22 @@ class ChatRoom extends React.Component {
         </ul>
         
         
+        
+        <div className="dm-title">Direct Messages
+        <FontAwesomeIcon onClick={this.handleDm.bind(this)} className="channel-plus" icon={faPlus} />
+        </div>
         <ul className="dms-list">
-        <div className="dm-title">Direct Messages</div>
         {Object.values(this.props.channels).filter(channel => channel.dm).map((channel) =>(
-              <li className="dm" tabindex={`${channel.id}`} onClick={this.props.fetchChannel.bind(this, channel.id)}>
+              <div className="holds-dm-name" tabindex={`${channel.id}`}>
+              <li className="dm-message" onClick={this.props.fetchChannel.bind(this, channel.id)}>
                 {channel.name}
+                {/* {channel.name.split(", ").includes(this.props.users[this.props.currentUser].displayName.toLowerCase()) ?
+                channel.name.split(", ").slice(channel.name.split(", ").indexOf(this.props.users[this.props.currentUser].displayName), 1): channel.name}
+                 */}
               </li>
+              <div className="dm-x-hover" onClick={this.handleDelete.bind(this, channel.id)}>X</div>
+              
+              </div>
             
           ))}
           
@@ -223,29 +267,92 @@ class ChatRoom extends React.Component {
         
         
 
-        {this.state.displayForm ? 
-                <div>
-                    <ChannelForm memberIds={this.state.memberIds} createChannelMember={this.props.createChannelMember} channels={this.props.channels} users={this.props.users} currentView = {this.props.currentView} createChannel={this.props.createChannel} fetchChannel={this.props.fetchChannel}/>
+        {this.state.displayForm && !this.state.displayEditForm ? 
+                <div className="modal-background">
+                    <ChannelFormContainer 
+                    memberIds={this.state.memberIds} 
+                    createChannelMember={this.props.createChannelMember} 
+                    channels={this.props.channels} 
+                    users={this.props.users} 
+                    currentView = {this.props.currentView} 
+                    createChannel={this.props.createChannel} 
+                    fetchChannel={this.props.fetchChannel}
+                    displayForm={this.state.displayForm}
+                    rerenderParent={this.rerenderParent}
+                    />
                     {this.state.displayForm = false}
                 </div>
+                
                     
                 : null}
         {/* <button onClick={this.handleClick.bind(this)}>New Channel</button> */}
 
+        {this.state.displayEditForm && !this.state.displayForm ? 
+             (Object.values(this.props.channelMembers).filter(channelMember =>
+              channelMember.memberId === this.props.currentUser && 
+              channelMember.channelId === this.props.currentView)[0]).creator ? 
+                <div className="modal-background">
+                    <EditChannelFormContainer
+                    
+                    channel={this.props.channels[this.props.currentView]} 
+                    currentUser={this.props.currentUser}
+                    updateChannel={this.props.updateChannel} 
+                    fetchCurrentUser={this.props.fetchCurrentUser}
+                    errors={this.props.errors}
+                    deleteChannel={this.props.deleteChannel}
+                    rerenderParent={this.rerenderParent}
+                    displayEditForm={this.state.displayEditForm}
+                    />
+                </div>
+                    
+                : <div className="modal-background"><ShowChannel 
+                    channel={this.props.channels[this.props.currentView]} 
+                    currentUser={this.props.currentUser}
+                    currentView={this.props.currentView}
+                    users={Object.values(this.props.users)}
+                    channelMembers={Object.values(this.props.channelMembers)}
+                    leaveChannel={this.props.leaveChannel}
+                    fetchCurrentUser={this.props.fetchCurrentUser}
+                    rerenderParent={this.rerenderParent}
+                    displayEditForm={this.state.displayEditForm}
+                /></div>
+                
+                : null}
+                {this.state.displayEditForm = false}
         {this.state.submittingMessage ? 
-                <div><AddChannelMembers createChannelMember = {this.props.createChannelMember} currentUser = {this.props.currentUser} currentView={this.props.currentView} memberIds={this.state.memberIds} />
+                <div><AddChannelMembers createChannelMember = 
+                {this.props.createChannelMember} 
+                currentUser = {this.props.currentUser} 
+                currentView={this.props.currentView} 
+                memberIds={this.state.memberIds} />
                 {this.state.submittingMessage = false}
                 {this.state.memberIds = []}
                 </div> : ""
                 
         }
+
+          {(this.state.displayDmForm && !this.state.DisplayEditForm && !this.state.displayForm) ? 
+            <div className="modal-background"><DmFormContainer
+                    memberIds={this.state.memberIds} 
+                    createChannelMember={this.props.createChannelMember} 
+                    channels={this.props.channels} 
+                    users={this.props.users} 
+                    currentView = {this.props.currentView} 
+                    createChannel={this.props.createChannel} 
+                    fetchChannel={this.props.fetchChannel}
+            />
+            {this.state.displayDmForm = false}
+            </div>: ""
+          } 
+          
              
         
         <div className="messages-and-threads">
         <div className="message-list" >
           {this.props.channels && this.props.currentView ? 
           <div className="channel-name">
-            {this.props.channels[this.props.currentView].name}
+            <div onClick= {this.editFormAppears.bind(this)} 
+            className="name-of-channel">{this.props.channels[this.props.currentView].name}</div>
             <div onClick={this.showMembers.bind(this)} className = "num-members">
               {Object.values(this.props.channelMembers).length}
               <FontAwesomeIcon className="user-icon" icon={faUser} />

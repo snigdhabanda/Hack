@@ -18,7 +18,8 @@
         .logo{
             margin: auto; 
             margin-left: 0px;
-            margin-right: 0px; 
+            margin-right: 5px; 
+           
             width: 30%;
             height: auto; 
         }
@@ -129,6 +130,9 @@
         box-sizing: border-box; 
         font-size: 18px; 
         margin-bottom: 20px; 
+        border-radius: 4px;
+        margin-top: 10px; 
+
     }
 
     .session-form-button{
@@ -156,5 +160,19 @@
         margin-top: 20px; 
         color: #36C5F0; 
     }
+
+    .session-errors{
+        text-align: center;
+        font-family: 'Source Sans Pro', sans-serif;
+        color: red; 
+        margin-top: 15px; 
+        font-size: 16px; 
+
+
+    }
+}
+
+.demo-user{
+    margin-top: 15px; 
 }
 

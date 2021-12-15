@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 
 const Render = ({currentUser}) => {
    const redirect = () => (
-        <Redirect to="/starthere" />
+        <Redirect to="/welcome" />
        
    )
 
@@ -14,7 +14,7 @@ const Render = ({currentUser}) => {
         </div>
    )
 
-   return currentUser ? redirect() : displayHome()
+   return currentUser ? displayHome() : redirect()
     
 }
 

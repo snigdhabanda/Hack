@@ -29,16 +29,18 @@ html, body {
     color: white; 
     position: absolute; 
 
-    img .profile-component{
-         
-    }
+    
    
 
-
-    .dinner-party{
-        background-color: #3F0E40; 
+    .sidebar-icon{
+        display: flex;
         border-bottom: 1px solid rgb(82,38,83);
         border-top: 1px solid rgb(82,38,83);
+        align-items: center; 
+    
+    .dinner-party{
+        background-color: #3F0E40; 
+        margin-top: 10px; 
         height: 50px;
         padding: 10px 16px 10px 16px; 
         font-size: 18px;
@@ -46,6 +48,15 @@ html, body {
         font-weight: bold; 
         padding: 10px 10px 10px 16px; 
         box-sizing: border-box;
+    }
+
+    .wine-glass{
+        margin: 10px 10px 10px 15px; 
+        width: auto;
+        height: 30px; 
+        border-radius: 4px; 
+        background: black; 
+    }
     }
 }
 
@@ -55,22 +66,16 @@ html, body {
     font-size: 15px; 
     margin-top: 80px; 
      
-    .channel-title, .dm-title{
+    .channel-title{
         display: flex;
-        padding-left: 18px;  
+        padding-left: 20px;  
         padding-bottom: 12px; 
+        height: 20px; 
+        width: 100px; 
+        font-size: 16px; 
+        
 
-        .channel-arrow-container{
-            padding-left: 5px;
-            height: 20px;
-            width: 15px; 
-            margin-right: 6px; 
-
-            .channel-arrow{
-                margin-right: 10px; 
-                
-            }
-        }
+        
 
         .channel-plus{
             cursor: pointer; 
@@ -79,15 +84,25 @@ html, body {
        
     }
 
-    // .channel-title:hover{
-    //     cursor: pointer; 
-        
-    //     .channel-plus{
-    //         margin-left: 60px; 
-    //     }
-               
-    // }
+    .dm-title{
+        display: flex;
+        padding-bottom: 12px; 
+        padding-left: 15px; 
+        margin-top: 50px; 
+        max-height: max-content; 
+        width: 190px; 
+        font-size: 16px; 
+         
 
+        .channel-plus{
+            cursor: pointer;
+            padding-left: 40px; 
+            width: 20px; 
+        }
+
+    }
+
+    
 
     .channels-list, .dms-list{
         height: 200px; 
@@ -113,19 +128,46 @@ html, body {
             padding-left: 40px; 
             padding-bottom: 15px;  
         }
+        .holds-dm-name{
+            display: flex;
+            flex-direction: row; 
+            align-items: baseline; 
+            .dm-message{
+                text-transform: capitalize; 
+                padding: 6px 12px 12px 30px; 
+                display: flex; 
+                align-items: center;
+            }
 
-        .dm{
-            text-transform: capitalize; 
-            padding: 6px 15px 12px 55px; 
-            display: flex; 
-            align-items: center;
         }
+
+        .holds-dm-name:focus{
+            background: #1164A3; 
+        }
+
+        .dm-x-hover{
+            display: none; 
+        }
+
+        .dm-x-hover:hover{
+            display: block; 
+        }
+
+        .dm-message:hover + .dm-x-hover{
+            display: block; 
+        }
+
+        .holds-dm-name:hover{
+            background-color: #350d36;
+            cursor: pointer; 
+        }
+        
 
         li:focus{
             background-color: #1164A3; 
         }
 
-        .channel:hover, .dm:hover{
+        .channel:hover{
             background-color: #350d36;
             cursor: pointer; 
         }
@@ -170,6 +212,18 @@ html, body {
                 border: 1px solid rgb(189, 180, 180); 
                 z-index: 8; 
 
+                .name-of-channel{
+                    max-width: max-content; 
+                    padding: 5px 5px 5px 5px; 
+                }
+                .name-of-channel:hover {
+                    
+                    background-color: rgb(216, 215, 215);
+                    border-radius: 3px; 
+                    cursor: pointer; 
+                }
+
+
                 .num-members{
                     z-index: 10; 
                     border: 1px solid rgb(189, 180, 180);
@@ -205,12 +259,14 @@ html, body {
                     max-width: content; 
 
                     display: flex; 
+                    align-items: flex-start; 
                     
                     .author-icon{
                         padding-left: 0px; 
-                        width: 8%;
-                        height: auto;  
-                        border-radius: 4px;  
+                        width: 5%;
+                        height: 5%;  
+                        border-radius: 4px; 
+                        margin-top: 5px;  
                     }
                     
                     .holds-message-properties{
@@ -258,9 +314,9 @@ html, body {
                 
             }
                 
-                // .edit-delete-reply{
-                //     display: none; 
-                // }
+                .edit-delete-reply{
+                    display: none; 
+                }
 
                 .flex-box-img-content:hover + .edit-delete-reply{
                     width: max-content; 
@@ -272,7 +328,9 @@ html, body {
                     // box-shadow: 0px 2px 1px red;
                     position: absolute; 
                     left: 250px;   
-                    top: 0px;                    
+                    top: 0px; 
+                    margin-left: 100px; 
+                                      
 
                     .update-message, .delete-message, .reply-message{
                         border: none; 
@@ -280,15 +338,33 @@ html, body {
                         outline: none; 
                         opacity: .5; 
                     }
-    
-                    .update-message, .delete-message, .reply-message:hover{
+
+                    .update-message:hover, .delete-message:hover, .reply-message:hover{
+                        display: block; 
                         cursor: pointer; 
+                        
                     }
+    
+                    
                 }
 
-                .edit-delete-reply{
-                    display: none; 
+                .edit-delete-reply:hover{
+                    
+                    width: max-content; 
+                    // padding: 3px 2px 3px 2px; 
+                    border: 1px solid rgb(189, 180, 180); 
+                    border-radius: 3px; 
+                    display: flex; 
+                    align-items: center; 
+                    // box-shadow: 0px 2px 1px red;
+                    position: absolute; 
+                    left: 250px;   
+                    top: 0px; 
+                    margin-left: 100px; 
+                    cursor: pointer; 
                 }
+
+                
                 
 
  
@@ -306,7 +382,7 @@ html, body {
             height: 100%; 
             width: 50%; 
             position: absolute; 
-            left: 800px; 
+            left: 75%; 
             border-left: 1px rgb(189, 180, 180);
             z-index: 4; 
 
@@ -343,6 +419,20 @@ html, body {
                     border: none; 
                 }
 
+                .thread-list{
+            
+                    display: flex;
+                    position: relative; 
+                    flex-direction: column-reverse;
+                    width: 72%;
+                    height: 98%;
+                    color: black; 
+                    overflow-x: hidden;
+                    overflow-y: auto; 
+                    position: relative; 
+                    z-index: 3; 
+                }
+
                 
             }
 
@@ -350,15 +440,16 @@ html, body {
 
             .reply-message{
                 position: fixed;
-                top: 530px; 
-                left: 1000px; 
+                top: 77%; 
+                left: 72%; 
                 display: flex; 
                 border-radius: 10px;
                 margin: 20px;  
+                width: 25%;
                 
                     form .message-form{
                         z-index: 8; 
-                        width: 150%; 
+                        width: 180%; 
                         line-height: 50px; 
                         border-radius: 4px; 
                         border: 1px solid black; 
@@ -379,15 +470,16 @@ html, body {
                 
                     .reply-message-button{
                         position: fixed; 
-                        top: 620px; 
+                        top: 89%; 
                         height: 25px; 
                         width: 50px; 
-                        left: 1210px; 
+                        left: 95%; 
                         border: none; 
                         background: transparent; 
                         background-color: #007A5A;
                         border-radius: 4px; 
                         box-shadow: 0px 2px 1px gray;
+                        z-index: 15; 
 
                 
                     }
@@ -401,15 +493,17 @@ html, body {
     
     .send-message{
         position: fixed;
-        top: 530px; 
+        top: 77%; 
         left: 220px; 
         display: flex; 
         border-radius: 10px;
         margin: 20px;  
+        width: 90%;
+
         
     
         form .message-form{
-            width: 480%; 
+            width: 60%; 
             line-height: 50px; 
             border-radius: 4px; 
             border: 1px solid black; 
@@ -430,15 +524,19 @@ html, body {
     
         .message-button{
             position: fixed; 
-            top: 620px; 
+            top: 89%; 
             height: 25px; 
             width: 50px; 
-            left: 957px; 
+            left: 67%; 
             border: none; 
             background: transparent; 
             background-color: #007A5A;
             border-radius: 4px; 
             box-shadow: 0px 2px 1px gray;
+        }
+
+        .message-button:hover{
+            cursor: pointer; 
         }
     }
 
@@ -455,11 +553,11 @@ html, body {
     
 }
 
-.new-channel-form{
+.new-channel-form, .edit-channel-form {
     display: block; 
     border: 1px solid black;
     position: absolute; 
-    height: 450px; 
+    height: 550px; 
     width: 450px; 
     left: 500px; 
     top: 40px; 
@@ -467,8 +565,7 @@ html, body {
     z-index: 8; 
     color: black; 
     padding: 15px 20px 20px 30px; 
-    background-color: rgb(189, 180, 180);
-
+    background-color: rgb(238, 234, 234); 
     h2{
         font-size: 30px; 
         font-weight: bolder; 
@@ -486,11 +583,41 @@ html, body {
         display: flex;
         flex-direction: column; 
 
-        .name-box, .description-box, .add-people-box{
+        .name-input, .description-input, .topic-input{
+                outline: none; 
+                border: 1px solid black; 
+                border-radius: 4px; 
+                width: 350px; 
+                height: 30px;
+                padding-left: 12px; 
+                margin-bottom: 15px; 
+        }
+
+        .channel-errors{
+            color: red;
+            font-size: 14px; 
+            font-family: 'Lato', sans-serif;
+            margin-bottom: 15px; 
+        }
+
+        .name-box, .description-box, .topic-box, .add-people-box{
             display: flex;
             flex-direction: column; 
             height: max-content; 
             margin-bottom: 10px; 
+
+            .description-div, .topic-div{
+                border: none;
+                font-size: 15px; 
+                margin-bottom: 25px; 
+            }
+
+            .description-show, .topic-show{
+                font-size: 18px;
+                text-transform: bold; 
+                margin-bottom: 18px; 
+            }
+
             input{
                 outline: none; 
                 width: 350px; 
@@ -508,19 +635,95 @@ html, body {
         
         }
 
-        .add-people-box{
+        .members-show{
+            margin-bottom: 10px; 
+            font-size: 18px; 
+            
+        }
+
+        .all-members{
+            overflow-y: auto; 
+            height: 260px; 
+        }
+
+        .delete{
+            position: absolute; 
+            top: 370px;
+            left: 331px; 
+            width: 150px; 
+            padding: 5px 0px 5px 0px;
+            background: transparent;
+            outline: none; 
+            font-size: 15px; 
+            font-family: 'Lato', sans-serif;
+            background-color: rgb(186, 16, 16);
+            border: 1px solid rgb(186, 16, 16); 
+            color: white;
+            font-weight: bold; 
+            border-radius: 4px; 
+        }
+
+        .delete:hover{
+            cursor: pointer; 
+        }
+
+        .members-list-show{
+            display: flex; 
+            align-items: center; 
             margin-bottom: 15px; 
+            
+            .show-user-name{
+                list-style: none;
+                margin-left: 15px; 
+            }
+        }
+
+        
+
+        .add-people-box{
+            
             
             label{
                 margin-bottom: 20px; 
             }
-            .all-users{
-                display: block; 
-                cursor: pointer; 
+            .search-box{
                 border: 1px solid black; 
-                border-radius: 4px;
-                width: 300px; 
-                padding-top: 5px; 
+                display: flex; 
+                width: 400px;
+                overflow-y: auto; 
+                border-radius: 4px; 
+            }
+           
+
+
+                .search-results{
+                    height: 150px; 
+                    overflow-y: auto; 
+                    overflow-x: hidden; 
+
+                    .user-search{
+                        display: flex; 
+                        align-items: center; 
+                        width: 500px; 
+                        padding: 3px 0px 3px 0px; 
+
+                        .search-icon{
+
+                        }
+
+                        .user-search-name{
+                            margin-left: 15px; 
+                            font-size: 18px; 
+                        }
+                    }
+                    .user-search:hover{
+                        cursor: pointer; 
+                    }
+                    .user-search:focus{
+                        background: #1154A3; 
+                        color: white; 
+                    }
+                }
                   
                 ul{
                     list-style-type: none; 
@@ -541,11 +744,11 @@ html, body {
                 }
                 
                 
-            }
+            
         }
     }
 
-    .create{
+    .create, .edit{
         background: transparent;
         outline: none; 
         font-size: 15px; 
@@ -560,6 +763,10 @@ html, body {
         width: 100px; 
         margin-left: 350px; 
         
+    }
+    
+    .edit:hover{
+        cursor: pointer; 
     }
     
 
@@ -606,6 +813,294 @@ html, body {
     width: 0em;
     background: white;
   }
+
+  .modal-background {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(46, 42, 42, 0.7);
+    z-index: 10;
+   
+  }
+
+  .leave{
+    position: absolute; 
+    top: 540px;
+    left: 330px; 
+    width: 150px; 
+    padding: 5px 0px 5px 0px;
+    background: transparent;
+    outline: none; 
+    font-size: 15px; 
+    font-family: 'Lato', sans-serif;
+    background-color: rgb(186, 16, 16);
+    border: 1px solid rgb(186, 16, 16); 
+    color: white;
+    font-weight: bold; 
+    border-radius: 4px;  
+}
+
+.leave:hover{
+    cursor: pointer; 
+}
+
+.dm-names{
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    position: absolute;
+    height: 140px; 
+    width: 400px; 
+    top: 360px;
+    left: 40px; 
+    overflow-y: auto; 
+}
+
+.user-dm{
+    list-style: none;
+    border: 1px solid white; 
+    display: flex; 
+    flex-direction: row; 
+    font-size: 13px; 
+    width: 100px; 
+    height: 20px; 
+    margin-bottom: 0px;
+    padding: 4px 0px 2px 5px;  
+    background-color: #d87393; 
+    border-radius: 4px;
+    overflow-x: auto; 
+
+}
+
+.user-name{
+    margin-right: 8px; 
+}
+
+.x-dm{
+    font-size: 10px; 
+    color: white; 
+}
+
+.x-dm:hover{
+    cursor: pointer; 
+}
+
+.dm{
+    position: absolute; 
+    top: 540px;
+}
+
+.create:hover{
+    cursor: pointer; 
+}
+
+.dm-list{
+    margin-top: 50px; 
+}
+
+.profile-component{
+    background: white;
+    width: 60px; 
+    position: absolute; 
+    left: 90%; 
+
+}
+
+.profile-component:hover{
+    cursor: pointer; 
+}
+
+
+
+.profile-dropdown{
+    position: absolute; 
+    display: flex; 
+    flex-direction: column; 
+    border: 0.5px solid gray;
+    left: 90%; 
+    top: 100%; 
+    z-index: 30; 
+    color: black; 
+    border-radius: 4px; 
+    font-family: 'Lato', sans-serif; 
+
+
+    .logout{
+        border-bottom: 0.5px solid gray;
+        padding: 5px 3px 5px 3px;
+         background-color: rgb(235, 235, 235);
+
+
+    }
+
+    .logout:hover{
+        cursor: pointer; 
+        background-color: white;  
+
+    }
+
+    .edit-profile{
+        padding: 5px 9px 5px 3px;
+        background-color: rgb(235, 235, 235);
+    }
+
+    .edit-profile:hover{
+        cursor: pointer;
+        background-color: white;  
+    }
+
+    
+    
+}
+
+.profile-form{
+    display: block; 
+    border: 1px solid black;
+    position: absolute; 
+    height: 300px; 
+    width: 220px; 
+    left: 500px; 
+    top: 120px; 
+    border-radius: 4px; 
+    z-index: 20; 
+    color: black; 
+    padding: 15px 20px 20px 30px; 
+    background-color: rgb(238, 234, 234);
+    font-family: 'Lato', sans-serif; 
+
+    label {
+        margin-bottom: 10px; 
+        width: 100px; 
+        height: 10px; 
+        display: block; 
+    }
+
+    h2{
+        font-size: 30px; 
+        font-weight: bolder; 
+        margin-bottom: 20px; 
+        margin-top: 20px; 
+         
+    }
+
+    .name-input{
+        outline: none; 
+        border: 1px solid black; 
+        border-radius: 4px; 
+        width: 200px; 
+        height: 20px;
+        padding-left: 12px; 
+        margin-bottom: 15px; 
+    }
+    .name-box{
+            display: flex;
+            flex-direction: column; 
+            height: max-content; 
+            margin-bottom: 10px;
+    }
+
+    .update-profile{
+        background: transparent;
+        outline: none; 
+        font-size: 15px; 
+        font-family: 'Lato', sans-serif;
+        background-color: #007A5A;
+        border: 1px solid #007A5A; 
+        color: white;
+        font-weight: bold; 
+        border-radius: 4px; 
+        padding-top: 5px;
+        padding-bottom: 5px; 
+        width: 120px; 
+        margin-left: 350px;
+        position: absolute; 
+        left: -215px; 
+        top: 280px; 
+    }
+
+    .close-profile-modal{
+        position: absolute; 
+        top: 20px;
+        left: 250px; 
+    }
+
+    .close-profile-modal:hover{
+        cursor: pointer; 
+    }
+         
+             
+}
+
+.message-box{
+    list-style: none; 
+    padding-left: 20px; 
+    margin-bottom: 20px; 
+.thread-flex-box{
+    display: flex; 
+    max-width: content; 
+    list-style: none; 
+    align-items: flex-start; 
+
+    .author-icon{
+        padding-left: 0px; 
+        width: 10%;
+        height: 10%; 
+        border-radius: 4px;  
+        margin-top: 5px; 
+    }
+    
+    .holds-message-properties{
+        padding-left: 20px; 
+
+    .message-author{
+        font-size: 15px;
+        font-weight: 700; 
+        color: #1D1C1D; 
+        margin-bottom: 8px; 
+        margin-top: 5px; 
+        display: flex; 
+        align-items: center;
+        
+        .message-time{
+            font-size: 12px;
+            font-weight: normal; 
+            padding-left: 10px;
+            
+        }
+    }
+
+    .message-content{
+        font-size: 15px;
+        font-weight: 300;
+        color: #1D1C1D;
+        cursor: text; 
+        overflow-wrap: break-word;
+    
+    }
+}
+}
+}
+
+.github{
+    margin-left: 80%; 
+    margin-top: 10px; 
+    margin-right: 10px; 
+
+}
+
+.linkedin{
+    margin-right: 30px;  
+}
+
+
+
 
 
 

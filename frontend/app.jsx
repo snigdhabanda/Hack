@@ -7,6 +7,7 @@ import LoginFormContainer from './components/session/login_form_container'
 import {AuthRoute, ProtectedRoute} from './util/route_util'
 import HomeContainer from './components/home/home_container'
 import RenderContainer from './components/render/render_container'
+import WelcomeContainer from "./components/welcome_container"
 
 //direct to signup form with a link to login 
 class App extends React.Component{
@@ -18,6 +19,7 @@ class App extends React.Component{
                     <AuthRoute exact path="/starthere" component={SignUpFormContainer} />
                     <AuthRoute exact path="/login" component={LoginFormContainer} />
                     <ProtectedRoute exact path="/home" component={HomeContainer} />
+                    <Route exact path="/welcome" component={WelcomeContainer} />
                     <Route exact path="/" component={RenderContainer} />
                 </Switch>
 

@@ -23,7 +23,7 @@ class MessageForm extends React.Component {
   render() {
     return (
       <div className="send-message">
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form className="send-message" onSubmit={this.handleSubmit.bind(this)}>
           <input
             className="message-form"
             type="text"
