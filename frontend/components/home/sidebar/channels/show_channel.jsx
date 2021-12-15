@@ -8,12 +8,15 @@ class ShowChannel extends React.Component {
         this.state = {
             name: this.props.channel.name,
             topic: this.props.channel.topic,
-            description: this.props.channel.description
+            description: this.props.channel.description,
+            displayEditForm: this.props.displayEditForm
             }
 
         this.clickAddPeople = React.createRef();
         this.inputField = React.createRef();
         this.modalDisappear = React.createRef();
+        
+
         
     }
 
@@ -30,13 +33,14 @@ class ShowChannel extends React.Component {
 
 
     modalDisappears(){
-        this.modalDisappear.current.style.display = "none"; 
+        this.setState({displayEditForm: !this.state.displayEditForm}, () => this.props.rerenderParent())
     }
     
     render() {
         const {channel, channelMembers, users} = this.props
-        // console.log(channelMembers, users)
         return (
+            <div>
+            {this.state.displayEditForm ? 
             <form ref={this.modalDisappear} className="edit-channel-form">
                 <h2>{`#${channel.name.toLowerCase()} `}</h2>
                 
@@ -71,7 +75,8 @@ class ShowChannel extends React.Component {
           
                 <div className="modal-disappear" onClick={this.modalDisappears.bind(this)} >X</div>
 
-            </form>
+            </form> : ""}
+            </div>
         )
     }
 }

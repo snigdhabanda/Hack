@@ -85,7 +85,15 @@ class ChatRoom extends React.Component {
   //   this.props.fetchCurrentUser()
   // }
 
-  
+  rerenderParent = () => {
+    if (this.state.displayForm){
+      this.setState({displayForm: false})
+    }
+    if (this.state.displayEditForm){
+      
+      this.setState({displayEditForm: false})
+    }
+  }
   
   componentDidUpdate(prevProps){
     if (prevProps.channels !== this.props.channels){
@@ -269,8 +277,10 @@ class ChatRoom extends React.Component {
                     currentView = {this.props.currentView} 
                     createChannel={this.props.createChannel} 
                     fetchChannel={this.props.fetchChannel}
+                    displayForm={this.state.displayForm}
+                    rerenderParent={this.rerenderParent}
                     />
-                    {this.state.displayForm = false}
+                    
                 </div>
                 
                     
@@ -290,8 +300,9 @@ class ChatRoom extends React.Component {
                     fetchCurrentUser={this.props.fetchCurrentUser}
                     errors={this.props.errors}
                     deleteChannel={this.props.deleteChannel}
+                    rerenderParent={this.rerenderParent}
+                    displayEditForm={this.state.displayEditForm}
                     />
-                    {this.state.displayEditForm = false}
                 </div>
                     
                 : <div className="modal-background"><ShowChannel 
@@ -302,9 +313,10 @@ class ChatRoom extends React.Component {
                     channelMembers={Object.values(this.props.channelMembers)}
                     leaveChannel={this.props.leaveChannel}
                     fetchCurrentUser={this.props.fetchCurrentUser}
+                    rerenderParent={this.rerenderParent}
+                    displayEditForm={this.state.displayEditForm}
                 /></div>
                 : null}
-               {this.state.displayEditForm = false}
         {this.state.submittingMessage ? 
                 <div><AddChannelMembers createChannelMember = {this.props.createChannelMember} currentUser = {this.props.currentUser} currentView={this.props.currentView} memberIds={this.state.memberIds} />
                 {this.state.submittingMessage = false}

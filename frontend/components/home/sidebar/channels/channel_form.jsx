@@ -13,7 +13,8 @@ class ChannelForm extends React.Component {
             submittedMessage: false,
             channelMembers: false,
             filters: [],
-            names: []
+            names: [],
+            displayForm: this.props.displayForm
         }
 
         this.clickAddPeople = React.createRef();
@@ -117,11 +118,13 @@ class ChannelForm extends React.Component {
     }
 
     modalDisappears(){
-        this.modalDisappear.current.style.display = "none"; 
+        this.setState({displayForm: !this.state.displayForm}, () => this.props.rerenderParent())
     }
     
     render() {
         return (
+            <div>
+            {this.state.displayForm ? 
             <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>Create a channel</h2>
                 <p>Create a channel to communicate with anyone you're a fan of!</p>
@@ -182,6 +185,8 @@ class ChannelForm extends React.Component {
                 <button className="create" type="submit" >Create</button>
 
             </form>
+            : ""}
+            </div>
         )
     }
 }

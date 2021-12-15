@@ -8,13 +8,16 @@ const mapStateToProps = ({entities: {channels}, errors, session}, ownProps) => (
     channel: ownProps.channel,
     currentUser: session.id,
     errors: errors.channels,
+    displayEditForm: ownProps.displayEditForm
     
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     deleteChannel: (channelId) => dispatch(deleteChannel(channelId)),
     updateChannel: (channel) => dispatch(updateChannel(channel)),
-    fetchCurrentUser: (userId) => dispatch(fetchCurrentUser(userId))
+    fetchCurrentUser: (userId) => dispatch(fetchCurrentUser(userId)),
+    rerenderParent: () => ownProps.rerenderParent()
+
     
 })
 

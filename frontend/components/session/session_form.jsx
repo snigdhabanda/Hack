@@ -55,7 +55,7 @@ class SessionForm extends React.Component {
 
     loginDemo(e){
         e.preventDefault()
-        this.props.loginUser({email: "demouser@yahoo.com", password: "password"}).then(this.props.history.push("/home"))
+        this.props.loginUser({email: "demouser@gmail.com", password: "password"}).then(this.props.history.push("/home"))
     }
 
     render() {

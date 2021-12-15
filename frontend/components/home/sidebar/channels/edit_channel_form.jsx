@@ -8,7 +8,8 @@ class EditChannelForm extends React.Component {
         this.state = {
             name: this.props.channel.name,
             topic: this.props.channel.topic,
-            description: this.props.channel.description
+            description: this.props.channel.description,
+            displayEditForm: this.props.displayEditForm
             }
 
         this.clickAddPeople = React.createRef();
@@ -50,13 +51,14 @@ class EditChannelForm extends React.Component {
     }
 
     modalDisappears(){
-        this.modalDisappear.current.style.display = "none"; 
+        this.setState({displayEditForm: !this.state.displayEditForm}, () => this.props.rerenderParent())
     }
     
     render() {
-        console.log("rendering")
         const {channel, channelMembers, currentUser} = this.props
         return (
+            <div>
+            {this.state.displayEditForm ? 
             <form ref={this.modalDisappear} className="edit-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>{`#${channel.name.toLowerCase()} `}</h2>
                 
@@ -94,7 +96,8 @@ class EditChannelForm extends React.Component {
 
                 <button className="edit" type="submit" >Submit</button>
 
-            </form>
+            </form> : ""}
+            </div>
         )
     }
 }

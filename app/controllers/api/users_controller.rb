@@ -21,10 +21,13 @@ class Api::UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save 
             login!(@user)
-            # @channel_member = ChannelMember.create({channel_id: 120, member_id: @user.id, creator: false})
+            @channel_member = ChannelMember.create({channel_id: 203, member_id: @user.id, creator: false})
             # @channel_member.save!
-            @channel_member2 = ChannelMember.create({channel_id: 130, member_id: @user.id, creator: false})
-            @channel_member2.save!
+            @channel_member2 = ChannelMember.create({channel_id: 204, member_id: @user.id, creator: false})
+            # @channel_member2.save!
+            @channel_member3 = ChannelMember.create({channel_id: 205, member_id: @user.id, creator: false})
+            @channel_member4 = ChannelMember.create({channel_id: 206, member_id: @user.id, creator: false})
+            @channel_member5 = ChannelMember.create({channel_id: 207, member_id: @user.id, creator: false})
             @channels = Channel.get_channels_by_user(@user)
             render "api/users/show" 
         else 
