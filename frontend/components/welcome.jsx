@@ -42,10 +42,11 @@ class Welcome extends React.Component {
                             </div>
                 </div>
                 <div className="ad">
-                    <h1>Hack is your Social Hub</h1>
-                    <p>Personally connect with your favorite artists and icons in one space.</p>
+                    <h1>Hack is your News + Social Hub</h1>
+                    <p>Hear news, announcements, and connect with your favorite icons and artists all in one space.</p>
                     <button className="demo-welcome" onClick={this.loginDemo.bind(this)} type="button">Try a Demo</button>
                 </div>
+                <img className="hack-screenshot" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/hack_screenshot.png?raw=true" />
                 <h3 className="instructions">See who's already signed up today!</h3>
                 <div className="endorsements">
                     <img width="160px" className="fauci" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/fauci.png?raw=true"></img>

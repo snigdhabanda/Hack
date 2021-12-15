@@ -54,6 +54,8 @@ class Home extends React.Component{
             <nav className="header-nav">
                {/* UserComponent */}
                {/* SearchBar */}
+               <a className="github" href="https://github.com/snigdhabanda/Hack">Github</a>
+               <a className="github" href="https://www.linkedin.com/in/snigdhabanda0/">LinkedIn</a>
             <img onClick={this.handleDropDrown.bind(this)} tabindex="0" className="profile-component" src={`${this.props.users[this.props.currentUserId].imageUrl}`} /> 
             {this.state.showDropdown ? 
             <div className="profile-dropdown">

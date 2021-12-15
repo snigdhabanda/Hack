@@ -61,14 +61,14 @@
     width: 50%; 
     padding-left: 50px; 
 
-    h1{
-        
+    h1{ 
+        width: 70%; 
         font-family: 'Source Sans Pro', sans-serif;
         font-size: 48px; 
         font-weight: bolder;
         line-height: 46px;
         margin-bottom: 30px; 
-        margin-top: 40px; 
+        margin-top: 10px; 
     }
 
     p{
@@ -99,6 +99,16 @@
     
 }
 
+.hack-screenshot{
+    width: 50%; 
+    position: absolute; 
+    top: 140px;
+    left: 43%; 
+    border-radius: 4px;
+    border: 1px solid black; 
+    box-shadow: 3px 3px 3px 3px gray; 
+}
+
 .instructions{
     display: block; 
     margin-top: 50px; 
@@ -106,6 +116,8 @@
     width: 70%; 
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;   
+    
+
 }
 
 .endorsements{
@@ -115,8 +127,10 @@
 
     img{
        margin-right: 120px; 
-       border-radius: 3px; 
-       box-shadow: 1px 1px 1px 1px solid gray; 
+       border-radius: 4px; 
+       border: 1px solid black;
+       box-shadow: 3px 3px 3px 3px gray; 
+       
     }
 }
 
