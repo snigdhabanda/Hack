@@ -13,7 +13,8 @@ class ChannelsIndex extends React.Component{
     }
     
     componentDidMount(){
-        this.props.fetchCurrentUser(this.props.currentUser)
+        this.props.fetchCurrentUser(this.props.currentUser).then(() => 
+        this.props.fetchChannel(this.props.currentView))
        
     }
 

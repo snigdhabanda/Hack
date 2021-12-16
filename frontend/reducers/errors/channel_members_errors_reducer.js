@@ -5,9 +5,14 @@ const ChannelMembersErrorsReducer = (state= [], action) => {
 
     switch (action.type) {
         case RECEIVE_CHANNEL_MEMBER_ERRORS:
-            return action.errors;
+            if (action.errors !== ["That channel has already been created"]) {
+                return []
+            }
+            else{
+                return action.errors; 
+            }
         case RECEIVE_CHANNEL_MEMBER:
-            return []
+            return [];
         default:
             return state; 
     }

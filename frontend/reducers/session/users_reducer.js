@@ -7,7 +7,7 @@ const UsersReducer = (state= {}, action) => {
         case RECEIVE_USERS:
             return action.users 
         case RECEIVE_USER:
-            nextState[action.user.id] = action.user 
+            nextState[action.user.id] = action.user
             return nextState; 
         case REMOVE_USER:
             delete nextState[action.user.id]

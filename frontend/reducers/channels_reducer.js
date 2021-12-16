@@ -9,7 +9,12 @@ const ChannelsReducer = (state= {}, action) => {
     switch (action.type) {
         
         case RECEIVE_USER:
-            return action.user.channels
+            if (action.user.channels){
+                return action.user.channels
+            }
+            else{
+                return state; 
+            }
         case UPDATE_CHANNEL:
             nextState[action.channel.id] = action.channel
             return nextState; 

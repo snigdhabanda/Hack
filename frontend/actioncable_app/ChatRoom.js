@@ -322,6 +322,7 @@ class ChatRoom extends React.Component {
         {this.state.submittingMessage ? 
                 <div><AddChannelMembers createChannelMember = 
                 {this.props.createChannelMember} 
+                channelMembers={Object.values(this.props.channelMembers)}
                 currentUser = {this.props.currentUser} 
                 currentView={this.props.currentView} 
                 memberIds={this.state.memberIds} />
