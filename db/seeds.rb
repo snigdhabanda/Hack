@@ -6,18 +6,23 @@
 # #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 # #   Character.create(name: 'Luke', movie: movies.first)
 
-User.destroy_all
-Channel.destroy_all
-ChannelMember.destroy_all
-Dm.destroy_all
-Message.destroy_all
+# User.destroy_all
+# Channel.destroy_all
+# ChannelMember.destroy_all
+# Dm.destroy_all
+# Message.destroy_all
 
-channel_general = Channel.create({name: "General", topic: "Make friends!", description: "A space for all members in Dinner Party to communicate", dm: false })
-channel_announcements = Channel.create({name: "Announcements", topic: "", description: "A space for announcements!", dm: false })
-channel_roundtable = Channel.create({name: "Roundtable", topic: "", description: "President Obama, Director Fauci, and Megan Thee Stallion are in this channel", dm: false })
-channel_squad = Channel.create({name: "The Squad", topic: "", description: "Message AOC, Ilhan, Ayanna, Rashid, Jamaal, or Cori", dm: false })
-channel_metaverse = Channel.create({name: "Metaverse", topic: "", description: "Message Mark, Jack, or Tim", dm: false })
+channel_general = Channel.new({name: "General", topic: "Make friends!", description: "A space for all members in Dinner Party to communicate", dm: false })
+channel_announcements = Channel.new({name: "Announcements", topic: "", description: "A space for announcements!", dm: false })
+channel_roundtable = Channel.new({name: "Roundtable", topic: "", description: "President Obama, Director Fauci, and Megan Thee Stallion are in this channel", dm: false })
+channel_squad = Channel.new({name: "The Squad", topic: "", description: "Message AOC, Ilhan, Ayanna, Rashid, Jamaal, or Cori", dm: false })
+channel_metaverse = Channel.new({name: "Metaverse", topic: "", description: "Message Mark, Jack, or Tim", dm: false })
 
+channel_general.save!
+channel_announcements.save!
+channel_roundtable.save!
+channel_squad.save!
+channel_metaverse.save!
 
 # # Channel.find(10).destroy!
 # # Channel.destroy_all

@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(version: 2021_11_11_070616) do
     t.boolean "dm", null: false
   end
 
+  create_table "create_channel_members", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "dms", force: :cascade do |t|
     t.integer "member_id"
     t.datetime "created_at", null: false
