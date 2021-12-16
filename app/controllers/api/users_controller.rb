@@ -21,7 +21,7 @@ class Api::UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             login!(@user)
-            # @channel_member = ChannelMember.create({channel_id: 1, member_id: @user.id, creator: false})
+            @channel_member = ChannelMember.create({channel_id: 1, member_id: @user.id, creator: false})
             @channel_member2 = ChannelMember.create({channel_id: 2, member_id: @user.id, creator: false})
             @channel_member3 = ChannelMember.create({channel_id: 3, member_id: @user.id, creator: false})
             @channel_member4 = ChannelMember.create({channel_id: 4, member_id: @user.id, creator: false})
