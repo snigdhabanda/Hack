@@ -3,8 +3,21 @@
   <head>
     <title>Hack</title>
     <link rel="shortcut icon" href="https://github.com/snigdhabanda/Hack/blob/main/app/assets/images/slack-logo-dark-purple.png?raw=true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <meta property="og:title" content="Hack" />
+    <meta property="og:image" content="splash-around-the-block.gif" />
+    <meta
+      property="og:description"
+      content="Hack is the social analog of Slack that connects users to first-hand news and announcements from social icons and artists."
+    />
+    <meta
+      property="og:url"
+      content="https://hack-a-slack-clone.herokuapp.com/#/welcome"
+    />
+
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
