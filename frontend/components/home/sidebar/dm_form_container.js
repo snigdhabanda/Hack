@@ -9,14 +9,16 @@ const mapStateToProps = ({entities: {filters, channelMembers, users}, session}, 
     memberIds: ownProps.memberIds,
     filteredUsers: Object.values(filters),
     channelMembers: Object.values(channelMembers),
-    currentUser: session.id
+    currentUser: session.id,
+    displayDmForm: ownProps.displayDmForm
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     createChannel: (channel) => dispatch(ownProps.createChannel(channel)),
     fetchChannel: (channel) => dispatch(ownProps.fetchChannel(channel)),
     createChannelMember: (channelMember) => dispatch(ownProps.createChannelMember(channelMember)),
-    fetchFilteredUsers: (users) => dispatch(fetchFilteredUsers(users))
+    fetchFilteredUsers: (users) => dispatch(fetchFilteredUsers(users)),
+    rerenderParent: () => ownProps.rerenderParent()
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DmForm)

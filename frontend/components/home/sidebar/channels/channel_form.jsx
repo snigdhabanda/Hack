@@ -76,14 +76,36 @@ class ChannelForm extends React.Component {
 
     
 
+    handleAdd(user){
+        this.addPerson(user)
+        let includeName = false;
+        this.state.names.map(member => {
+            if (member.displayName === user.displayName){
+                includeName = true;
+            }
+        })
+        if (!includeName) this.setState({names: this.state.names.concat([user])})
+    }
+
     addPerson(user){
-        if (this.props.memberIds.includes(user.id)){
-            this.props.memberIds.pop(user.id)
-        }
-        else{
+        if (!this.props.memberIds.includes(user.id)){
             this.props.memberIds.push(user.id)
         }
-   
+       
+    }
+
+    removeUser(user){
+        let id = this.props.memberIds.filter(userId => userId === user.id)[0]
+        let idx = this.props.memberIds.indexOf(id)
+        this.props.memberIds.splice(idx, 1)
+
+        let member = this.state.names.filter(member => member.id === user.id)[0]
+        let memberId = this.state.names.indexOf(member)
+        this.state.names.splice(memberId, 1)
+        
+        this.setState({names: this.state.names})
+
+
     }
 
     modalDisappears(){
@@ -121,12 +143,22 @@ class ChannelForm extends React.Component {
                         <div className="search-results">
                         {this.state.filters.length > 0 ? 
                         this.state.filters.map((user) => 
-                            <div tabindex="0" className="user-search" onClick={this.addPerson.bind(this, user)}>
+                            <div tabindex="0" className="user-search" onClick={this.handleAdd.bind(this, user)}>
                             <img className="search-icon" width="30px" src={user.imageUrl}></img>
                             <div className="user-search-name">{user.displayName}</div>
                             
                             </div>
                         ) : ""}
+
+                    <div className="dm-names-channel-form">
+                        {this.state.names.map((user) => 
+                            <div className="user-dm">
+                            <li className="user-name">{user.displayName}</li>
+                            <div className="x-dm" onClick={this.removeUser.bind(this, user)}>X</div>
+                            </div>
+                        )
+                        }
+                    </div>
                         
                        
                         {/* <ul>

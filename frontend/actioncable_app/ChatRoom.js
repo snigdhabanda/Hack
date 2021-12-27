@@ -89,7 +89,7 @@ class ChatRoom extends React.Component {
     
       this.setState({displayForm: false})
     
-    
+      this.setState({displayDmForm: false})
       
       this.setState({displayEditForm: false})
     
@@ -341,8 +341,11 @@ class ChatRoom extends React.Component {
                     currentView = {this.props.currentView} 
                     createChannel={this.props.createChannel} 
                     fetchChannel={this.props.fetchChannel}
+                    rerenderParent={this.rerenderParent}
+                    displayDmForm={this.state.displayDmForm}
             />
             {this.state.displayDmForm = false}
+            {this.state.memberIds = []}
             </div>: ""
           } 
           

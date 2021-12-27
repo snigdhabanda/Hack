@@ -1099,6 +1099,18 @@ html, body {
     margin-right: 30px;  
 }
 
+.dm-names-channel-form{
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    position: absolute;
+    height: 30px; 
+    width: 280px; 
+    top: 530px;
+    left: 30px; 
+    overflow-y: auto; 
+}
+
 
 
 

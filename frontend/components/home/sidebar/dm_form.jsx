@@ -12,6 +12,7 @@ class DmForm extends React.Component {
             submittedMessage: false,
             channelMembers: false,
             filters: [],
+            displayDmForm: this.props.displayDmForm
         }
 
         this.clickAddPeople = React.createRef();
@@ -100,12 +101,14 @@ class DmForm extends React.Component {
     }
 
     modalDisappears(){
-        this.modalDisappear.current.style.display = "none"; 
+        this.setState({displayDmForm: !this.state.displayDmForm}, () => this.props.rerenderParent())
     }
     
     render() {
         
         return (
+            <div>
+            {this.state.displayDmForm ? 
             <form ref={this.modalDisappear} className="new-channel-form" onSubmit={this.handleSubmit.bind(this)} >
                 <h2>Direct message</h2>
                 <p>Send a direct message to one or multiple people!</p>
@@ -145,7 +148,8 @@ class DmForm extends React.Component {
                 <div className="modal-disappear" onClick={this.modalDisappears.bind(this)} >X</div>
                 <button className="create dm" type="submit" >Create</button>
 
-            </form>
+            </form> : ""}
+            </div>
         )
     }
 }
