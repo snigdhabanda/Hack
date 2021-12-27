@@ -13,6 +13,12 @@ class Home extends React.Component{
       }
    }
 
+   componentDidMount(){
+      this.props.fetchCurrentUser(this.props.currentUserId).then(() => 
+      this.props.fetchChannel(this.props.channelId))
+     
+  }
+
    handleDropDrown(e){
       e.preventDefault()
       if (!this.state.showDropdown) this.setState({showDropdown: true})
@@ -54,10 +60,10 @@ class Home extends React.Component{
             <nav className="header-nav">
                {/* UserComponent */}
                {/* SearchBar */}
-               <a className="github" href="https://github.com/snigdhabanda/Hack" >
+               <a className="github" href="https://github.com/snigdhabanda/Hack" target="_blank">
                   <img className="github-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/github.png?raw=true"></img>
                </a>
-               <a className="linkedin" href="https://www.linkedin.com/in/snigdhabanda0/">
+               <a className="linkedin" href="https://www.linkedin.com/in/snigdhabanda0/" target="_blank">
                   <img className="linkedin-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/linkedin-transparent.png?raw=true" ></img>
                </a>
             <img onClick={this.handleDropDrown.bind(this)} tabindex="0" className="profile-component" src={`${this.props.users[this.props.currentUserId].imageUrl}`} /> 
@@ -98,8 +104,7 @@ class Home extends React.Component{
             </nav>  
             
 
-            {/* // <RenderMessagesContainer /> 
-            // <SidebarContainer />  */}
+            
 
       
          </div>

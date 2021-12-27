@@ -1,6 +1,8 @@
 import {connect} from 'react-redux'
 import { logoutUser } from '../../actions/session/session_actions'
 import { updateUser } from '../../actions/user_actions'
+import { fetchCurrentUser } from '../../actions/session/session_actions'
+import { fetchChannel } from '../../actions/channel_actions'
 import Home from './home'
 
 const mapStateToProps = ({session, currentView, errors, entities: {users}}) => ({
@@ -14,7 +16,9 @@ const mapStateToProps = ({session, currentView, errors, entities: {users}}) => (
 
 const mapDispatchToProps = dispatch => ({
     logoutUser: () => dispatch(logoutUser()),
-    updateUser: (user) => dispatch(updateUser(user))
+    updateUser: (user) => dispatch(updateUser(user)),
+    fetchCurrentUser: (user) => dispatch(fetchCurrentUser(user)),
+    fetchChannel: (channelId) => dispatch(fetchChannel(channelId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

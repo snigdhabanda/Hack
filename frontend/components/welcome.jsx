@@ -42,11 +42,11 @@ class Welcome extends React.Component {
 
                             <div className="signup-link">
                                
-                                <a className="github-welcome" href="https://github.com/snigdhabanda/Hack" >
-                                    <img className="github-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/github.png?raw=true"></img>
+                                <a className="github-welcome" href="https://github.com/snigdhabanda/Hack" target="_blank">
+                                    <img className="github-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/github.png?raw=true" ></img>
                                 </a>
-                                <a className="linkedin-welcome" href="https://www.linkedin.com/in/snigdhabanda0/">
-                                    <img className="linkedin-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/linkedin-transparent.png?raw=true" ></img>
+                                <a className="linkedin-welcome" href="https://www.linkedin.com/in/snigdhabanda0/" target="_blank">
+                                    <img className="linkedin-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/linkedin-transparent.png?raw=true"></img>
                                 </a>
                                 {this.props.signupLink}
                             

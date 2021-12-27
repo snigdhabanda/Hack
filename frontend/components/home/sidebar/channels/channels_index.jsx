@@ -12,11 +12,11 @@ class ChannelsIndex extends React.Component{
         this.state = {displayForm: false }
     }
     
-    componentDidMount(){
-        this.props.fetchCurrentUser(this.props.currentUser).then(() => 
-        this.props.fetchChannel(this.props.currentView))
+    // componentDidMount(){
+    //     this.props.fetchCurrentUser(this.props.currentUser).then(() => 
+    //     this.props.fetchChannel(this.props.currentView))
        
-    }
+    // }
 
     
     render(){
