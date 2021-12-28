@@ -96,7 +96,7 @@ class ChatRoom extends React.Component {
   }
   
   componentDidUpdate(prevProps){
-    if (prevProps.channels !== this.props.channels){
+    if ((Object.values(prevProps.channels)).length < (Object.values(this.props.channels)).length){
       this.setState({submittingMessage: true})
     }
   }

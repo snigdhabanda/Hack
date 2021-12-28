@@ -8,7 +8,7 @@ const MessagesReducer = (state= {}, action) => {
     switch (action.type) {
         case RECEIVE_CHANNEL:
             if (action.messages) return action.messages 
-            else return {}
+            else {return {}}
         case UPDATE_MESSAGE:
             nextState[action.message.id] = action.message
             return nextState; 
