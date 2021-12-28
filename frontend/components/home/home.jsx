@@ -9,8 +9,11 @@ class Home extends React.Component{
          showDropdown: false, 
          showModal: false,
          displayName: this.props.displayName,
-         email: this.props.email 
+         email: this.props.email,
+         search: "",
+         filters: []
       }
+      this.timerId = 0; 
    }
 
    componentDidMount(){
@@ -54,12 +57,46 @@ class Home extends React.Component{
          displayName: this.state.displayName})
    }
 
+   debounce(){
+      let search = this.state.search
+      clearTimeout(this.timerId) 
+      this.timerId = setTimeout(() => this.props.fetchFilteredUsers(search), 200)
+
+  }
+
+   updateSearch(field) {
+      return e =>
+        this.setState({ [field]: e.currentTarget.value },
+      () => {this.debounce()});
+  }
+
+  componentDidUpdate(prevProps){
+   if (prevProps.filteredUsers !== this.props.filteredUsers){
+       this.setState({filters: Object.values(this.props.filteredUsers)})
+   }
+}
+
    render(){
+      console.log(this.state.filters)
       return (
          <div> 
             <nav className="header-nav">
                {/* UserComponent */}
                {/* SearchBar */}
+               <div className="search-header">
+                  <input className="search-box" type="text" value={this.state.search} placeholder="Search for members here" onChange={this.updateSearch('search')} />
+                  <div className="search-results-header">
+                           {this.state.filters.length > 0 && this.state.search.length > 0 ? 
+                           this.state.filters.map((user) => 
+                              <div className="user-search-header">
+                              <img className="search-icon" width="30px" src={user.imageUrl}></img>
+                              <div className="user-search-name-header">{user.displayName}</div>
+                              </div>
+                           ) : ""}
+                  </div>
+               </div>
+               
+               
                <a className="github" href="https://github.com/snigdhabanda/Hack" target="_blank">
                   <img className="github-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/github.png?raw=true"></img>
                </a>
