@@ -117,6 +117,7 @@ class DmForm extends React.Component {
                 
                 <div className="add-people-box">
                 <label>Add members</label>
+                <div className="channel-errors">{this.props.errors}</div>
                     <input className="search-box" type="text" value={this.state.search} placeholder="Enter a name" onChange={this.updateSearch('search')} />
                     
                         <div className="search-results">

@@ -11,6 +11,7 @@ class AddChannelMembers extends React.Component {
         this.props.memberIds.push(this.props.currentUser)
         let uniqueIds = [...new Set(this.props.memberIds)];
         let channelMembers = [];
+        console.log(uniqueIds)
         uniqueIds.forEach((id, idx) => {
             let channelMember = {
                 channelId: this.props.currentView,

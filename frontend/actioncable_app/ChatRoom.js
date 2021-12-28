@@ -252,7 +252,7 @@ class ChatRoom extends React.Component {
         {Object.values(this.props.channels).filter(channel => channel.dm).map((channel) =>(
               <div className="holds-dm-name" tabindex={`${channel.id}`}>
               <li className="dm-message" onClick={this.props.fetchChannel.bind(this, channel.id)}>
-                {channel.name}
+                {channel.name.split(", ").filter(name => name !== this.props.users[this.props.currentUser].displayName).join(", ")}
                 {/* {channel.name.split(", ").includes(this.props.users[this.props.currentUser].displayName.toLowerCase()) ?
                 channel.name.split(", ").slice(channel.name.split(", ").indexOf(this.props.users[this.props.currentUser].displayName), 1): channel.name}
                  */}
@@ -345,7 +345,7 @@ class ChatRoom extends React.Component {
                     displayDmForm={this.state.displayDmForm}
             />
             {this.state.displayDmForm = false}
-            {this.state.memberIds = []}
+            
             </div>: ""
           } 
           
