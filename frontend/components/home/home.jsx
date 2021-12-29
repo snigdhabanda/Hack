@@ -54,7 +54,10 @@ class Home extends React.Component{
       this.props.updateUser({
          id: this.props.currentUserId,
          email: this.state.email, 
-         displayName: this.state.displayName})
+         displayName: this.state.displayName}).then(() => 
+      this.setState({displayName: this.props.displayName,
+         email: this.props.email,
+         showModal: false}))
    }
 
    debounce(){
@@ -96,13 +99,16 @@ class Home extends React.Component{
                   </div>
                </div>
                
+               <div className="home-imgs">
+                  <a className="github" href="https://github.com/snigdhabanda/Hack" target="_blank">
+                     <img className="github-img" width="45px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/github.png?raw=true"></img>
+                  </a>
+
+                  <a className="linkedin" href="https://www.linkedin.com/in/snigdhabanda0/" target="_blank">
+                  <img className="linkedin-img" width="45px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/linkedin-transparent.png?raw=true" ></img>
+                  </a>
+               </div>
                
-               <a className="github" href="https://github.com/snigdhabanda/Hack" target="_blank">
-                  <img className="github-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/github.png?raw=true"></img>
-               </a>
-               <a className="linkedin" href="https://www.linkedin.com/in/snigdhabanda0/" target="_blank">
-                  <img className="linkedin-img" width="48px" src="https://github.com/snigdhabanda/Hack/blob/refactoring_channels/app/assets/images/linkedin-transparent.png?raw=true" ></img>
-               </a>
             <img onClick={this.handleDropDrown.bind(this)} tabindex="0" className="profile-component" src={`${this.props.users[this.props.currentUserId].imageUrl}`} /> 
             {this.state.showDropdown ? 
             <div className="profile-dropdown">
@@ -125,6 +131,7 @@ class Home extends React.Component{
                     <input className="name-input" value={this.state.email} type="text" onChange={this.update('email')} />
                 </div>
                 <button className="update-profile" type="submit">Update Profile</button>
+                <div className="update-profile-errors">{this.props.errors}</div>
             </form> : ""
          }
 

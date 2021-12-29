@@ -29,6 +29,6 @@ export const fetchFilteredUsers = (search) => dispatch => (
 export const updateUser = (user) => dispatch => (
     UserApiUtil.updateUser(user).then(
         (user) => dispatch(Session.receiveUser(user)),
-        (errors) => dispatch(receiveUserErrors(errors))
+        (errors) => dispatch(receiveUserErrors(errors.responseJSON))
     )
 )
