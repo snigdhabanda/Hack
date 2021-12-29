@@ -80,7 +80,6 @@ class Home extends React.Component{
 }
 
    render(){
-      console.log(this.state.filters)
       return (
          <div> 
             <nav className="header-nav">

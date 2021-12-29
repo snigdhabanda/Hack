@@ -62,7 +62,6 @@ class SessionForm extends React.Component {
         let signup; 
         if (this.props.formType === "Sign Up") signup = true; 
         else signup = false; 
-        console.log(this.props.channelId)
         return (
             <form className="session-form">
                 <div className="header">
