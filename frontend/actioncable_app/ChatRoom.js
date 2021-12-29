@@ -180,7 +180,7 @@ class ChatRoom extends React.Component {
       let numReplies = this.props.messages.filter(stateMessage => stateMessage.parentMessageId === message.id).length
       if (!message.parentMessageId){
       return (
-        <li className="message-box" key={message.id}>
+        <li className="message-box" >
           <div className="flex-box-img-content">
             {this.props.users && this.props.users[message.authorId] && this.props.users[message.authorId].imageUrl !== "test" && 
             this.props.users[message.authorId].imageUrl

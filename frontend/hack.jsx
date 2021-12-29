@@ -6,7 +6,7 @@ import {fetchFilteredUsers} from "../frontend/actions/user_actions"
 
 document.addEventListener("DOMContentLoaded", () => {
     let store; 
-
+    window.store = store; 
   if (window.currentUser){
     const preloadedState = {
       entities: {
@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     
-    window.store = store; 
-    window.fetchFilteredUsers = fetchFilteredUsers
+    
+    
     const root = document.getElementById("root")
     ReactDOM.render(<Root store={store}/>, root)
 })
